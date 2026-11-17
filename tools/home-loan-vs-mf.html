@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="../favicon.png">
 <title>Home Loan: Prepay or Invest | Nityasarathi Financial Services</title>
 <meta name="description" content="Compare closing your home loan early with investing the same money in mutual funds. Illustrative results only.">
 <style>
@@ -113,24 +114,6 @@ button.act:focus-visible{outline:2px solid #fff;outline-offset:1px}
 <body>
 <div class="back-bar noprint"><a href="../tools.html">&larr; Back to Tools</a></div>
 <div class="wrap">
-  <div class="bar noprint">
-    <label for="clientName">Client</label>
-    <input type="text" id="clientName" placeholder="Name of client" autocomplete="off">
-    <span id="autoStatus" class="autostatus"></span>
-    <div class="status"><div id="lastExport">Never saved</div></div>
-    <div class="actions">
-      <label class="ab-control" style="display:flex;align-items:center;gap:6px">Backup reminder
-        <select id="remindEvery"><option value="0">Off</option><option value="21600000">Every 6h</option><option value="86400000" selected>Daily</option><option value="604800000">Weekly</option></select>
-      </label>
-      <button class="act" id="btnNew" type="button">New</button>
-      <button class="act" id="btnOpen" type="button">Open client…</button>
-      <button class="act primary" id="btnSave" type="button">Save client</button>
-      <button class="act" id="btnPrint" type="button">Print summary</button>
-    </div>
-  </div>
-  <div class="banner noprint" id="staleBanner"><span id="staleText"></span><button id="staleSaveBtn" type="button">Save now</button></div>
-  <input type="file" id="fileIn" accept=".json,application/json" style="display:none">
-  <div class="printonly printhead"><h1 id="printTitle"></h1><div id="printSub" style="color:var(--soft);font-size:12px"></div></div>
   <h1>Home loan: prepay it or invest it?</h1>
   <p class="sub">Enter your loan and the extra money you can put in: a lump sum, an extra payment every month, an extra EMI every year, or a yearly step-up in your EMI. See whether it does more good in the loan or in mutual funds, with the reasons.</p>
 
@@ -161,9 +144,6 @@ button.act:focus-visible{outline:2px solid #fff;outline-offset:1px}
   <p>Vamshi Krishna Rudra | AMFI Registered Mutual Fund Distributor (ARN-370426) | Nityasarathi Financial Services, Hyderabad</p>
   <p class="noprint"><a href="../index.html">Home</a> &nbsp;|&nbsp; <a href="../tools.html">All tools</a> &nbsp;|&nbsp; <a href="https://wa.me/918886912221?text=Hello%2C%20I%20would%20like%20to%20talk%20about%20my%20home%20loan." target="_blank" rel="noopener">Talk to me on WhatsApp</a></p>
 </div>
-
-<div class="overlay" id="overlay"><div class="modal" role="dialog" aria-modal="true"><h3 id="mTitle"></h3><p id="mText"></p><textarea id="mArea" style="display:none"></textarea><div class="btns" id="mBtns"></div></div></div>
-<div class="toast" id="toast" role="status"></div>
 
 <script>
 "use strict";
@@ -278,149 +258,6 @@ function compute(){
     "<p style=\"color:var(--soft)\">Prepaying earns about " + effLoan.toFixed(1) + "% a year, guaranteed. " + (be.k === "ok" ? "The funds need to beat about " + be.v.toFixed(1) + "% before tax to come out ahead, and you assumed " + ret + "%." : "") + "</p></div></div>";
   out.innerHTML = h;
 }
-
-/* ============ client: autosave, save / open, backup reminder, print ============ */
-const FIELDS = ["principal","rate","years","lump","ret","tax","extra","step","monthly"];
-const AUTO_KEY = "hl_prepay_autosave_v1", CHANGES_KEY = "hl_changes_since_save_v1", LASTSAVE_KEY = "hl_last_save_v1", REMIND_KEY = "hl_remind_every_v1";
-const STALE_AT = 5;
-const store = {
-  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
-  set(k,v){ try{ localStorage.setItem(k,v); return true; }catch(e){ return false; } },
-  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
-};
-const $ = id => document.getElementById(id);
-const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const slug = t => (t || "client").trim().replace(/[^\w\- ]+/g, "").replace(/\s+/g, "_") || "client";
-const DEFAULTS = {principal:"40,00,000", rate:"8.5", years:"15", lump:"10,00,000", ret:"11", tax:"12.5", extra:"0", step:"0", monthly:""};
-function snapshot(){
-  const inputs = {}; FIELDS.forEach(f => inputs[f] = $(f).value);
-  return {app:"home-loan-prepay-or-invest", version:1, meta:{clientName:$("clientName").value.trim(), savedOn:new Date().toISOString().slice(0,10)}, inputs};
-}
-function hydrate(data){
-  const d = data || {meta:{clientName:""}, inputs:DEFAULTS};
-  $("clientName").value = (d.meta && d.meta.clientName) || "";
-  if(d.inputs) FIELDS.forEach(f => { $(f).value = d.inputs[f] !== undefined ? d.inputs[f] : DEFAULTS[f]; });
-  compute();
-}
-function toast(t){ const el = $("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("show"), 3500); }
-function modal(title, text, area, buttons){
-  $("mTitle").textContent = title; $("mText").textContent = text;
-  const a = $("mArea"); a.style.display = area ? "block" : "none"; a.value = area || "";
-  const b = $("mBtns"); b.innerHTML = "";
-  buttons.forEach(x => { const el = document.createElement("button"); el.type = "button"; el.textContent = x.label; if(x.primary) el.className = "primary";
-    el.onclick = () => { if(x.close !== false) closeModal(); if(x.fn) x.fn(); }; b.appendChild(el); });
-  $("overlay").classList.add("show");
-  const f = b.querySelector("button.primary") || b.querySelector("button"); if(f) f.focus();
-}
-function closeModal(){ $("overlay").classList.remove("show"); }
-document.addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
-
-// autosave: a safety net in this browser only. Save client is the real record.
-let autoTimer = null, autoOK = true;
-function setAuto(t){ $("autoStatus").textContent = t; }
-function scheduleAuto(){
-  setAuto("Saving…"); clearTimeout(autoTimer);
-  autoTimer = setTimeout(() => {
-    const ok = store.set(AUTO_KEY, JSON.stringify({savedAt:new Date().toISOString(), data:snapshot()}));
-    if(!ok){ autoOK = false; setAuto("Autosave unavailable. Use Save client."); return; }
-    const n = (parseInt(store.get(CHANGES_KEY) || "0", 10) || 0) + 1; store.set(CHANGES_KEY, String(n));
-    setAuto("Autosaved in this browser"); renderBackup();
-  }, 600);
-}
-const fmtT = ts => new Date(parseInt(ts, 10)).toLocaleString("en-IN", {day:"numeric", month:"short", hour:"2-digit", minute:"2-digit"});
-function renderBackup(){
-  const last = store.get(LASTSAVE_KEY), changes = parseInt(store.get(CHANGES_KEY) || "0", 10) || 0;
-  const every = parseInt(store.get(REMIND_KEY) || "86400000", 10);
-  $("lastExport").textContent = last ? "Last saved " + fmtT(last) : "Never saved";
-  let msg = "";
-  if(changes >= STALE_AT) msg = changes + " changes since your last save. Back them up.";
-  else if(changes > 0 && every > 0 && (!last || Date.now() - parseInt(last, 10) >= every)) msg = last ? "Your last save is older than your reminder interval. Back up this client." : "This client has not been saved to a file yet.";
-  $("staleText").textContent = msg; $("staleBanner").classList.toggle("show", !!msg);
-}
-$("remindEvery").value = store.get(REMIND_KEY) || "86400000";
-$("remindEvery").addEventListener("change", e => { store.set(REMIND_KEY, e.target.value); renderBackup(); });
-setInterval(renderBackup, 5 * 60 * 1000);
-
-let dlPromise = null;
-function getDownloads(){
-  if(!dlPromise) dlPromise = (window.claude && window.claude.use) ? window.claude.use("downloads").catch(() => null) : Promise.resolve(null);
-  return dlPromise;
-}
-async function offerFile(filename, text, mime, fbTitle, fbText){
-  const d = await getDownloads();
-  if(d && d.save){
-    try{ await d.save({filename, data:text}); toast("Saved " + filename); return true; }
-    catch(e){
-      const msg = String((e && (e.code || e.message)) || e);
-      if(/declin|cancel|denied|reject/i.test(msg)){ toast("Save cancelled."); return false; }
-      try{ await d.save({filename, data:new Blob([text], {type:mime})}); toast("Saved " + filename); return true; }catch(e2){}
-    }
-  }
-  try{
-    const url = URL.createObjectURL(new Blob([text], {type:mime}));
-    const a = document.createElement("a"); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 2000);
-    toast("Saved " + filename); return true;
-  }catch(e){}
-  modal(fbTitle, fbText, text, [
-    {label:"Copy", primary:true, close:false, fn:async () => { try{ await navigator.clipboard.writeText(text); toast("Copied."); }catch(e){ $("mArea").select(); toast("Press Ctrl+C to copy."); } }},
-    {label:"Close"}]);
-  $("mArea").readOnly = true;
-  return false;
-}
-async function saveClient(){
-  const snap = snapshot();
-  const ok = await offerFile(slug(snap.meta.clientName) + "_" + snap.meta.savedOn + ".json", JSON.stringify(snap, null, 2), "application/json",
-    "Copy the client data", "This page could not start a download here. Copy the text below into a file ending in .json, then use Open client to load it later.");
-  if(ok){ store.set(LASTSAVE_KEY, String(Date.now())); store.set(CHANGES_KEY, "0"); renderBackup(); }
-}
-$("btnSave").onclick = saveClient;
-$("staleSaveBtn").onclick = saveClient;
-$("btnOpen").onclick = () => $("fileIn").click();
-$("fileIn").addEventListener("change", ev => {
-  const f = ev.target.files[0]; if(!f) return;
-  const fr = new FileReader();
-  fr.onload = () => {
-    try{
-      const data = JSON.parse(fr.result);
-      if(!data || data.app !== "home-loan-prepay-or-invest" || !data.inputs) throw new Error("shape");
-      hydrate(data); store.set(CHANGES_KEY, "0"); scheduleAuto(); toast("Opened " + ((data.meta && data.meta.clientName) || f.name));
-    }catch(e){ modal("Could not open that file", "That is not a client file saved from this page. Pick a .json file made with Save client.", "", [{label:"Close", primary:true}]); }
-    ev.target.value = "";
-  };
-  fr.readAsText(f);
-});
-$("btnNew").onclick = () => modal("Start a blank client?", "Anything not saved with Save client will be lost.", "", [
-  {label:"Cancel"}, {label:"Start blank", primary:true, fn:() => { store.del(AUTO_KEY); store.set(CHANGES_KEY, "0"); hydrate(); setAuto(""); renderBackup(); }}]);
-
-function reportHTML(){
-  const name = $("clientName").value.trim() || "Client";
-  const css = document.querySelector("style").textContent + ".noprint,.bar{display:none!important}body{background:#fff;padding:0 16px}.printonly{display:none}.rbtn{margin:16px 0}@media print{.rbtn{display:none}}";
-  const rows = [["Loan outstanding", "₹" + $("principal").value],["Interest rate", $("rate").value + "% a year"],["Years left", $("years").value],
-    ["Lump sum", $("lump").value ? "₹" + $("lump").value : "None"],["Expected fund return", $("ret").value + "% a year"],["Tax on fund gains", $("tax").value + "%"],
-    ["Extra EMI every year", $("extra").value === "1" ? "Yes" : "No"],["Yearly step-up in EMI", ($("step").value || "0") + "%"],["Extra payment every month", $("monthly").value ? "₹" + $("monthly").value : "None"]];
-  const inp = '<div class="card"><h2>Numbers used</h2><div style="padding:6px 18px 12px"><table>' + rows.map(r => "<tr><td>" + esc(r[0]) + "</td><td>" + esc(r[1]) + "</td></tr>").join("") + "</table></div></div>";
-  return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>' + esc(name) + ' · Home loan: prepay or invest</title><style>' + css + '</style></head><body><div class="wrap">' +
-    '<button class="rbtn" onclick="window.print()">Print this report</button><h1 style="border-bottom:2px solid #16222E;padding-bottom:8px">' + esc(name) + ' · Home loan: prepay or invest</h1><p class="sub">Prepared ' +
-    new Date().toLocaleDateString("en-IN", {day:"numeric", month:"long", year:"numeric"}) + '</p>' + inp + $("out").innerHTML + '</div></body></html>';
-}
-$("btnPrint").onclick = async () => {
-  if(!$("out").querySelector(".verdict")){ toast("Fill in the numbers first so there is a result to print."); return; }
-  const name = $("clientName").value.trim() || "Client";
-  $("printTitle").textContent = name + " · Home loan: prepay or invest";
-  $("printSub").textContent = "Prepared " + new Date().toLocaleDateString("en-IN", {day:"numeric", month:"long", year:"numeric"});
-  const d = await getDownloads();
-  if(d && d.save){ offerFile(slug(name) + "_home-loan-report.html", reportHTML(), "text/html", "", ""); return; }
-  try{ window.print(); }catch(e){ toast("Printing is not available here. Use your browser's print command on this page."); }
-};
-$("clientName").addEventListener("input", scheduleAuto);
-FIELDS.forEach(f => $(f).addEventListener($(f).tagName === "SELECT" ? "change" : "input", scheduleAuto));
-(function boot(){
-  const raw = store.get(AUTO_KEY);
-  if(raw){ try{ const p = JSON.parse(raw); if(p && p.data && p.data.inputs){ hydrate(p.data);
-      const w = new Date(p.savedAt); setAuto("Restored autosave" + (isNaN(w) ? "" : " from " + w.toLocaleString("en-IN", {day:"numeric", month:"short", hour:"2-digit", minute:"2-digit"}))); } }catch(e){} }
-  renderBackup();
-})();
 
 document.getElementById("extra").addEventListener("change", compute);
 document.querySelectorAll("input").forEach(el => {
