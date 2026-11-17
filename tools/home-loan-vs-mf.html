@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home Loan: Prepay or Invest | Nityasarathi Financial Services</title>
+<meta name="description" content="Compare closing your home loan early with investing the same money in mutual funds. Illustrative results only.">
+<style>
+/* Layout idea: one narrow column. Inputs on top, verdict and reasons directly below, updating live. */
+:root{
+  --ink:#16222E; --soft:#53646F; --paper:#EFF2F3; --card:#FFFFFF; --rule:#D7DEE2;
+  --input:#FFF8E1; --input-rule:#E3C46A; --teal:#0F6B60; --teal-bg:#E4F1EF;
+  --amber:#9A6B00; --amber-bg:#FBF0DA; --rust:#A43522; --focus:#1B5E8C;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:15px;line-height:1.5;padding:24px 16px 60px}
+.wrap{max-width:820px;margin:0 auto}
+h1{font-size:24px;margin:0 0 4px;text-wrap:balance}
+.sub{color:var(--soft);margin:0 0 20px;max-width:75ch;text-wrap:pretty}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:6px;margin-bottom:16px}
+.card h2{margin:0;padding:12px 18px;font-size:15px;border-bottom:1px solid var(--rule)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px 20px;padding:16px 18px}
+label{display:block;font-size:12px;font-weight:600;color:var(--soft);margin-bottom:4px}
+input{width:100%;font:inherit;font-size:15px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);background:var(--input);border:1px solid var(--input-rule);border-radius:4px;padding:7px 9px}
+select{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--input);border:1px solid var(--input-rule);border-radius:4px;padding:7px 9px}
+input:focus{outline:2px solid var(--focus);outline-offset:-1px;background:#fff}
+.help{font-size:12px;color:var(--soft);margin-top:4px}
+.emi{padding:0 18px 14px;color:var(--soft);font-size:13px}
+.emi b{color:var(--ink)}
+.err{margin:0 18px 16px;padding:9px 12px;background:#FBE9E5;border-left:3px solid var(--rust);color:#7A2718;font-size:13px}
+.verdict{border-left:6px solid var(--teal);padding:16px 20px}
+.verdict.invest{border-left-color:var(--amber)}.verdict.close{border-left-color:var(--focus)}
+.eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--soft)}
+.verdict h3{font-size:22px;margin:4px 0 6px;line-height:1.25;text-wrap:balance}
+.verdict p{margin:0;color:var(--soft)}
+ul.why{list-style:none;margin:0;padding:6px 18px 10px}
+ul.why li{padding:10px 0;border-bottom:1px solid #E8EDEF}
+ul.why li:last-child{border-bottom:none}
+ul.why b.t{display:block;font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--soft);margin-bottom:2px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{text-align:right;font-size:12px;color:var(--soft);padding:8px 12px;border-bottom:1px solid var(--rule);background:#FAFBFB}
+th:first-child,td:first-child{text-align:left}
+td{padding:8px 12px;border-bottom:1px solid #E8EDEF;text-align:right;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:none}
+.pos{color:var(--teal);font-weight:600}.neg{color:var(--rust);font-weight:600}
+.scroll{overflow-x:auto}
+
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px 18px}
+@media(max-width:640px){.paths{grid-template-columns:1fr}}
+.path{border:1px solid var(--rule);border-radius:6px;padding:14px 16px}
+.path.win{border-color:var(--teal);background:#F3FAF8}
+.path h3{margin:0 0 10px;font-size:15px}
+.path dl{margin:0}
+.path .row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid #E8EDEF;font-size:14px}
+.path .row dt{color:var(--soft)}
+.path .row dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.path .row.final{border-bottom:none;padding-top:10px;font-weight:700;font-size:16px}
+.path .row.final dt{color:var(--ink)}
+.bottom{padding:0 18px 16px}
+.bottom p{text-wrap:pretty}
+.bottom p{margin:0 0 6px}
+.note{color:var(--soft);font-size:12.5px;padding:0 18px 16px;max-width:70ch}
+
+/* client bar */
+.bar{background:#16222E;color:#fff;border-radius:6px;padding:10px 14px;margin-bottom:16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.bar label{color:#C9D3D9;margin:0;font-size:12px}
+.bar input#clientName{width:220px;text-align:left;font-size:14px;padding:6px 9px}
+.bar .autostatus{font-size:12px;color:#9FB0BA}
+.bar .status{font-size:11.5px;color:#9FB0BA;line-height:1.35}
+.bar .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-left:auto}
+.bar select{width:auto;font-size:12.5px;padding:5px 7px}
+button.act{background:#24384A;color:#fff;border:1px solid #3C5266;padding:6px 13px;border-radius:3px;font-size:13px;cursor:pointer;font-family:inherit}
+button.act:hover{background:#2F4658}
+button.act.primary{background:#E0A526;border-color:#E0A526;color:#1B1200;font-weight:600}
+button.act:focus-visible{outline:2px solid #fff;outline-offset:1px}
+.banner{display:none;background:var(--amber-bg);border-left:4px solid var(--amber);padding:9px 14px;margin-bottom:16px;font-size:13px;align-items:center;gap:12px;border-radius:0 4px 4px 0}
+.banner.show{display:flex}
+.banner button{margin-left:auto;font:inherit;font-size:13px;padding:4px 12px;border:1px solid var(--amber);background:#fff;border-radius:3px;cursor:pointer}
+.overlay{position:fixed;inset:0;background:rgba(10,20,30,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}
+.overlay.show{display:flex}
+.modal{background:#fff;border-radius:8px;max-width:560px;width:100%;padding:20px 22px;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.modal h3{margin:0 0 8px;font-size:16px}
+.modal p{margin:0 0 12px;color:var(--soft);font-size:13.5px}
+.modal textarea{width:100%;height:150px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;text-align:left;border:1px solid var(--rule);border-radius:3px;padding:8px;margin-bottom:12px;color:var(--ink)}
+.modal .btns{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.modal button{font:inherit;font-size:13px;padding:7px 14px;border-radius:3px;border:1px solid var(--rule);background:#F3F6F7;cursor:pointer;color:var(--ink)}
+.modal button.primary{background:#E0A526;border-color:#E0A526;color:#1B1200;font-weight:600}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:4px;font-size:13px;z-index:110;display:none;max-width:90vw}
+.toast.show{display:block}
+.printonly{display:none}
+@media print{
+  body{background:#fff;padding:0}
+  .noprint{display:none !important}
+  .printonly{display:block}
+  .printhead{border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
+  .printhead h1{font-size:19px;margin:0}
+  .card{break-inside:avoid}
+}
+
+/* site additions */
+.back-bar{background:#EEF2F8;padding:10px 16px;font-size:15px}
+.back-bar a{color:#0E7C7B;text-decoration:none;font-weight:600}
+.back-bar a:hover{text-decoration:underline}
+.tool-foot{max-width:820px;margin:8px auto 0;padding:18px 0 0;border-top:1px solid var(--rule);color:var(--soft);font-size:13px}
+.tool-foot p{margin:0 0 8px}
+.tool-foot strong{color:var(--ink)}
+.tool-foot a{color:#0E7C7B}
+@media print{.back-bar{display:none !important}}
+</style>
+</head>
+<body>
+<div class="back-bar noprint"><a href="../tools.html">&larr; Back to Tools</a></div>
+<div class="wrap">
+  <div class="bar noprint">
+    <label for="clientName">Client</label>
+    <input type="text" id="clientName" placeholder="Name of client" autocomplete="off">
+    <span id="autoStatus" class="autostatus"></span>
+    <div class="status"><div id="lastExport">Never saved</div></div>
+    <div class="actions">
+      <label class="ab-control" style="display:flex;align-items:center;gap:6px">Backup reminder
+        <select id="remindEvery"><option value="0">Off</option><option value="21600000">Every 6h</option><option value="86400000" selected>Daily</option><option value="604800000">Weekly</option></select>
+      </label>
+      <button class="act" id="btnNew" type="button">New</button>
+      <button class="act" id="btnOpen" type="button">Open client…</button>
+      <button class="act primary" id="btnSave" type="button">Save client</button>
+      <button class="act" id="btnPrint" type="button">Print summary</button>
+    </div>
+  </div>
+  <div class="banner noprint" id="staleBanner"><span id="staleText"></span><button id="staleSaveBtn" type="button">Save now</button></div>
+  <input type="file" id="fileIn" accept=".json,application/json" style="display:none">
+  <div class="printonly printhead"><h1 id="printTitle"></h1><div id="printSub" style="color:var(--soft);font-size:12px"></div></div>
+  <h1>Home loan: prepay it or invest it?</h1>
+  <p class="sub">Enter your loan and the extra money you can put in: a lump sum, an extra payment every month, an extra EMI every year, or a yearly step-up in your EMI. See whether it does more good in the loan or in mutual funds, with the reasons.</p>
+
+  <div class="card">
+    <h2>Your numbers</h2>
+    <div class="grid">
+      <div><label for="principal">Loan outstanding (₹)</label><input id="principal" inputmode="numeric" value="40,00,000"></div>
+      <div><label for="rate">Interest rate (% a year)</label><input id="rate" type="number" step="0.05" value="8.5"></div>
+      <div><label for="years">Years left on the loan</label><input id="years" type="number" step="0.5" min="0" value="15"></div>
+      <div><label for="lump">Lump sum available (₹), optional</label><input id="lump" inputmode="numeric" value="10,00,000"></div>
+      <div><label for="ret">Expected mutual fund return (% a year)</label><input id="ret" type="number" step="0.5" value="11"><div class="help">Before tax. A planning figure, not a promise.</div></div>
+      <div><label for="tax">Tax on mutual fund gains (%)</label><input id="tax" type="number" step="0.5" value="12.5"><div class="help">12.5% is the long-term rate on equity funds.</div></div>
+      <div><label for="extra">One extra EMI every year (the 13th EMI)</label><select id="extra"><option value="0">No</option><option value="1">Yes, pay one extra EMI every year</option></select><div class="help">Paid at the end of each year, for example from your bonus. Path 1 puts it into the loan; Path 2 invests it in mutual funds.</div></div>
+      <div><label for="step">Yearly step-up in EMI (%)</label><input id="step" type="number" step="0.5" min="0" value="0"><div class="help">Your EMI rises by this much every year, like a salary raise. Leave 0 for a fixed EMI.</div></div>
+      <div><label for="monthly">Extra payment every month (₹), optional</label><input id="monthly" inputmode="numeric" value=""><div class="help">On top of the EMI. Path 1 puts it into the loan; Path 2 invests it.</div></div>
+    </div>
+    <div class="emi" id="emiLine"></div>
+    <div id="errBox"></div>
+  </div>
+
+  <div id="out"></div>
+
+</div>
+
+<div class="tool-foot">
+  <p><strong>Mutual Fund investments are subject to market risks. Read all scheme related documents carefully.</strong></p>
+  <p>This tool is for general education only and gives illustrative results based on the numbers and assumptions you enter. Expected returns are assumptions, not promises. Past performance may or may not be sustained in the future. Returns are not guaranteed. Nothing here is an offer, solicitation or recommendation to buy or sell any product.</p>
+  <p>Vamshi Krishna Rudra | AMFI Registered Mutual Fund Distributor (ARN-370426) | Nityasarathi Financial Services, Hyderabad</p>
+  <p class="noprint"><a href="../index.html">Home</a> &nbsp;|&nbsp; <a href="../tools.html">All tools</a> &nbsp;|&nbsp; <a href="https://wa.me/918886912221?text=Hello%2C%20I%20would%20like%20to%20talk%20about%20my%20home%20loan." target="_blank" rel="noopener">Talk to me on WhatsApp</a></p>
+</div>
+
+<div class="overlay" id="overlay"><div class="modal" role="dialog" aria-modal="true"><h3 id="mTitle"></h3><p id="mText"></p><textarea id="mArea" style="display:none"></textarea><div class="btns" id="mBtns"></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+"use strict";
+const num = v => { const x = parseFloat(String(v).replace(/,/g, "")); return isFinite(x) ? x : 0; };
+const rup = n => (n < 0 ? "−" : "") + "₹" + Math.abs(Math.round(n)).toLocaleString("en-IN");
+function short(n){
+  const a = Math.abs(n), s = n < 0 ? "−" : "", t = x => x.toFixed(2).replace(/\.?0+$/, "");
+  if(a >= 1e7) return s + "₹" + t(a / 1e7) + " Cr";
+  if(a >= 1e5) return s + "₹" + t(a / 1e5) + " L";
+  return s + "₹" + Math.round(a).toLocaleString("en-IN");
+}
+const sgn = n => (n > 0 ? "+" : "") + short(n);
+const ym = m => { const y = Math.floor(m / 12), r = m % 12; return (y ? y + " yr" : "") + (y && r ? " " : "") + (r || !y ? r + " m" : ""); };
+const emiFor = (P, ratePct, n) => { const r = ratePct / 1200; if(r === 0) return P / n; const f = Math.pow(1 + r, n); return P * r * f / (f - 1); };
+
+// Month by month. Both paths hand over the same EMI every month; whatever the bank does not take is invested.
+function run(P, ratePct, n, emi, lump, retPct, taxPct, prepay, extra, step, mx){
+  const r = ratePct / 1200, g = Math.pow(1 + retPct / 100, 1 / 12) - 1;
+  let bal = prepay ? Math.max(0, P - lump) : P;
+  let V = prepay ? Math.max(0, lump - P) : lump;       // leftover goes to funds if the lump sum exceeds the loan
+  let cost = V, interest = 0, end = bal > 0.5 ? 0 : 0;
+  for(let t = 1; t <= n; t++){
+    let pay = 0;
+    const cur = emi * Math.pow(1 + (step || 0) / 100, Math.floor((t - 1) / 12));  // EMI you hand over this month (steps up each year)
+    const xtra = (extra && t % 12 === 0) ? cur : 0;      // the extra EMI falls due in month 12, 24, ...
+    const due = prepay ? cur + xtra + (mx || 0) : emi;                // Path 1 sends it all to the loan; Path 2 pays the normal EMI and invests the rest
+    if(bal > 0.5){
+      const i = bal * r; pay = Math.min(due, bal + i); bal = Math.max(0, bal - (pay - i)); interest += i;
+      if(bal < 0.5){ bal = 0; end = t; }
+    }
+    const inv = cur + xtra + (mx || 0) - pay;
+    V = V * (1 + g) + inv; cost += inv;
+  }
+  const tax = Math.max(0, V - cost) * taxPct / 100;
+  return {net:V - tax, gross:V, tax, interest, end, closed:(prepay ? Math.max(0, P - lump) : P) <= 0.5 ? 0 : end};
+}
+
+function compute(){
+  const P = num(document.getElementById("principal").value), rate = num(document.getElementById("rate").value),
+    years = num(document.getElementById("years").value), L = num(document.getElementById("lump").value),
+    ret = num(document.getElementById("ret").value), tax = num(document.getElementById("tax").value),
+    X = document.getElementById("extra").value === "1", ST = Math.max(0, num(document.getElementById("step").value)), M = Math.max(0, num(document.getElementById("monthly").value));
+  const n = Math.round(years * 12), errs = [];
+  if(!(P > 0)) errs.push("Enter the loan outstanding.");
+  if(!(rate > 0)) errs.push("Enter the interest rate.");
+  if(!(n > 0)) errs.push("Enter the years left on the loan.");
+  document.getElementById("errBox").innerHTML = errs.length ? '<div class="err">' + errs.join(" ") + "</div>" : "";
+  const out = document.getElementById("out"), emiLine = document.getElementById("emiLine");
+  if(errs.length){ emiLine.textContent = ""; out.innerHTML = ""; return; }
+  const emi = emiFor(P, rate, n);
+  emiLine.innerHTML = "Your EMI works out to <b>" + rup(emi) + "</b> a month.";
+
+  if(!(L > 0) && !X && !(ST > 0) && !(M > 0)){ out.innerHTML = '<div class="card"><p style="margin:0">Enter a lump sum, an extra monthly payment, an extra yearly EMI or a yearly step-up in the EMI to compare prepaying the loan with investing.</p></div>'; return; }
+  const at = r => ({p:run(P, rate, n, emi, L, r, tax, true, X, ST, M), i:run(P, rate, n, emi, L, r, tax, false, X, ST, M)});
+  const cases = [["Lower returns", ret - 3], ["Your assumption", ret], ["Higher returns", ret + 3]].map(c => {
+    const x = at(c[1]); return {name:c[0], ret:c[1], p:x.p, i:x.i, d:x.i.net - x.p.net};
+  });
+  const base = cases[1], low = cases[0];
+  // return at which investing and prepaying end level (bisection on the yearly return)
+  let lo = 0, hi = 40;
+  const f = r => { const x = at(r); return x.i.net - x.p.net; };
+  let be;
+  if(f(lo) > 0) be = {v:0, k:"below"}; else if(f(hi) < 0) be = {v:40, k:"above"};
+  else { for(let k = 0; k < 40; k++){ const m = (lo + hi) / 2; if(f(m) < 0) lo = m; else hi = m; } be = {v:(lo + hi) / 2, k:"ok"}; }
+
+  const interestSaved = base.i.interest - base.p.interest;
+  const closeNow = L >= P;
+  const small = Math.abs(base.d) < L * 0.02;
+  const parts = []; if(L > 0) parts.push("the lump sum"); if(X) parts.push("the extra EMI"); if(ST > 0) parts.push("the EMI increases"); if(M > 0) parts.push("the extra monthly payment");
+  const what = parts.length > 1 ? "the money" : parts[0];
+  let tone, head, lead;
+  if(base.d <= 0){
+    tone = "prepay"; head = closeNow ? "Close the loan with the lump sum" : "Put " + what + " into the loan";
+    lead = "Prepaying finishes ahead of investing on your assumptions" + (cases[2].d <= 0 ? ", even if returns turn out higher." : ", though investing wins if returns are higher.");
+  } else if(low.d > 0){
+    tone = "invest"; head = "Invest " + what + " and keep paying the loan";
+    lead = "Investing finishes ahead even if returns are 3 points lower than you assumed.";
+  } else {
+    tone = "close"; head = "A close call: prepay if you want certainty";
+    lead = "Investing wins if returns match your assumption, but loses if they come in 3 points lower. Prepaying is the safer of the two.";
+  }
+  if(small && tone !== "close") lead += " The gap is small, so the guaranteed saving from prepaying is a fair tie-breaker.";
+
+  const effLoan = (Math.pow(1 + rate / 1200, 12) - 1) * 100;
+  let h = '<div class="card verdict ' + tone + '"><div class="eyebrow">Verdict</div><h3>' + head + "</h3><p>" + lead + "</p></div>";
+  const p = base.p, iv = base.i, e = Math.round(emi);
+  const left = p.end > 0 ? n - p.end : n;
+  const row = (k, v, cls) => '<div class="row' + (cls ? " " + cls : "") + '"><dt>' + k + "</dt><dd>" + v + "</dd></div>";
+  const win = base.d > 0 ? "i" : "p";
+  h += '<div class="card"><h2>How the two paths compare<span style="float:right;font-weight:400;font-size:12px;color:var(--soft)">After ' + ym(n) + ", at " + ret + "% a year</span></h2><div class=\"paths\">";
+  h += '<div class="path' + (win === "p" ? " win" : "") + '"><h3>Path 1: Prepay the loan</h3><dl>' +
+    (L > 0 ? row("Lump sum put into the loan", rup(Math.min(L, P))) : "") + (L > P ? row("Left over, invested now", rup(L - P)) : "") +
+    (X ? row("Extra EMI into the loan each year", rup(e)) : "") +
+    (M > 0 ? row("Extra into the loan each month", rup(M)) : "") +
+    (ST > 0 ? row("EMI into the loan", "rises " + ST + "% every year") : "") +
+    row("Loan closes in", p.end > 0 ? ym(p.end) + " (not " + ym(n) + ")" : "straight away") +
+    row("Interest saved", rup(interestSaved)) +
+    row("Then invest your " + (ST > 0 ? "higher EMI" : "EMI") + ((X || M > 0) ? " and the extra payments" : (ST > 0 ? "" : " of " + rup(e))) + " for", ym(left)) +
+    row("Investments grow to", rup(p.gross)) +
+    row("Tax on the gains", "−" + rup(p.tax)) +
+    row("You hold", rup(p.net), "final") + "</dl></div>";
+  h += '<div class="path' + (win === "i" ? " win" : "") + '"><h3>Path 2: Invest instead</h3><dl>' +
+    (L > 0 ? row("Lump sum invested now", rup(L)) : "") +
+    (X ? row("Extra EMI invested each year", rup(e)) : "") +
+    (M > 0 ? row("Extra invested each month", rup(M)) : "") +
+    (ST > 0 ? row("Yearly EMI increase", "invested, EMI stays " + rup(e)) : "") +
+    row("Loan closes in", iv.end > 0 && iv.end < n ? ym(iv.end) + " (not " + ym(n) + ")" : ym(n) + " (keep paying)") +
+    row("Investments grow to", rup(iv.gross)) +
+    row("Tax on the gains", "−" + rup(iv.tax)) +
+    row("You hold", rup(iv.net), "final") + "</dl></div></div>";
+  h += '<div class="bottom"><p><b>' + (base.d > 0 ? "Investing is ahead by " : "Prepaying is ahead by ") + rup(Math.abs(base.d)) + ".</b></p>" +
+    "<p style=\"color:var(--soft)\">Prepaying earns about " + effLoan.toFixed(1) + "% a year, guaranteed. " + (be.k === "ok" ? "The funds need to beat about " + be.v.toFixed(1) + "% before tax to come out ahead, and you assumed " + ret + "%." : "") + "</p></div></div>";
+  out.innerHTML = h;
+}
+
+/* ============ client: autosave, save / open, backup reminder, print ============ */
+const FIELDS = ["principal","rate","years","lump","ret","tax","extra","step","monthly"];
+const AUTO_KEY = "hl_prepay_autosave_v1", CHANGES_KEY = "hl_changes_since_save_v1", LASTSAVE_KEY = "hl_last_save_v1", REMIND_KEY = "hl_remind_every_v1";
+const STALE_AT = 5;
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); return true; }catch(e){ return false; } },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+const $ = id => document.getElementById(id);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const slug = t => (t || "client").trim().replace(/[^\w\- ]+/g, "").replace(/\s+/g, "_") || "client";
+const DEFAULTS = {principal:"40,00,000", rate:"8.5", years:"15", lump:"10,00,000", ret:"11", tax:"12.5", extra:"0", step:"0", monthly:""};
+function snapshot(){
+  const inputs = {}; FIELDS.forEach(f => inputs[f] = $(f).value);
+  return {app:"home-loan-prepay-or-invest", version:1, meta:{clientName:$("clientName").value.trim(), savedOn:new Date().toISOString().slice(0,10)}, inputs};
+}
+function hydrate(data){
+  const d = data || {meta:{clientName:""}, inputs:DEFAULTS};
+  $("clientName").value = (d.meta && d.meta.clientName) || "";
+  if(d.inputs) FIELDS.forEach(f => { $(f).value = d.inputs[f] !== undefined ? d.inputs[f] : DEFAULTS[f]; });
+  compute();
+}
+function toast(t){ const el = $("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("show"), 3500); }
+function modal(title, text, area, buttons){
+  $("mTitle").textContent = title; $("mText").textContent = text;
+  const a = $("mArea"); a.style.display = area ? "block" : "none"; a.value = area || "";
+  const b = $("mBtns"); b.innerHTML = "";
+  buttons.forEach(x => { const el = document.createElement("button"); el.type = "button"; el.textContent = x.label; if(x.primary) el.className = "primary";
+    el.onclick = () => { if(x.close !== false) closeModal(); if(x.fn) x.fn(); }; b.appendChild(el); });
+  $("overlay").classList.add("show");
+  const f = b.querySelector("button.primary") || b.querySelector("button"); if(f) f.focus();
+}
+function closeModal(){ $("overlay").classList.remove("show"); }
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
+
+// autosave: a safety net in this browser only. Save client is the real record.
+let autoTimer = null, autoOK = true;
+function setAuto(t){ $("autoStatus").textContent = t; }
+function scheduleAuto(){
+  setAuto("Saving…"); clearTimeout(autoTimer);
+  autoTimer = setTimeout(() => {
+    const ok = store.set(AUTO_KEY, JSON.stringify({savedAt:new Date().toISOString(), data:snapshot()}));
+    if(!ok){ autoOK = false; setAuto("Autosave unavailable. Use Save client."); return; }
+    const n = (parseInt(store.get(CHANGES_KEY) || "0", 10) || 0) + 1; store.set(CHANGES_KEY, String(n));
+    setAuto("Autosaved in this browser"); renderBackup();
+  }, 600);
+}
+const fmtT = ts => new Date(parseInt(ts, 10)).toLocaleString("en-IN", {day:"numeric", month:"short", hour:"2-digit", minute:"2-digit"});
+function renderBackup(){
+  const last = store.get(LASTSAVE_KEY), changes = parseInt(store.get(CHANGES_KEY) || "0", 10) || 0;
+  const every = parseInt(store.get(REMIND_KEY) || "86400000", 10);
+  $("lastExport").textContent = last ? "Last saved " + fmtT(last) : "Never saved";
+  let msg = "";
+  if(changes >= STALE_AT) msg = changes + " changes since your last save. Back them up.";
+  else if(changes > 0 && every > 0 && (!last || Date.now() - parseInt(last, 10) >= every)) msg = last ? "Your last save is older than your reminder interval. Back up this client." : "This client has not been saved to a file yet.";
+  $("staleText").textContent = msg; $("staleBanner").classList.toggle("show", !!msg);
+}
+$("remindEvery").value = store.get(REMIND_KEY) || "86400000";
+$("remindEvery").addEventListener("change", e => { store.set(REMIND_KEY, e.target.value); renderBackup(); });
+setInterval(renderBackup, 5 * 60 * 1000);
+
+let dlPromise = null;
+function getDownloads(){
+  if(!dlPromise) dlPromise = (window.claude && window.claude.use) ? window.claude.use("downloads").catch(() => null) : Promise.resolve(null);
+  return dlPromise;
+}
+async function offerFile(filename, text, mime, fbTitle, fbText){
+  const d = await getDownloads();
+  if(d && d.save){
+    try{ await d.save({filename, data:text}); toast("Saved " + filename); return true; }
+    catch(e){
+      const msg = String((e && (e.code || e.message)) || e);
+      if(/declin|cancel|denied|reject/i.test(msg)){ toast("Save cancelled."); return false; }
+      try{ await d.save({filename, data:new Blob([text], {type:mime})}); toast("Saved " + filename); return true; }catch(e2){}
+    }
+  }
+  try{
+    const url = URL.createObjectURL(new Blob([text], {type:mime}));
+    const a = document.createElement("a"); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    toast("Saved " + filename); return true;
+  }catch(e){}
+  modal(fbTitle, fbText, text, [
+    {label:"Copy", primary:true, close:false, fn:async () => { try{ await navigator.clipboard.writeText(text); toast("Copied."); }catch(e){ $("mArea").select(); toast("Press Ctrl+C to copy."); } }},
+    {label:"Close"}]);
+  $("mArea").readOnly = true;
+  return false;
+}
+async function saveClient(){
+  const snap = snapshot();
+  const ok = await offerFile(slug(snap.meta.clientName) + "_" + snap.meta.savedOn + ".json", JSON.stringify(snap, null, 2), "application/json",
+    "Copy the client data", "This page could not start a download here. Copy the text below into a file ending in .json, then use Open client to load it later.");
+  if(ok){ store.set(LASTSAVE_KEY, String(Date.now())); store.set(CHANGES_KEY, "0"); renderBackup(); }
+}
+$("btnSave").onclick = saveClient;
+$("staleSaveBtn").onclick = saveClient;
+$("btnOpen").onclick = () => $("fileIn").click();
+$("fileIn").addEventListener("change", ev => {
+  const f = ev.target.files[0]; if(!f) return;
+  const fr = new FileReader();
+  fr.onload = () => {
+    try{
+      const data = JSON.parse(fr.result);
+      if(!data || data.app !== "home-loan-prepay-or-invest" || !data.inputs) throw new Error("shape");
+      hydrate(data); store.set(CHANGES_KEY, "0"); scheduleAuto(); toast("Opened " + ((data.meta && data.meta.clientName) || f.name));
+    }catch(e){ modal("Could not open that file", "That is not a client file saved from this page. Pick a .json file made with Save client.", "", [{label:"Close", primary:true}]); }
+    ev.target.value = "";
+  };
+  fr.readAsText(f);
+});
+$("btnNew").onclick = () => modal("Start a blank client?", "Anything not saved with Save client will be lost.", "", [
+  {label:"Cancel"}, {label:"Start blank", primary:true, fn:() => { store.del(AUTO_KEY); store.set(CHANGES_KEY, "0"); hydrate(); setAuto(""); renderBackup(); }}]);
+
+function reportHTML(){
+  const name = $("clientName").value.trim() || "Client";
+  const css = document.querySelector("style").textContent + ".noprint,.bar{display:none!important}body{background:#fff;padding:0 16px}.printonly{display:none}.rbtn{margin:16px 0}@media print{.rbtn{display:none}}";
+  const rows = [["Loan outstanding", "₹" + $("principal").value],["Interest rate", $("rate").value + "% a year"],["Years left", $("years").value],
+    ["Lump sum", $("lump").value ? "₹" + $("lump").value : "None"],["Expected fund return", $("ret").value + "% a year"],["Tax on fund gains", $("tax").value + "%"],
+    ["Extra EMI every year", $("extra").value === "1" ? "Yes" : "No"],["Yearly step-up in EMI", ($("step").value || "0") + "%"],["Extra payment every month", $("monthly").value ? "₹" + $("monthly").value : "None"]];
+  const inp = '<div class="card"><h2>Numbers used</h2><div style="padding:6px 18px 12px"><table>' + rows.map(r => "<tr><td>" + esc(r[0]) + "</td><td>" + esc(r[1]) + "</td></tr>").join("") + "</table></div></div>";
+  return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>' + esc(name) + ' · Home loan: prepay or invest</title><style>' + css + '</style></head><body><div class="wrap">' +
+    '<button class="rbtn" onclick="window.print()">Print this report</button><h1 style="border-bottom:2px solid #16222E;padding-bottom:8px">' + esc(name) + ' · Home loan: prepay or invest</h1><p class="sub">Prepared ' +
+    new Date().toLocaleDateString("en-IN", {day:"numeric", month:"long", year:"numeric"}) + '</p>' + inp + $("out").innerHTML + '</div></body></html>';
+}
+$("btnPrint").onclick = async () => {
+  if(!$("out").querySelector(".verdict")){ toast("Fill in the numbers first so there is a result to print."); return; }
+  const name = $("clientName").value.trim() || "Client";
+  $("printTitle").textContent = name + " · Home loan: prepay or invest";
+  $("printSub").textContent = "Prepared " + new Date().toLocaleDateString("en-IN", {day:"numeric", month:"long", year:"numeric"});
+  const d = await getDownloads();
+  if(d && d.save){ offerFile(slug(name) + "_home-loan-report.html", reportHTML(), "text/html", "", ""); return; }
+  try{ window.print(); }catch(e){ toast("Printing is not available here. Use your browser's print command on this page."); }
+};
+$("clientName").addEventListener("input", scheduleAuto);
+FIELDS.forEach(f => $(f).addEventListener($(f).tagName === "SELECT" ? "change" : "input", scheduleAuto));
+(function boot(){
+  const raw = store.get(AUTO_KEY);
+  if(raw){ try{ const p = JSON.parse(raw); if(p && p.data && p.data.inputs){ hydrate(p.data);
+      const w = new Date(p.savedAt); setAuto("Restored autosave" + (isNaN(w) ? "" : " from " + w.toLocaleString("en-IN", {day:"numeric", month:"short", hour:"2-digit", minute:"2-digit"}))); } }catch(e){} }
+  renderBackup();
+})();
+
+document.getElementById("extra").addEventListener("change", compute);
+document.querySelectorAll("input").forEach(el => {
+  el.addEventListener("input", compute);
+  if(el.hasAttribute("inputmode")) el.addEventListener("blur", () => { const n = num(el.value); el.value = n ? Math.round(n).toLocaleString("en-IN") : ""; });
+});
+compute();
+</script>
+</body>
+</html>
