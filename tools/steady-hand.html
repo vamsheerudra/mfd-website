@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<meta name="description" content="Steady Hand: a calm, private focus space with tiny-step tasks, a just 5 minutes timer, habits and rewards. From Nityasarathi Financial Services.">
+<title>Steady Hand | Focus, Tasks and Habits</title>
+<style>
+:root{
+  --bg:#12303a; --bg2:#23272b;
+  --paper:#fbf7ee; --paper2:#f3ecdc; --line:#e2d8c0;
+  --ink:#2b2a27; --ink-soft:#6b665c;
+  --brass:#a47c2f; --brass-tint:#f1e6c9;
+  --teal:#1f6f6b; --teal-tint:#d9ece9;
+  --rust:#b0503a; --rust-tint:#f4dcd4;
+  --amber:#d6931f; --amber-tint:#f8e7c2;
+  --slate:#51606b; --slate-tint:#e0e6ea;
+  --olive:#6b7a3a; --olive-tint:#e4e9d0;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink);min-height:100vh;padding:24px 14px 40px;
+  background:linear-gradient(135deg,#0e2c33 0%,#1b3b40 45%,#25282b 100%) fixed;
+  position:relative;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.card{
+  position:relative;max-width:1180px;margin:0 auto;background:var(--paper);border-radius:20px;
+  box-shadow:0 24px 70px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.25);overflow:hidden;
+}
+.card::before{content:"";display:block;height:5px;background:linear-gradient(90deg,var(--brass),var(--amber),var(--teal),var(--rust))}
+.top{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--paper)}
+.brand{display:flex;align-items:baseline;gap:8px;margin-right:auto}
+.brand h1{font-size:20px;margin:0;letter-spacing:.2px}
+.brand small{color:var(--brass);text-transform:uppercase;letter-spacing:1.4px;font-size:10.5px;font-weight:700}
+.status{font-size:12px;color:var(--ink-soft);line-height:1.3}
+.status b{color:var(--ink)}
+.btns{display:flex;flex-wrap:wrap;gap:6px}
+button,.btn{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:7px 12px;border-radius:9px;font-size:13px;font-weight:600;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--brass);background:var(--brass-tint)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.primary:hover{background:#185b58}
+.btn.danger{color:var(--rust);border-color:#e3b9ad}
+.btn.danger:hover{background:var(--rust);color:#fff;border-color:var(--rust)}
+.btn.sm{padding:4px 9px;font-size:12px;border-radius:7px}
+.btn.ghost{background:transparent}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.banner{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--amber-tint);border-bottom:1px solid #e5c37a;padding:10px 20px;font-size:13.5px}
+.banner span{margin-right:auto}
+.app{display:grid;grid-template-columns:200px 1fr;min-height:600px}
+.side{border-right:1px solid var(--line);padding:14px 10px;background:var(--paper2);display:flex;flex-direction:column;gap:3px}
+.side button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;font-size:14px;color:var(--ink-soft);font-weight:600;white-space:nowrap}
+.side button:hover{background:#fff;color:var(--ink)}
+.side button.on{background:var(--teal);color:#fff}
+.side .ic{width:20px;text-align:center}
+.side .count{margin-left:auto;font-size:11px;background:var(--rust);color:#fff;border-radius:10px;padding:1px 7px}
+main{padding:22px 24px 30px;min-width:0}
+h2{margin:0 0 4px;font-size:22px}
+.sub{color:var(--ink-soft);font-size:13.5px;margin:0 0 16px}
+.label{color:var(--brass);text-transform:uppercase;letter-spacing:1.3px;font-size:11px;font-weight:700;margin:0 0 8px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.tile{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.tile .n{font-size:26px;font-weight:700}
+.tile .l{font-size:12px;color:var(--ink-soft)}
+.tile.t{border-top:3px solid var(--teal)}.tile.r{border-top:3px solid var(--rust)}.tile.a{border-top:3px solid var(--amber)}.tile.b{border-top:3px solid var(--brass)}
+input[type=text],input[type=number],input[type=date],input[type=time],select,textarea{
+  font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);max-width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--teal-tint);border-color:var(--teal)}
+textarea{width:100%;resize:vertical}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>.grow{flex:1;min-width:180px}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600;background:var(--slate-tint);color:var(--slate)}
+.chip.teal{background:var(--teal-tint);color:var(--teal)}.chip.rust{background:var(--rust-tint);color:var(--rust)}
+.chip.amber{background:var(--amber-tint);color:#8a5a00}.chip.brass{background:var(--brass-tint);color:var(--brass)}.chip.olive{background:var(--olive-tint);color:var(--olive)}
+.chip.sel{background:var(--teal);color:#fff;cursor:pointer}
+button.chip{border:0;cursor:pointer}
+.hint{font-size:12.5px;color:var(--ink-soft)}
+.muted{color:var(--ink-soft)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--brass);padding:8px 8px;border-bottom:2px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap}
+th.ns{cursor:default}
+th:hover:not(.ns){color:var(--teal)}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr.done td.tt{text-decoration:line-through;color:var(--ink-soft)}
+tr.main:hover{background:#fffdf6}
+tr.detail td{background:var(--paper2);padding:14px}
+.tablewrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px}
+.cb{width:20px;height:20px;border-radius:6px;border:2px solid var(--slate);background:#fff;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px;line-height:1;padding:0;vertical-align:middle}
+.cb.on{background:var(--teal);border-color:var(--teal)}
+.bar{height:10px;background:var(--line);border-radius:8px;overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--amber))}
+.rust{color:var(--rust)}.amber{color:#9a6500}.teal{color:var(--teal)}
+.steps{list-style:none;margin:8px 0;padding:0}
+.steps li{display:flex;gap:8px;align-items:center;padding:4px 0}
+.steps li.done span{text-decoration:line-through;color:var(--ink-soft)}
+.steps li span{flex:1}
+.ringwrap{display:flex;justify-content:center;margin:10px 0}
+.ring{width:240px;height:240px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:conic-gradient(var(--teal) var(--p,0%),var(--line) 0)}
+.ring.brk{background:conic-gradient(var(--amber) var(--p,0%),var(--line) 0)}
+.ring>div{width:200px;height:200px;border-radius:50%;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:inset 0 2px 8px rgba(0,0,0,.08)}
+.ring .time{font-size:46px;font-weight:700;font-variant-numeric:tabular-nums}
+.heat{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,15px);grid-auto-columns:15px;gap:3px;overflow-x:auto;padding-bottom:6px}
+.heat i{border-radius:3px;background:var(--line)}
+.heat i.l1{background:#bcdcd8}.heat i.l2{background:#7fbab4}.heat i.l3{background:#3f908a}.heat i.l4{background:var(--teal)}
+.heat i.fut{background:transparent}
+.flexbars{display:flex;align-items:flex-end;gap:8px;height:120px;padding-top:6px}
+.flexbars>div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:11px;color:var(--ink-soft)}
+.flexbars .b{width:100%;max-width:38px;background:var(--teal);border-radius:6px 6px 0 0;min-height:2px}
+.flexbars .b.am{background:var(--amber)}
+.days{display:flex;gap:4px;flex-wrap:wrap}
+.dcell{width:30px;text-align:center;font-size:10px;color:var(--ink-soft)}
+.dcell button{margin-top:2px}
+.dcell .off{opacity:.35}
+.hab{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--line)}
+.hab:last-child{border-bottom:0}
+.hab .nm{min-width:170px;flex:1}
+.tl{position:relative;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+.tl .hr{position:absolute;left:0;right:0;border-top:1px dashed var(--line);font-size:11px;color:var(--ink-soft);padding-left:6px}
+.tl .ev{position:absolute;border-radius:8px;padding:3px 8px;font-size:12.5px;overflow:hidden;background:var(--teal-tint);border-left:4px solid var(--teal);cursor:pointer}
+.tl .ev.d{opacity:.55;text-decoration:line-through}.tl .ev.p3{background:var(--rust-tint);border-color:var(--rust)}.tl .ev.p2{background:var(--amber-tint);border-color:var(--amber)}
+.tl .now{position:absolute;left:46px;right:0;border-top:2px solid var(--rust);z-index:2}
+.moods{display:flex;gap:6px}
+.moods button{font-size:24px;background:#fff;border:2px solid var(--line);border-radius:12px;padding:4px 8px}
+.moods button.on{border-color:var(--teal);background:var(--teal-tint)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.badge{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;font-size:13px}
+.badge.lock{opacity:.45;filter:grayscale(1)}
+.badge b{display:block}
+.list>div{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.list>div:last-child{border-bottom:0}
+.list .grow{flex:1;min-width:0;overflow-wrap:anywhere}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:50;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+#toast div{background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-size:13.5px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.modalbg{position:fixed;inset:0;background:rgba(10,25,28,.65);z-index:40;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:var(--paper);border-radius:16px;padding:22px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.modal h3{margin:0 0 8px}
+.modal .row{justify-content:flex-end;margin-top:16px}
+@media(max-width:780px){
+  body{padding:10px 6px 30px}
+  .app{grid-template-columns:1fr}
+  .side{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:8px}
+  main{padding:16px 14px 24px}
+  .ring{width:210px;height:210px}.ring>div{width:174px;height:174px}.ring .time{font-size:38px}
+}
+
+/* ---- Nityasarathi site additions ---- */
+body{padding:0 0 40px !important}
+.card{margin:22px auto 0;width:calc(100% - 28px)}
+@media(max-width:780px){.card{margin-top:12px;width:calc(100% - 12px)}}
+.site-head{background:#fff;border-bottom:1px solid #EEF2F8;position:relative;z-index:2}
+.site-head-in{max-width:1080px;margin:0 auto;padding:0 22px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.site-head .brand{display:flex;align-items:center;gap:10px;margin:0;text-decoration:none;color:#1B3A6B;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:19px;line-height:1.1}
+.site-head .brand img{width:42px;height:42px;border-radius:10px;display:block}
+.site-head .brand small{display:block;font-family:Arial,sans-serif;font-weight:500;font-size:11px;color:#4A5F85;letter-spacing:.04em;text-transform:uppercase;margin-top:3px}
+.site-head .cta{background:#E87722;color:#fff;text-decoration:none;font-family:Arial,sans-serif;font-weight:600;font-size:14px;padding:9px 18px;border-radius:999px;white-space:nowrap}
+.site-head .cta:hover{background:#cf6a1c}
+@media(max-width:480px){.site-head .brand small{display:none}.site-head .cta{font-size:13px;padding:9px 14px}}
+.back-bar{background:#EEF2F8;padding:10px 16px;font-size:15px;position:relative;z-index:2}
+.back-bar a{color:#0E7C7B;text-decoration:none;font-weight:600}
+.back-bar a:hover{text-decoration:underline}
+.tool-foot{max-width:1180px;width:calc(100% - 28px);margin:18px auto 0;padding:16px 20px;background:#fbf7ee;border-radius:14px;color:#6b665c;font-size:13px;position:relative;z-index:2}
+.tool-foot p{margin:0 0 8px}
+.tool-foot p:last-child{margin-bottom:0}
+.tool-foot strong{color:#2b2a27}
+.tool-foot a{color:#1f6f6b}
+@media print{.site-head,.back-bar,.tool-foot{display:none !important}}
+</style>
+</head>
+<body>
+<header class="site-head noprint"><div class="site-head-in">
+  <a class="brand" href="../index.html" aria-label="Nityasarathi Financial Services home"><img src="data:image/png;base64,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" width="42" height="42" alt="Nityasarathi compass logo"><span>Nityasarathi<small>Financial Services</small></span></a>
+  <a class="cta" href="https://wa.me/918886912221?text=Hello%2C%20I%20would%20like%20to%20book%20a%20conversation." target="_blank" rel="noopener">Book a Conversation</a>
+</div></header>
+<div class="back-bar"><a href="../tools.html">&larr; Back to Tools</a></div>
+<div class="card">
+  <header class="top">
+    <div class="brand"><h1>🌿 Steady Hand</h1><small>personal focus space</small></div>
+    <div class="status" id="status"></div>
+    <div class="btns">
+      <button class="btn" data-act="export">⬇ Export</button>
+      <button class="btn" data-act="exportcsv">⬇ Export CSV</button>
+      <button class="btn" data-act="import">⬆ Import</button>
+      <button class="btn danger" data-act="reset">New (reset)</button>
+    </div>
+    <input type="file" id="importFile" accept="application/json,.json" hidden>
+  </header>
+  <div id="banner"></div>
+  <div id="nudge"></div>
+  <div class="app">
+    <nav class="side" id="nav"></nav>
+    <main id="main"></main>
+  </div>
+</div>
+<div class="tool-foot">
+  <p><strong>Steady Hand is a personal productivity tool.</strong> Your tasks, habits and notes are saved only in your own browser. Nothing is sent to Nityasarathi or anyone else. Use Export on the Backup page now and then, because clearing your browser data will erase them.</p>
+  <p>Vamshi Krishna Rudra | AMFI Registered Mutual Fund Distributor (ARN-370426) | Nityasarathi Financial Services, Hyderabad</p>
+  <p><a href="../index.html">Home</a> &nbsp;|&nbsp; <a href="../tools.html">All tools</a> &nbsp;|&nbsp; <a href="https://wa.me/918886912221?text=Hello%2C%20I%20would%20like%20to%20talk." target="_blank" rel="noopener">Talk to me on WhatsApp</a></p>
+</div>
+<div id="modal"></div>
+<div id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- storage ---------- */
+var NS='ledger_steadyhand_';
+/* one-time migration from the earlier 'mellowflow' key names */
+try{var OLD='ledger_mellowflow_';if(!localStorage.getItem(NS+'saved_probe')){Object.keys(localStorage).forEach(function(k){if(k.indexOf(OLD)===0){var nk=NS+k.slice(OLD.length);if(localStorage.getItem(nk)===null)localStorage.setItem(nk,localStorage.getItem(k))}});localStorage.setItem(NS+'saved_probe','1')}}catch(e){}
+var KEYS={tasks:NS+'tasks_v1',habits:NS+'habits_v1',sessions:NS+'sessions_v1',moods:NS+'moods_v1',inbox:NS+'inbox_v1',rewards:NS+'rewards_v1',prefs:NS+'prefs_v1',
+  timer:NS+'timer_v1',changes:NS+'changes_since_export_v1',saved:NS+'last_saved_v1',exp:NS+'last_export_v1',ab:NS+'autobackup_interval_v1',lastab:NS+'last_autobackup_v1'};
+var DATA_KEYS=['tasks','habits','sessions','moods','inbox','rewards','prefs'];
+var mem={};
+function lsGet(k){try{var v=localStorage.getItem(k);return v}catch(e){return mem[k]===undefined?null:mem[k]}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=String(v)}}
+function lsDel(k){try{localStorage.removeItem(k)}catch(e){delete mem[k]}}
+function jget(k,def){try{var v=lsGet(k);return v?JSON.parse(v):def}catch(e){return def}}
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function defaults(){return {
+  tasks:[],habits:[],sessions:[],moods:[],inbox:[],
+  rewards:{log:[],claims:[],menu:[{id:'r1',name:'Favourite snack',cost:30},{id:'r2',name:'30 min guilt-free scrolling',cost:50},{id:'r3',name:'One episode of a show',cost:80},{id:'r4',name:'A proper treat',cost:200}]},
+  prefs:{projects:['Personal','Work','Home','Study'],focusMin:25,breakMin:5,staleAfter:25,nudge:true,nudgeEvery:60,introSeen:false}
+}}
+var D={};
+function loadAll(){var d=defaults();DATA_KEYS.forEach(function(k){var v=jget(KEYS[k],null);D[k]=v===null?d[k]:v});
+  D.prefs=Object.assign(d.prefs,D.prefs);D.rewards=Object.assign(d.rewards,D.rewards)}
+loadAll();
+
+function persist(name){lsSet(KEYS[name],JSON.stringify(D[name]));bump()}
+function bump(){var c=(parseInt(lsGet(KEYS.changes),10)||0)+1;lsSet(KEYS.changes,String(c));lsSet(KEYS.saved,new Date().toISOString());refreshStatus()}
+function changes(){return parseInt(lsGet(KEYS.changes),10)||0}
+
+(function(){var n=0,d=new Date(),iso=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);D.tasks.forEach(function(t){if(!t.done&&t.repeat&&!t.due){t.due=iso;n++}});if(n)lsSet(KEYS.tasks,JSON.stringify(D.tasks))})();
+/* ---------- helpers ---------- */
+function $(s,r){return (r||document).querySelector(s)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function pad(n){return n<10?'0'+n:''+n}
+function isoOf(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+function today(){return isoOf(new Date())}
+function pISO(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
+function addDays(s,n){var d=pISO(s);d.setDate(d.getDate()+n);return isoOf(d)}
+function dow(s){return pISO(s).getDay()}
+function fmtDate(s){if(!s)return '';var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0]}
+function fmtTime(t){if(!t)return '';var p=t.split(':'),h=+p[0],m=p[1];var ap=h>=12?'PM':'AM';h=h%12;if(h===0)h=12;return h+':'+m+' '+ap}
+function fmtStamp(iso){if(!iso)return 'never';var d=new Date(iso);return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear()+' '+fmtTime(pad(d.getHours())+':'+pad(d.getMinutes()))}
+function fmtMin(m){m=Math.round(m||0);if(m<60)return m+'m';return Math.floor(m/60)+'h '+(m%60?pad(m%60)+'m':'')}
+function dayDiff(a,b){return Math.round((pISO(b)-pISO(a))/86400000)}
+var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+var DOWFULL=['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+var PRI={0:'—',1:'Low',2:'Medium',3:'High'};
+
+/* ---------- toast & modal ---------- */
+function toast(msg){var t=$('#toast');var d=document.createElement('div');d.textContent=msg;t.appendChild(d);setTimeout(function(){d.remove()},3200)}
+function confirmBox(title,msg,okLabel,danger){
+  return new Promise(function(res){
+    var m=$('#modal');
+    m.innerHTML='<div class="modalbg"><div class="modal"><h3>'+esc(title)+'</h3><div>'+esc(msg)+'</div><div class="row"><button class="btn" id="mNo">Cancel</button><button class="btn '+(danger?'danger':'primary')+'" id="mYes">'+esc(okLabel||'OK')+'</button></div></div></div>';
+    function close(v){m.innerHTML='';res(v)}
+    $('#mNo').onclick=function(){close(false)};$('#mYes').onclick=function(){close(true)};
+    $('.modalbg').addEventListener('click',function(e){if(e.target===this)close(false)});
+  });
+}
+
+/* ---------- rewards / xp ---------- */
+function award(ref,xp,why){var L=D.rewards.log;if(L.some(function(e){return e.ref===ref}))return;L.push({id:uid(),ref:ref,xp:xp,why:why,ts:new Date().toISOString(),day:today()});persist('rewards');toast('+'+xp+' XP · '+why)}
+function revoke(ref){var L=D.rewards.log,n=L.length;D.rewards.log=L.filter(function(e){return e.ref!==ref});if(D.rewards.log.length!==n)persist('rewards')}
+function totalXP(){return D.rewards.log.reduce(function(a,e){return a+e.xp},0)}
+function levelOf(xp){return 1+Math.floor(Math.sqrt(xp/40))}
+function levelStart(l){return 40*(l-1)*(l-1)}
+function balance(){return totalXP()-D.rewards.claims.reduce(function(a,c){return a+c.cost},0)}
+function activityStreak(){
+  var days={};D.rewards.log.forEach(function(e){days[e.day]=1});
+  var d=today(),n=0;if(!days[d])d=addDays(d,-1);
+  while(days[d]){n++;d=addDays(d,-1)}return n;
+}
+
+/* ---------- quick-add parser ---------- */
+function nextWeekday(from,w,strict){var d=from,i=0;while(i<8){if(dow(d)===w&&(!strict||d>from))return d;d=addDays(d,1);i++}return from}
+var WD={sun:0,sunday:0,mon:1,monday:1,tue:2,tues:2,tuesday:2,wed:3,wednesday:3,thu:4,thur:4,thurs:4,thursday:4,fri:5,friday:5,sat:6,saturday:6};
+function parseQuick(input){
+  var s=' '+input+' ';var r={title:'',project:'',due:'',time:'',est:0,pri:0,repeat:''};var t=today(),m;
+  // explicit symbols
+  m=s.match(/\s#([\w-]+)/);if(m){r.project=m[1];s=s.replace(m[0],' ')}
+  m=s.match(/\s!(high|h|3|medium|med|m|2|low|l|1)\b/i);if(m){var v=m[1].toLowerCase()[0];r.pri=(v==='h'||v==='3')?3:(v==='m'||v==='2')?2:1;s=s.replace(m[0],' ')}
+  m=s.match(/\s@(\d+(?:\.\d+)?)\s*(h|hr|hrs|m|min|mins)?\b/i);if(m){r.est=Math.round(parseFloat(m[1])*(/^h/i.test(m[2]||'')?60:1));s=s.replace(m[0],' ')}
+  // repeat
+  m=s.match(/\bevery\s+(day|weekday|weekdays|week|month|sunday|monday|tuesday|wednesday|thursday|friday|saturday|sun|mon|tue|tues|wed|thu|thur|thurs|fri|sat)\b/i);
+  if(m){var w=m[1].toLowerCase();if(w==='day')r.repeat='daily';else if(w==='weekday'||w==='weekdays')r.repeat='weekdays';else if(w==='week')r.repeat='weekly';else if(w==='month')r.repeat='monthly';else{r.repeat='weekly';r.due=nextWeekday(t,WD[w],false)}s=s.replace(m[0],' ')}
+  else{m=s.match(/\b(daily|weekdays|weekly|monthly)\b/i);if(m){var q=m[1].toLowerCase();r.repeat=q;s=s.replace(m[0],' ')}}
+  // priority words
+  m=s.match(/\b(urgent|asap|high priority|important)\b/i);if(m){r.pri=3;s=s.replace(m[0],' ')}
+  else{m=s.match(/\b(medium priority|med priority)\b/i);if(m){r.pri=2;s=s.replace(m[0],' ')}else{m=s.match(/\blow priority\b/i);if(m){r.pri=1;s=s.replace(m[0],' ')}}}
+  // time
+  m=s.match(/\b(?:at\s+)?(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/i);
+  if(m){var h=+m[1],mi=m[2]?+m[2]:0;if(h>=1&&h<=12&&mi<60){if(/pm/i.test(m[3])&&h<12)h+=12;if(/am/i.test(m[3])&&h===12)h=0;r.time=pad(h)+':'+pad(mi);s=s.replace(m[0],' ')}}
+  if(!r.time){m=s.match(/\b(?:at\s+)?([01]?\d|2[0-3]):([0-5]\d)\b/);if(m){r.time=pad(+m[1])+':'+m[2];s=s.replace(m[0],' ')}}
+  if(!r.time){m=s.match(/\b(morning|noon|afternoon|evening|tonight)\b/i);if(m){var map={morning:'09:00',noon:'12:00',afternoon:'15:00',evening:'18:00',tonight:'20:00'};r.time=map[m[1].toLowerCase()];if(/tonight/i.test(m[1])){if(!r.due)r.due=t;s=s.replace(m[0],' ')}else s=s.replace(m[0],' ')}}
+  // duration
+  if(!r.est){m=s.match(/\b(?:for\s+)?(\d+(?:\.\d+)?)\s*(hours?|hrs?|h|minutes?|mins?|m)\b/i);if(m){r.est=Math.round(parseFloat(m[1])*(/^h/i.test(m[2])?60:1));s=s.replace(m[0],' ')}}
+  // dates
+  m=s.match(/\b(today|tomorrow|tmrw|tom)\b/i);
+  if(m){r.due=/^to?day/i.test(m[1])?t:addDays(t,1);s=s.replace(m[0],' ')}
+  else{
+    m=s.match(/\bin\s+(\d+)\s*(day|days|week|weeks)\b/i);
+    if(m){r.due=addDays(t,(+m[1])*(/^w/i.test(m[2])?7:1));s=s.replace(m[0],' ')}
+    else{
+      m=s.match(/\b(\d{1,2})[\/.-](\d{1,2})(?:[\/.-](\d{2,4}))?\b/);
+      if(m&&+m[1]<=31&&+m[2]<=12){var yy=m[3]?(+m[3]<100?2000+ +m[3]:+m[3]):new Date().getFullYear();var cand=yy+'-'+pad(+m[2])+'-'+pad(+m[1]);if(!m[3]&&cand<t)cand=(yy+1)+'-'+pad(+m[2])+'-'+pad(+m[1]);r.due=cand;s=s.replace(m[0],' ')}
+      else{
+        m=s.match(/\b(?:on\s+|next\s+|this\s+|by\s+)?(sunday|monday|tuesday|wednesday|thursday|friday|saturday|sun|mon|tues|tue|wed|thurs|thur|thu|fri|sat)\b/i);
+        if(m&&!r.due){r.due=nextWeekday(t,WD[m[1].toLowerCase()],true);s=s.replace(m[0],' ')}
+      }
+    }
+  }
+  // bare project word
+  if(!r.project){var low=' '+s.toLowerCase()+' ';
+    for(var i=0;i<D.prefs.projects.length;i++){var p=D.prefs.projects[i];if(low.indexOf(' '+p.toLowerCase()+' ')>-1||new RegExp('\\b'+p.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b').test(low)){r.project=p;break}}}
+  else{var found=D.prefs.projects.filter(function(p){return p.toLowerCase()===r.project.toLowerCase()})[0];if(found)r.project=found}
+  if(r.time&&!r.due)r.due=t;
+  if(r.repeat&&!r.due){var dd=t;if(r.repeat==='weekdays')while(dow(dd)===0||dow(dd)===6)dd=addDays(dd,1);r.due=dd}
+  r.title=s.replace(/\b(on|at|by|for|due)\s*$/i,' ').replace(/\s+/g,' ').trim();
+  if(!r.title)r.title=input.trim();
+  return r;
+}
+function describeParsed(r){
+  var c=[];if(r.due)c.push('<span class="chip teal">📅 '+fmtDate(r.due)+(r.time?' '+fmtTime(r.time):'')+'</span>');else if(r.time)c.push('<span class="chip teal">⏰ '+fmtTime(r.time)+'</span>');
+  if(r.est)c.push('<span class="chip">⏱ '+fmtMin(r.est)+'</span>');
+  if(r.pri)c.push('<span class="chip '+(r.pri===3?'rust':r.pri===2?'amber':'')+'">⚑ '+PRI[r.pri]+'</span>');
+  if(r.project)c.push('<span class="chip brass">📁 '+esc(r.project)+'</span>');
+  if(r.repeat)c.push('<span class="chip olive">🔁 '+r.repeat+'</span>');
+  return c.join(' ');
+}
+
+/* ---------- breakdown ("magic") ---------- */
+var TEMPLATES=[
+ {re:/(email|e-mail|mail|reply|message|text|whatsapp|call|phone|ring|follow.?up)/,steps:['Open the app/contact and look at what you need to say',"Jot the 2–3 key points (bullets are fine)",'Write or say the ugly first version','Read once, fix only the biggest problem','Send it / make the call','Tick it off and take a breath']},
+ {re:/(write|draft|report|essay|assignment|article|blog|proposal|notes|document|ppt|slides|presentation)/,steps:['Open the file and write the title','List 3–5 headings or bullet points','Fill in the easiest section first (ugly is fine)','Fill in the remaining sections','Read through once and fix big issues','Save / send / submit']},
+ {re:/(study|learn|revise|revision|read|chapter|exam|practice|course|lecture|memor)/,steps:['Gather book/notes/laptop in one place','Skim the headings so you know the shape','Do one small chunk (10–15 min), then pause','Write 3 things you remember without looking','Do a second chunk or practise questions','Note what is still unclear for next time']},
+ {re:/(clean|tidy|declutter|laundry|organi[sz]e|dishes|vacuum|sweep|mop|wash|arrange)/,steps:['Put on music or a podcast','Grab a bag/basket and bin the obvious rubbish','Do one surface or one corner only','Put away what belongs elsewhere','Quick wipe/sweep of the area','Step back — done for now']},
+ {re:/(pay|bill|recharge|renew|book|apply|register|form|submit|file|tax|insurance|booking|appointment|ticket)/,steps:['Find the link/document/login you need','Gather the details (numbers, ID, amount) in one place','Open the page or form','Fill in the first half','Fill in the rest and double-check','Submit and save the confirmation']},
+ {re:/(buy|shop|order|purchase|groceries|grocery|get )/,steps:['Write the list (even 3 items)','Check budget/where to buy','Open the app or store','Add items to the cart','Place order / pay','Note the delivery or pickup time']},
+ {re:/(cook|meal|dinner|lunch|breakfast|prepare food|bake)/,steps:['Pick what you will make','Check ingredients, write what is missing','Lay out the ingredients and tools','Prep (chop/measure)','Cook','Eat, then clear up one thing']},
+ {re:/(exercise|workout|gym|run|walk|yoga|stretch|swim|cycle)/,steps:['Put on the clothes/shoes','Fill a water bottle','Warm up for 3 minutes','Do the main set — just begin','Cool down / stretch','Log it, you earned it']},
+ {re:/(plan|schedule|organise|organize|prepare|arrange|trip|event)/,steps:['Write down the goal in one line','Brain-dump everything that comes to mind','Group into 3 buckets','Pick the very first action in each bucket','Put dates on the first actions','Done — now start the first one']},
+ {re:/(fix|debug|code|build|install|setup|set up|configure|develop|repair)/,steps:['Write what "working" looks like in one line','Gather the files, error or tools','Try the smallest possible change','Test it','Repeat the small change/test until it works','Write a short note of what fixed it']}
+];
+function breakdown(title){
+  var parts=title.split(/\s*(?:,|;|\bthen\b|\band then\b)\s*/i).filter(function(x){return x&&x.length>2});
+  if(parts.length>=2&&parts.length<=7)return parts.map(function(p){return {t:p.charAt(0).toUpperCase()+p.slice(1),done:false}});
+  var low=title.toLowerCase();
+  for(var i=0;i<TEMPLATES.length;i++)if(TEMPLATES[i].re.test(low))return TEMPLATES[i].steps.map(function(t){return {t:t,done:false}});
+  return ['Get everything you need within reach','Set a 5-minute timer for "'+title+'"','Do the smallest possible first piece','Keep going for another short stretch','Check what is left and write it down','Wrap up and tick it off'].map(function(t){return {t:t,done:false}});
+}
+function splitStep(txt){return [{t:'Get ready for: '+txt,done:false},{t:'Do just the first 2 minutes of: '+txt,done:false},{t:'Finish: '+txt,done:false}]}
+
+/* ---------- tasks ---------- */
+function projectsEnsure(p){if(p&&D.prefs.projects.indexOf(p)<0){D.prefs.projects.push(p);persist('prefs')}}
+function newTask(o){
+  var t=Object.assign({id:uid(),title:'',project:'',due:'',time:'',est:0,pri:0,repeat:'',steps:[],notes:'',done:false,doneAt:'',created:new Date().toISOString(),spent:0,spawned:false},o);
+  if(t.repeat&&!t.due)t.due=today();
+  projectsEnsure(t.project);D.tasks.push(t);persist('tasks');return t;
+}
+function getTask(id){return D.tasks.filter(function(t){return t.id===id})[0]}
+function nextDue(due,rep){
+  var base=due||today(),n=base,tt=today(),guard=0;
+  do{
+    if(rep==='daily')n=addDays(n,1);
+    else if(rep==='weekdays'){n=addDays(n,1);while(dow(n)===0||dow(n)===6)n=addDays(n,1)}
+    else if(rep==='weekly')n=addDays(n,7);
+    else if(rep==='monthly'){var d=pISO(n),day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+1);var last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();d.setDate(Math.min(day,last));n=isoOf(d)}
+    else return n;
+    guard++;
+  }while(n<=tt&&guard<400);
+  return n;
+}
+function toggleTask(id){
+  var t=getTask(id);if(!t)return;
+  if(!t.done){
+    t.done=true;t.doneAt=new Date().toISOString();
+    if(t.repeat&&!t.spawned){t.spawned=true;newTask({title:t.title,project:t.project,due:nextDue(t.due,t.repeat),time:t.time,est:t.est,pri:t.pri,repeat:t.repeat,notes:t.notes,steps:t.steps.map(function(s){return {t:s.t,done:false}})});toast('Next repeat created for '+fmtDate(D.tasks[D.tasks.length-1].due))}
+    persist('tasks');
+    award('task:'+t.id,10+(t.pri===3?5:t.pri===2?2:0)+(t.est>=30?5:0),'Task done: '+t.title.slice(0,30));
+  }else{t.done=false;t.doneAt='';persist('tasks');revoke('task:'+t.id)}
+}
+function isOverdue(t){return !t.done&&t.due&&t.due<today()}
+
+/* ---------- habits ---------- */
+function sched(h,d){return !h.days||h.days.length===0||h.days.length===7||h.days.indexOf(dow(d))>-1}
+function habitStreak(h){
+  var d=today(),n=0,g=0;
+  while(g<3700){
+    if(sched(h,d)){if(h.dates.indexOf(d)>-1)n++;else if(d!==today())break}
+    d=addDays(d,-1);g++;
+  }return n;
+}
+function habitBest(h){
+  if(!h.dates.length)return 0;var first=h.dates.slice().sort()[0],d=first,end=today(),run=0,best=0;
+  while(d<=end){if(sched(h,d)){if(h.dates.indexOf(d)>-1){run++;if(run>best)best=run}else if(d!==end)run=0}d=addDays(d,1)}
+  return best;
+}
+function toggleHabit(id,date){
+  var h=D.habits.filter(function(x){return x.id===id})[0];if(!h)return;var i=h.dates.indexOf(date);
+  if(i>-1){h.dates.splice(i,1);persist('habits');revoke('habit:'+id+':'+date)}
+  else{h.dates.push(date);persist('habits');if(date===today()||date>=addDays(today(),-1))award('habit:'+id+':'+date,5+Math.min(habitStreak(h),10),h.name+' check-in')}
+}
+
+/* ---------- focus timer ---------- */
+var T=Object.assign({mode:'focus',status:'idle',total:D.prefs.focusMin*60000,remain:D.prefs.focusMin*60000,endAt:0,taskId:'',just5:false},jget(KEYS.timer,{}));
+function saveT(){lsSet(KEYS.timer,JSON.stringify(T))}
+function tSet(mode,min,just5){T.mode=mode;T.total=min*60000;T.remain=T.total;T.status='idle';T.just5=!!just5;saveT()}
+function tStart(){if(T.status==='run')return;if(T.remain<=0)T.remain=T.total;T.endAt=Date.now()+T.remain;T.status='run';saveT();notifyAsk()}
+function tPause(){if(T.status!=='run')return;T.remain=Math.max(0,T.endAt-Date.now());T.status='pause';saveT()}
+function tReset(){T.status='idle';T.remain=T.total;saveT()}
+function beep(){try{var C=window.AudioContext||window.webkitAudioContext;var c=new C();[660,880,1100].forEach(function(f,i){var o=c.createOscillator(),g=c.createGain();o.frequency.value=f;o.type='sine';o.connect(g);g.connect(c.destination);var t0=c.currentTime+i*.25;g.gain.setValueAtTime(.0001,t0);g.gain.exponentialRampToValueAtTime(.25,t0+.03);g.gain.exponentialRampToValueAtTime(.0001,t0+.22);o.start(t0);o.stop(t0+.25)});setTimeout(function(){c.close()},1500)}catch(e){}}
+function notifyAsk(){}
+function notify(msg){try{if(window.Notification&&Notification.permission==='granted')new Notification('Steady Hand',{body:msg})}catch(e){}}
+function tDone(){
+  var wasFocus=T.mode==='focus',min=Math.round(T.total/60000),tid=T.taskId,just5=T.just5;
+  T.status='idle';
+  if(wasFocus){
+    var s={id:uid(),ts:new Date().toISOString(),day:today(),min:min,taskId:tid};D.sessions.push(s);persist('sessions');
+    var t=tid&&getTask(tid);if(t){t.spent=(t.spent||0)+min;persist('tasks')}
+    award('focus:'+s.id,Math.max(3,min),'Focus session '+min+'m');
+    beep();notify('Focus session done — nice work! Take a break.');toast('Focus session complete 🎉');
+    if(just5){tSet('focus',10,false);toast('Momentum is the hard part. Want 10 more minutes?')}
+    else tSet('break',D.prefs.breakMin,false);
+  }else{beep();notify('Break over — ready when you are.');toast('Break over');tSet('focus',D.prefs.focusMin,false)}
+  saveT();if(U.view==='focus')render();else renderNav();
+}
+function tick(){
+  var nc=$('#nowClock');if(nc)nc.textContent=clockNow();
+  if(T.status==='run'){var r=T.endAt-Date.now();if(r<=0){tDone();return}updateTimerDom(r)}
+}
+function updateTimerDom(r){
+  var d=$('#tmDisp');if(d){var s=Math.ceil(r/1000);d.textContent=pad(Math.floor(s/60))+':'+pad(s%60)}
+  var ring=$('#tmRing');if(ring)ring.style.setProperty('--p',(100*(1-r/T.total)).toFixed(1)+'%');
+  var s2=Math.ceil(r/1000);document.title=(T.status==='run'?pad(Math.floor(s2/60))+':'+pad(s2%60)+' · ':'')+'Steady Hand';
+}
+
+/* ---------- UI state ---------- */
+var U={view:'today',sort:{k:'due',d:1},filter:{q:'',status:'open',project:'',pri:''},expanded:null,tlDate:today(),heat:'all',quick:''};
+var NAV=[['today','🏠','Today'],['tasks','✅','Tasks'],['focus','⏱','Focus'],['habits','🔥','Habits'],['timeline','🗓','Timeline'],['dump','🧠','Brain dump'],['mood','🙂','Mood'],['rewards','🏆','Rewards'],['backup','💾','Backup'],['help','❓','How to use']];
+function renderNav(){
+  var od=D.tasks.filter(isOverdue).length;
+  $('#nav').innerHTML=NAV.map(function(n){return '<button class="'+(U.view===n[0]?'on':'')+'" data-view="'+n[0]+'"><span class="ic">'+n[1]+'</span>'+n[2]+(n[0]==='tasks'&&od?'<span class="count">'+od+'</span>':'')+(n[0]==='focus'&&T.status==='run'?'<span class="count" style="background:var(--amber)">●</span>':'')+'</button>'}).join('');
+}
+var VIDEO_URL='https://youtube.com/shorts/QvJwVRSsoH8';
+var SNZ=NS+'nudge_snooze';
+function overdueList(){return D.tasks.filter(isOverdue)}
+function renderNudge(){
+  var el=$('#nudge');if(!el)return;var od=overdueList();
+  var snoozed=(parseInt(lsGet(SNZ),10)||0)>Date.now();
+  document.title=(od.length&&D.prefs.nudge?'('+od.length+' overdue) ':'')+'Steady Hand';
+  if(!D.prefs.nudge||!od.length||snoozed){el.innerHTML='';return}
+  var small=od.slice().sort(function(a,b){return (a.est||999)-(b.est||999)})[0];
+  el.innerHTML='<div class="banner" style="background:var(--rust-tint);border-bottom-color:#e3b9ad"><span>⏰ <b>'+od.length+' overdue task'+(od.length>1?'s':'')+'</b> — no pressure. Pick the smallest one and give it just 5 minutes: <i>'+esc(small.title)+'</i></span><button class="btn primary sm" data-act="focustask" data-id="'+small.id+'">▶ Just 5 minutes</button><button class="btn sm" data-act="viewoverdue">View overdue</button><button class="btn sm ghost" data-act="snooze">Snooze 1h</button></div>';
+}
+var lastNudge=Date.now();
+function nudgeTick(){
+  if(!D.prefs.nudge)return;var od=overdueList();if(!od.length){renderNudge();return}
+  var snoozed=(parseInt(lsGet(SNZ),10)||0)>Date.now();
+  if(!snoozed&&Date.now()-lastNudge>=D.prefs.nudgeEvery*60000){lastNudge=Date.now();notify(od.length+' overdue task'+(od.length>1?'s':'')+' — try just 5 minutes on the smallest one.');toast('⏰ '+od.length+' overdue — try just 5 minutes');}
+  renderNudge();
+}
+function render(){renderNav();refreshStatus();renderNudge();var v=VIEWS[U.view];$('#main').innerHTML=v();if(AFTER[U.view])AFTER[U.view]();window.scrollTo&&0}
+function refreshStatus(){
+  var sv=lsGet(KEYS.saved),n=changes();
+  $('#status').innerHTML='<div>'+(sv?'Saved <b>'+fmtStamp(sv)+'</b>':'Nothing saved yet')+'</div><div>'+n+' change'+(n===1?'':'s')+' since last export</div>';
+  var b=$('#banner');
+  if(n>=D.prefs.staleAfter)b.innerHTML='<div class="banner"><span>⚠ You have <b>'+n+'</b> unsaved-to-file changes since your last backup. Export a copy so you do not lose your data.</span><button class="btn primary sm" data-act="export">Back up now</button></div>';
+  else b.innerHTML='';
+}
+
+/* ---------- views ---------- */
+var VIEWS={},AFTER={};
+function clockNow(){var n=new Date(),h=n.getHours(),ap=h>=12?'PM':'AM';h=h%12;if(h===0)h=12;return h+':'+pad(n.getMinutes())+':'+pad(n.getSeconds())+' '+ap}
+function hello(){var h=new Date().getHours();return h<5?'Still up':h<12?'Good morning':h<17?'Good afternoon':'Good evening'}
+function taskLine(t){
+  return '<div><button class="cb '+(t.done?'on':'')+'" data-act="toggle" data-id="'+t.id+'">'+(t.done?'✓':'')+'</button><div class="grow"><a href="#" data-act="expand-go" data-id="'+t.id+'" title="Open this task" style="color:inherit;font-weight:600;text-decoration:none;border-bottom:1px dotted var(--brass)'+(t.done?';text-decoration:line-through;color:var(--ink-soft)':'')+'">'+esc(t.title)+'</a> '+(t.time?'<span class="chip teal">'+fmtTime(t.time)+'</span> ':'')+(t.est?'<span class="chip">'+fmtMin(t.est)+'</span> ':'')+(t.pri===3?'<span class="chip rust">High</span> ':'')+(isOverdue(t)?'<span class="chip rust">overdue '+fmtDate(t.due)+'</span>':'')+'</div><button class="btn sm" data-act="focustask" data-id="'+t.id+'" title="Start a 5-minute focus">▶ 5 min</button></div>';
+}
+function focusMinutesOn(day){return D.sessions.filter(function(s){return s.day===day}).reduce(function(a,s){return a+s.min},0)}
+VIEWS.today=function(){
+  var t0=today(),open=D.tasks.filter(function(t){return !t.done});
+  var due=open.filter(function(t){return t.due===t0}),doneToday=D.tasks.filter(function(t){return t.done&&t.due===t0}),over=open.filter(isOverdue),
+      undated=open.filter(function(t){return !t.due}).slice(0,5);
+  var hs=D.habits.filter(function(h){return sched(h,t0)}),hdone=hs.filter(function(h){return h.dates.indexOf(t0)>-1}).length;
+  var xp=totalXP(),lv=levelOf(xp),lo=levelStart(lv),hi=levelStart(lv+1),pct=Math.round(100*(xp-lo)/(hi-lo));
+  var cand=over.concat(due).concat(undated).sort(function(a,b){return (a.est||999)-(b.est||999)})[0];
+  var bars='',mx=1,days=[];for(var i=6;i>=0;i--){var d=addDays(t0,-i);var m=focusMinutesOn(d);days.push([d,m]);if(m>mx)mx=m}
+  bars=days.map(function(x){return '<div><span>'+(x[1]||'')+'</span><div class="b '+(x[0]===t0?'am':'')+'" style="height:'+Math.round(80*x[1]/mx)+'px"></div><span>'+DOW[dow(x[0])]+'</span></div>'}).join('');
+  var lastMood=D.moods.length?D.moods[D.moods.length-1]:null;
+  return '<h2>'+hello()+' 👋</h2><p class="sub">'+DOW[dow(t0)]+', '+fmtDate(t0)+' · <b id="nowClock">'+clockNow()+'</b> — one small step at a time.</p>'
+  +(D.prefs.introSeen?'':'<div class="panel" style="border-left:4px solid var(--brass)"><div class="row"><div class="grow"><div class="label">New here?</div><b>Watch the 1-minute intro video</b><div class="hint">A quick tour of how Steady Hand helps you stop putting things off. Opens on YouTube in a new tab.</div></div><a class="btn primary" href="'+VIDEO_URL+'" target="_blank" rel="noopener noreferrer" data-act="watchvid">▶ Watch video</a><button class="btn sm ghost" data-act="dismissvid" title="Hide this">✕</button></div></div>')
+  +'<div class="grid g4" style="margin-bottom:16px">'
+   +'<div class="tile t"><div class="n">'+due.length+'</div><div class="l">due today</div></div>'
+   +'<div class="tile r"><div class="n '+(over.length?'rust':'')+'">'+over.length+'</div><div class="l">overdue</div></div>'
+   +'<div class="tile a"><div class="n">'+hdone+'/'+hs.length+'</div><div class="l">habits today</div></div>'
+   +'<div class="tile b"><div class="n">'+fmtMin(focusMinutesOn(t0))+'</div><div class="l">focus today</div></div></div>'
+  +'<div class="panel"><div class="row"><div><div class="label">Level '+lv+'</div><b>'+xp+' XP</b> <span class="muted">· '+activityStreak()+'-day streak 🔥 · balance '+balance()+' pts</span></div><div class="grow"><div class="bar"><i style="width:'+pct+'%"></i></div></div></div></div>'
+  +'<div class="panel"><div class="label">Add a task</div><div class="row"><input type="text" id="tquick" class="grow" placeholder="e.g. Pay electricity bill tomorrow 6pm 10 min" autocomplete="off"><button class="btn primary" data-act="todayadd">Add task</button></div><div id="tprev" class="row" style="margin-top:8px;min-height:24px"><span class="hint">Dates, times, durations and projects are picked up automatically.</span></div></div>'
+  +(cand?'<div class="panel" style="border-left:4px solid var(--teal)"><div class="label">Stuck? Start here</div><div class="row"><div class="grow"><b>'+esc(cand.title)+'</b><div class="hint">Just do 5 minutes. You can stop after that.</div></div><button class="btn primary" data-act="focustask" data-id="'+cand.id+'">▶ Just 5 minutes</button></div></div>':'<div class="panel" style="border-left:4px solid var(--teal)"><div class="label">Stuck? Start here</div><div class="row"><div class="grow"><b>Just 5 minutes</b><div class="hint">No task needed. Start the timer, do anything useful, stop after 5 if you want.</div></div><button class="btn primary" data-act="just5go">▶ Just 5 minutes</button></div></div>')
+  +'<div class="grid g2"><div class="panel"><div class="label">Today\'s tasks</div><div class="list">'+((over.concat(due,doneToday)).map(taskLine).join('')||'<div class="muted">Nothing due today. Add a task from the Tasks page, or enjoy the calm.</div>')+'</div></div>'
+  +'<div class="panel"><div class="label">Habits today</div><div class="list">'+(hs.map(function(h){var on=h.dates.indexOf(t0)>-1;return '<div><button class="cb '+(on?'on':'')+'" data-act="habit" data-id="'+h.id+'" data-d="'+t0+'">'+(on?'✓':'')+'</button><div class="grow">'+esc(h.name)+'</div><span class="chip amber">🔥 '+habitStreak(h)+'</span></div>'}).join('')||'<div class="muted">No habits yet — add one on the Habits page.</div>')+'</div></div></div>'
+  +'<div class="grid g2"><div class="panel"><div class="label">Focus minutes — last 7 days</div><div class="flexbars">'+bars+'</div></div>'
+  +'<div class="panel"><div class="label">Check-in</div>'+(lastMood?'<div>Last mood: <span style="font-size:22px">'+MOODS[lastMood.mood-1]+'</span> <span class="muted">'+fmtStamp(lastMood.ts)+'</span></div>':'<div class="muted">No mood logged yet.</div>')+'<div style="margin-top:10px"><button class="btn" data-view="mood">Log mood &amp; energy</button> <button class="btn" data-view="dump">Brain dump ('+D.inbox.length+')</button></div></div></div>';
+};
+
+function taskCmp(a,b){
+  var k=U.sort.k,d=U.sort.d,va,vb;
+  function val(t){switch(k){case 'title':return t.title.toLowerCase();case 'project':return (t.project||'~').toLowerCase();case 'due':return t.due?t.due+(t.time||'99:99'):'9999';case 'pri':return -t.pri;case 'est':return t.est||0;case 'progress':return t.steps.length?t.steps.filter(function(s){return s.done}).length/t.steps.length:-1;case 'done':return t.done?1:0;default:return ''}}
+  va=val(a);vb=val(b);return (va<vb?-1:va>vb?1:0)*d;
+}
+function filteredTasks(){
+  var f=U.filter,q=f.q.toLowerCase();
+  return D.tasks.filter(function(t){
+    if(f.status==='open'&&t.done)return false;if(f.status==='overdue'&&!isOverdue(t))return false;if(f.status==='done'&&!t.done)return false;
+    if(f.project&&t.project!==f.project)return false;if(f.pri&&String(t.pri)!==f.pri)return false;
+    if(q&&(t.title+' '+t.project+' '+t.notes).toLowerCase().indexOf(q)<0)return false;return true}).sort(taskCmp);
+}
+function th(k,label){var on=U.sort.k===k;return '<th data-sort="'+k+'">'+label+(on?' <span>'+(U.sort.d===1?'▲':'▼')+'</span>':'')+'</th>'}
+function opts(arr,sel,blank){return (blank!==undefined?'<option value="">'+blank+'</option>':'')+arr.map(function(a){var v=Array.isArray(a)?a[0]:a,l=Array.isArray(a)?a[1]:a;return '<option value="'+esc(v)+'"'+(String(sel)===String(v)?' selected':'')+'>'+esc(l)+'</option>'}).join('')}
+function taskTable(){
+  var list=filteredTasks();
+  if(!list.length)return '<div class="panel muted" style="text-align:center">No tasks match. Type something in the box above and press Enter.</div>';
+  var h='<div class="tablewrap"><table><thead><tr>'+th('done','✓')+th('title','Task')+th('project','Project')+th('due','Due')+th('pri','Priority')+th('est','Est.')+th('progress','Steps')+'<th class="ns"></th></tr></thead><tbody>';
+  list.forEach(function(t){
+    var done=t.steps.filter(function(s){return s.done}).length;
+    var dueCls=isOverdue(t)?'rust':(t.due===today()&&!t.done?'amber':'');
+    h+='<tr class="main '+(t.done?'done':'')+'"><td><button class="cb '+(t.done?'on':'')+'" data-act="toggle" data-id="'+t.id+'">'+(t.done?'✓':'')+'</button></td>'
+      +'<td class="tt"><a href="#" data-act="expand" data-id="'+t.id+'" style="color:inherit;text-decoration:none;font-weight:600">'+esc(t.title)+'</a>'+(isOverdue(t)?' <span class="chip rust" style="white-space:nowrap">⏰ '+(function(n){return n+' day'+(n===1?'':'s')+' overdue'})(dayDiff(t.due,today()))+'</span>':'')+(t.repeat?' <span class="chip olive">🔁 '+t.repeat+'</span>':'')+(t.spent?' <span class="chip">⏱ '+fmtMin(t.spent)+' focused</span>':'')+'</td>'
+      +'<td>'+(t.project?'<span class="chip brass">'+esc(t.project)+'</span>':'')+'</td>'
+      +'<td class="'+dueCls+'">'+(t.due?fmtDate(t.due)+(t.time?'<br><small>'+fmtTime(t.time)+'</small>':''):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(t.pri?'<span class="chip '+(t.pri===3?'rust':t.pri===2?'amber':'')+'">'+PRI[t.pri]+'</span>':'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(t.est?fmtMin(t.est):'<span class="muted">—</span>')+'</td>'
+      +'<td>'+(t.steps.length?done+'/'+t.steps.length:'<span class="muted">—</span>')+'</td>'
+      +'<td style="white-space:nowrap"><button class="btn sm" data-act="expand" data-id="'+t.id+'">'+(U.expanded===t.id?'Close':'Open')+'</button></td></tr>';
+    if(U.expanded===t.id)h+='<tr class="detail"><td colspan="8">'+taskDetail(t)+'</td></tr>';
+  });
+  return h+'</tbody></table></div>';
+}
+function taskDetail(t){
+  return '<div data-tid="'+t.id+'"><div class="row"><input type="text" class="grow" data-tf="title" value="'+esc(t.title)+'">'
+   +'<input type="text" list="projlist" data-tf="project" placeholder="Project" value="'+esc(t.project)+'" style="width:130px">'
+   +'<input type="date" data-tf="due" value="'+esc(t.due)+'"><input type="time" data-tf="time" value="'+esc(t.time)+'">'
+   +'<input type="number" min="0" data-tf="est" value="'+(t.est||'')+'" placeholder="min" style="width:80px" title="Estimated minutes">'
+   +'<select data-tf="pri">'+opts([[0,'No priority'],[1,'Low'],[2,'Medium'],[3,'High']],t.pri)+'</select>'
+   +'<select data-tf="repeat">'+opts([['','No repeat'],['daily','Daily'],['weekdays','Weekdays'],['weekly','Weekly'],['monthly','Monthly']],t.repeat)+'</select></div>'
+   +'<div class="label" style="margin-top:14px">Tiny steps</div><ul class="steps">'
+   +t.steps.map(function(s,i){return '<li class="'+(s.done?'done':'')+'"><button class="cb '+(s.done?'on':'')+'" data-act="step" data-id="'+t.id+'" data-i="'+i+'">'+(s.done?'✓':'')+'</button><span>'+esc(s.t)+'</span><button class="btn sm ghost" data-act="split" data-id="'+t.id+'" data-i="'+i+'" title="Make this step even smaller">✂ smaller</button><button class="btn sm ghost danger" data-act="delstep" data-id="'+t.id+'" data-i="'+i+'">✕</button></li>'}).join('')
+   +'</ul><div class="row"><input type="text" class="grow" id="newStep" placeholder="Add a step and press Enter"><button class="btn primary" data-act="magic" data-id="'+t.id+'">✨ Break it down</button>'
+   +'<button class="btn" data-act="focustask" data-id="'+t.id+'">▶ Focus on this</button></div>'
+   +'<div class="label" style="margin-top:14px">Notes</div><textarea rows="2" data-tf="notes">'+esc(t.notes)+'</textarea>'
+   +'<div class="row" style="margin-top:10px;justify-content:flex-end"><button class="btn danger sm" data-act="deltask" data-id="'+t.id+'">Delete task</button></div></div>';
+}
+VIEWS.tasks=function(){
+  var f=U.filter;
+  return '<h2>Tasks</h2><p class="sub">Type naturally — dates, times, durations and projects are picked up automatically.</p>'
+  +'<div class="panel"><div class="row"><input type="text" id="quick" class="grow" placeholder="e.g. Call the bank tomorrow 4pm 20 min high priority" value="'+esc(U.quick)+'" autocomplete="off"><button class="btn primary" data-act="quickadd">Add task</button></div>'
+  +'<div id="qprev" class="row" style="margin-top:8px;min-height:24px"></div>'
+  +'<div class="hint" style="margin-top:6px">Understands: <i>today, tomorrow, mon, in 3 days, 25/12, 4pm, 16:30, 30 min, 1h, urgent, low priority, every day, every mon, weekly</i>, and your project names. Optional shortcuts: <code>#project</code> <code>!high</code> <code>@30m</code>.</div></div>'
+  +'<div class="row" style="margin-bottom:12px"><input type="text" id="fq" placeholder="Search…" value="'+esc(f.q)+'" class="grow">'
+  +'<select data-fl="status">'+opts([['open','Open'],['overdue','Overdue'],['done','Done'],['all','All']],f.status)+'</select>'
+  +'<select data-fl="project">'+opts(D.prefs.projects,f.project,'All projects')+'</select>'
+  +'<select data-fl="pri">'+opts([['3','High'],['2','Medium'],['1','Low'],['0','None']],f.pri,'Any priority')+'</select></div>'
+  +'<datalist id="projlist">'+D.prefs.projects.map(function(p){return '<option value="'+esc(p)+'">'}).join('')+'</datalist>'
+  +'<div id="tt">'+taskTable()+'</div>';
+};
+AFTER.tasks=function(){updateQuickPrev();var d=document.querySelector('tr.detail');if(d&&d.scrollIntoView)d.scrollIntoView({block:'center'})};
+function updateQuickPrev(){var q=$('#quick');if(!q)return;var el=$('#qprev');if(!q.value.trim()){el.innerHTML='<span class="hint">Preview of what I understood will appear here.</span>';return}el.innerHTML='<span class="muted">→ <b>'+esc(parseQuick(q.value).title)+'</b></span> '+describeParsed(parseQuick(q.value))}
+function todayAdd(){
+  var q=$('#tquick');if(!q||!q.value.trim()){toast('Type a task first');return}
+  var r=parseQuick(q.value);newTask(r);toast('Added: '+r.title);render();var n=$('#tquick');if(n)n.focus();
+}
+function quickAdd(){
+  var q=$('#quick');if(!q||!q.value.trim())return;var r=parseQuick(q.value);newTask(r);q.value='';U.quick='';
+  if(r.project)projectsEnsure(r.project);toast('Added: '+r.title);render();var qq=$('#quick');if(qq)qq.focus();
+}
+
+VIEWS.focus=function(){
+  var r=T.status==='run'?Math.max(0,T.endAt-Date.now()):T.remain,s=Math.ceil(r/1000),p=100*(1-r/T.total);
+  var open=D.tasks.filter(function(t){return !t.done});
+  var t0=today(),todays=D.sessions.filter(function(x){return x.day===t0});
+  return '<h2>Focus</h2><p class="sub">Short bursts, then a break. Starting is the hardest part — try “Just 5 minutes”.</p>'
+  +'<div class="grid g2"><div class="panel" style="text-align:center"><div class="label">'+(T.mode==='focus'?'Focus':'Break')+(T.just5?' · just 5':'')+'</div>'
+  +'<div class="ringwrap"><div class="ring '+(T.mode==='break'?'brk':'')+'" id="tmRing" style="--p:'+p.toFixed(1)+'%"><div><div class="time" id="tmDisp">'+pad(Math.floor(s/60))+':'+pad(s%60)+'</div><div class="muted">'+(T.status==='run'?'running':T.status==='pause'?'paused':'ready')+'</div></div></div></div>'
+  +'<div class="row" style="justify-content:center">'+(T.status==='run'?'<button class="btn" data-act="tpause">⏸ Pause</button>':'<button class="btn primary" data-act="tstart">▶ '+(T.status==='pause'?'Resume':'Start')+'</button>')+'<button class="btn" data-act="treset">↺ Reset</button><button class="btn" data-act="tskip">⏭ Skip</button></div>'
+  +'<div class="row" style="justify-content:center;margin-top:14px">'
+  +'<button class="chip '+(T.mode==='focus'&&!T.just5&&T.total===25*60000?'sel':'')+'" data-act="preset" data-m="25" data-b="5">25 / 5</button>'
+  +'<button class="chip '+(T.total===50*60000?'sel':'')+'" data-act="preset" data-m="50" data-b="10">50 / 10</button>'
+  +'<button class="chip '+(T.total===15*60000&&T.mode==='focus'?'sel':'')+'" data-act="preset" data-m="15" data-b="3">15 / 3</button>'
+  +'<button class="chip '+(T.just5?'sel':'')+'" data-act="just5">Just 5 minutes</button></div>'
+  +'<div class="row" style="justify-content:center;margin-top:10px"><label class="hint">Custom focus <input type="number" id="cf" min="1" max="180" value="'+D.prefs.focusMin+'" style="width:64px"> break <input type="number" id="cb" min="1" max="60" value="'+D.prefs.breakMin+'" style="width:64px"></label><button class="btn sm" data-act="custom">Set</button></div>'
+  +'<div class="row" style="justify-content:center;margin-top:10px"><button class="btn sm ghost" data-act="notifyperm">🔔 Enable desktop alerts</button></div></div>'
+  +'<div><div class="panel"><div class="label">Working on</div><select id="ftask" style="width:100%"><option value="">— nothing specific —</option>'+open.map(function(t){return '<option value="'+t.id+'"'+(T.taskId===t.id?' selected':'')+'>'+esc(t.title)+'</option>'}).join('')+'</select>'
+  +'<div class="hint" style="margin-top:8px">Time you focus is added to the task. A sound plays when the timer ends.</div></div>'
+  +'<div class="panel"><div class="label">Today — '+fmtMin(todays.reduce(function(a,x){return a+x.min},0))+' in '+todays.length+' session'+(todays.length===1?'':'s')+'</div><div class="list">'
+  +(todays.slice().reverse().map(function(x){var t=x.taskId&&getTask(x.taskId);return '<div><span class="chip teal">'+x.min+'m</span><div class="grow">'+(t?esc(t.title):'<span class="muted">general focus</span>')+'</div><span class="muted">'+fmtTime(pad(new Date(x.ts).getHours())+':'+pad(new Date(x.ts).getMinutes()))+'</span></div>'}).join('')||'<div class="muted">No sessions yet today.</div>')+'</div></div></div></div>';
+};
+
+function heatHtml(hid){
+  var t0=today(),weeks=20,startWeekEnd=addDays(t0,-(dow(t0)));var start=addDays(startWeekEnd,-(weeks-1)*7),cells='';
+  var hs=hid==='all'?D.habits:D.habits.filter(function(h){return h.id===hid});
+  for(var i=0;i<weeks*7;i++){
+    var d=addDays(start,i);
+    if(d>t0){cells+='<i class="fut"></i>';continue}
+    var sc=hs.filter(function(h){return sched(h,d)}),dn=sc.filter(function(h){return h.dates.indexOf(d)>-1}).length;
+    var lvl=!sc.length||!dn?0:(dn/sc.length<.34?1:dn/sc.length<.67?2:dn/sc.length<1?3:4);
+    cells+='<i class="'+(lvl?'l'+lvl:'')+'" title="'+DOW[dow(d)]+' '+fmtDate(d)+': '+dn+'/'+sc.length+'"></i>';
+  }
+  return '<div class="heat">'+cells+'</div>';
+}
+VIEWS.habits=function(){
+  var t0=today();
+  var days=[];for(var i=13;i>=0;i--)days.push(addDays(t0,-i));
+  return '<h2>Habits</h2><p class="sub">Small and repeatable beats big and occasional. Streaks skip days a habit is not scheduled for.</p>'
+  +'<div class="panel"><div class="row"><input type="text" id="hname" class="grow" placeholder="New habit, e.g. Drink water, Walk 10 minutes"><div class="days" id="hdays">'
+  +DOW.map(function(d,i){return '<button class="chip sel" data-act="hday" data-i="'+i+'">'+d+'</button>'}).join('')+'</div><button class="btn primary" data-act="addhabit">Add habit</button></div><div class="hint" style="margin-top:6px">Tap days to turn them off for habits that are not daily.</div></div>'
+  +'<div class="panel"><div class="row" style="margin-bottom:8px"><div class="label" style="margin:0">Activity heatmap · 20 weeks</div><select data-hheat style="margin-left:auto"><option value="all">All habits</option>'+D.habits.map(function(h){return '<option value="'+h.id+'"'+(U.heat===h.id?' selected':'')+'>'+esc(h.name)+'</option>'}).join('')+'</select></div>'+heatHtml(U.heat)+'<div class="hint">Columns are weeks (Sunday first). Darker = more of the scheduled habits done.</div></div>'
+  +'<div class="panel">'+(D.habits.map(function(h){
+    return '<div class="hab"><div class="nm"><b>'+esc(h.name)+'</b><div class="hint">'+(!h.days||h.days.length===0||h.days.length===7?'Every day':h.days.map(function(d){return DOW[d]}).join(', '))+'</div></div>'
+    +'<span class="chip amber">🔥 '+habitStreak(h)+' day streak</span><span class="chip">best '+habitBest(h)+'</span>'
+    +'<div class="days">'+days.map(function(d){var on=h.dates.indexOf(d)>-1,sc=sched(h,d);return '<div class="dcell">'+DOW[dow(d)][0]+'<br><button class="cb '+(on?'on':'')+'" style="'+(sc?'':'opacity:.3')+'" title="'+fmtDate(d)+'" data-act="habit" data-id="'+h.id+'" data-d="'+d+'">'+(on?'✓':'')+'</button><div>'+d.slice(8)+'</div></div>'}).join('')+'</div>'
+    +'<button class="btn sm danger ghost" data-act="delhabit" data-id="'+h.id+'">✕</button></div>'}).join('')||'<div class="muted">No habits yet.</div>')+'</div>';
+};
+var hdaysSel=[0,1,2,3,4,5,6];
+
+function tlItems(date){return D.tasks.filter(function(t){return t.due===date&&t.time})}
+VIEWS.timeline=function(){
+  var date=U.tlDate,items=tlItems(date),H0=6,H1=23,PX=52;
+  var h='<h2>Timeline</h2><p class="sub">Your day as time blocks. Give a task a time (and an estimate) and it appears here.</p>'
+   +'<div class="row" style="margin-bottom:12px"><button class="btn" data-act="tlprev">◀</button><button class="btn" data-act="tltoday">Today</button><button class="btn" data-act="tlnext">▶</button><b style="margin-left:6px">'+DOW[dow(date)]+' '+fmtDate(date)+'</b></div>';
+  var lines='';for(var x=H0;x<=H1;x++)lines+='<div class="hr" style="top:'+((x-H0)*PX)+'px">'+fmtTime(pad(x)+':00')+'</div>';
+  // column assignment for overlaps
+  var ev=items.map(function(t){var p=t.time.split(':'),st=(+p[0]-H0)*60+ +p[1];var du=Math.max(t.est||30,20);return {t:t,st:st,en:st+du}}).sort(function(a,b){return a.st-b.st});
+  var cols=[];ev.forEach(function(e){var c=0;while(cols[c]&&cols[c]>e.st)c++;e.c=c;cols[c]=e.en});
+  var nc=Math.max(1,cols.length);
+  var evh=ev.map(function(e){var top=e.st/60*PX,hh=Math.max(22,(e.en-e.st)/60*PX-2);var w=(100-6)/nc;return '<div class="ev p'+e.t.pri+' '+(e.t.done?'d':'')+'" data-act="expand-go" data-id="'+e.t.id+'" style="top:'+top+'px;height:'+hh+'px;left:calc(54px + '+(e.c*w)+'% );width:calc('+w+'% - 62px/'+nc+')"><b>'+fmtTime(e.t.time)+'</b> '+esc(e.t.title)+'</div>'}).join('');
+  var now='';if(date===today()){var n=new Date(),mm=(n.getHours()-H0)*60+n.getMinutes();if(mm>=0&&mm<=(H1-H0+1)*60)now='<div class="now" style="top:'+(mm/60*PX)+'px"></div>'}
+  h+='<div class="tl" style="height:'+((H1-H0+1)*PX)+'px">'+lines+evh+now+'</div>';
+  var un=D.tasks.filter(function(t){return !t.done&&t.due===date&&!t.time});
+  h+='<div class="panel" style="margin-top:16px"><div class="label">Unscheduled for this day</div><div class="list">'+(un.map(function(t){return '<div><div class="grow">'+esc(t.title)+(t.est?' <span class="chip">'+fmtMin(t.est)+'</span>':'')+'</div><input type="time" data-tl="'+t.id+'" title="Pick a start time"></div>'}).join('')||'<div class="muted">Nothing unscheduled.</div>')+'</div></div>';
+  return h;
+};
+
+VIEWS.dump=function(){
+  return '<h2>Brain dump</h2><p class="sub">Get it out of your head first. Sort it later. One thought per line.</p>'
+  +'<div class="panel"><textarea id="dumpTxt" rows="4" placeholder="Anything on your mind…"></textarea><div class="row" style="margin-top:8px"><button class="btn primary" data-act="dumpadd">Capture</button>'+(D.inbox.length?'<button class="btn" data-act="dumpall">Turn all into tasks</button>':'')+'</div></div>'
+  +'<div class="panel"><div class="label">Inbox · '+D.inbox.length+'</div><div class="list">'
+  +(D.inbox.map(function(i){return '<div><div class="grow">'+esc(i.text)+'<div class="hint">'+fmtStamp(i.ts)+'</div></div><button class="btn sm" data-act="dumptask" data-id="'+i.id+'">→ Task</button><button class="btn sm danger" data-act="dumpdel" data-id="'+i.id+'">✕</button></div>'}).join('')||'<div class="muted">Inbox is empty. 🎈</div>')+'</div></div>';
+};
+
+var MOODS=['😞','😕','😐','🙂','😄'];
+var moodSel={mood:3,energy:3};
+VIEWS.mood=function(){
+  var t0=today(),days=[],i;
+  for(i=13;i>=0;i--){var d=addDays(t0,-i);var ms=D.moods.filter(function(m){return m.day===d});var avg=ms.length?ms.reduce(function(a,m){return a+m.mood},0)/ms.length:0;var en=ms.length?ms.reduce(function(a,m){return a+m.energy},0)/ms.length:0;days.push({d:d,avg:avg,en:en})}
+  return '<h2>Mood &amp; energy</h2><p class="sub">A 10-second check-in. Patterns show up over time.</p>'
+  +'<div class="panel"><div class="label">How are you right now?</div><div class="moods" id="mm">'+MOODS.map(function(e,i){return '<button class="'+(moodSel.mood===i+1?'on':'')+'" data-act="mood" data-v="'+(i+1)+'">'+e+'</button>'}).join('')+'</div>'
+  +'<div class="label" style="margin-top:14px">Energy</div><div class="moods" id="ee">'+[1,2,3,4,5].map(function(i){return '<button class="'+(moodSel.energy===i?'on':'')+'" style="font-size:16px;font-weight:700" data-act="energy" data-v="'+i+'">'+i+'</button>'}).join('')+'</div>'
+  +'<div class="row" style="margin-top:12px"><input type="text" id="mnote" class="grow" placeholder="Optional note"><button class="btn primary" data-act="logmood">Save check-in</button></div></div>'
+  +'<div class="grid g2"><div class="panel"><div class="label">Mood · last 14 days</div><div class="flexbars">'+days.map(function(x){return '<div><span>'+(x.avg?x.avg.toFixed(1):'')+'</span><div class="b" style="height:'+Math.round(x.avg*16)+'px"></div><span>'+x.d.slice(8)+'</span></div>'}).join('')+'</div></div>'
+  +'<div class="panel"><div class="label">Energy · last 14 days</div><div class="flexbars">'+days.map(function(x){return '<div><span>'+(x.en?x.en.toFixed(1):'')+'</span><div class="b am" style="height:'+Math.round(x.en*16)+'px"></div><span>'+x.d.slice(8)+'</span></div>'}).join('')+'</div></div></div>'
+  +'<div class="panel"><div class="label">History</div><div class="list">'+(D.moods.slice().reverse().slice(0,20).map(function(m){return '<div><span style="font-size:22px">'+MOODS[m.mood-1]+'</span><span class="chip amber">⚡ '+m.energy+'</span><div class="grow">'+esc(m.note||'')+'</div><span class="muted">'+fmtStamp(m.ts)+'</span><button class="btn sm danger ghost" data-act="delmood" data-id="'+m.id+'">✕</button></div>'}).join('')||'<div class="muted">No check-ins yet.</div>')+'</div></div>';
+};
+
+function stats(){
+  var bestH=D.habits.reduce(function(a,h){return Math.max(a,habitBest(h))},0);
+  return {tasks:D.tasks.filter(function(t){return t.done}).length,focus:D.sessions.reduce(function(a,s){return a+s.min},0),streak:activityStreak(),habit:bestH,level:levelOf(totalXP()),moods:D.moods.length,dump:D.inbox.length+D.tasks.length,sessions:D.sessions.length};
+}
+var BADGES=[['First step','Complete 1 task',function(s){return s.tasks>=1}],['Getting going','Complete 10 tasks',function(s){return s.tasks>=10}],['Task machine','Complete 50 tasks',function(s){return s.tasks>=50}],
+ ['First focus','Finish a focus session',function(s){return s.sessions>=1}],['One hour deep','60 focus minutes in total',function(s){return s.focus>=60}],['Ten hours','600 focus minutes in total',function(s){return s.focus>=600}],
+ ['3-day run','3 active days in a row',function(s){return s.streak>=3}],['Week warrior','7 active days in a row',function(s){return s.streak>=7}],['Month of momentum','30 active days in a row',function(s){return s.streak>=30}],
+ ['Habit seed','A 7-day habit streak',function(s){return s.habit>=7}],['Habit tree','A 21-day habit streak',function(s){return s.habit>=21}],['Self-aware','5 mood check-ins',function(s){return s.moods>=5}],['Level 5','Reach level 5',function(s){return s.level>=5}],['Level 10','Reach level 10',function(s){return s.level>=10}]];
+VIEWS.rewards=function(){
+  var xp=totalXP(),lv=levelOf(xp),lo=levelStart(lv),hi=levelStart(lv+1),pct=Math.round(100*(xp-lo)/(hi-lo)),st=stats();
+  return '<h2>Rewards</h2><p class="sub">XP for tasks (10+), steps (2), habits (5+), focus (1 per minute), mood check-ins (2). Spend points on rewards you choose.</p>'
+  +'<div class="grid g4" style="margin-bottom:16px"><div class="tile b"><div class="n">Lv '+lv+'</div><div class="l">'+xp+' XP total</div></div><div class="tile t"><div class="n">'+balance()+'</div><div class="l">points to spend</div></div><div class="tile a"><div class="n">'+activityStreak()+'🔥</div><div class="l">day streak</div></div><div class="tile r"><div class="n">'+(hi-xp)+'</div><div class="l">XP to level '+(lv+1)+'</div></div></div>'
+  +'<div class="panel"><div class="bar"><i style="width:'+pct+'%"></i></div></div>'
+  +'<div class="grid g2"><div class="panel"><div class="label">Reward menu</div><div class="list">'+(D.rewards.menu.map(function(r){return '<div><div class="grow">'+esc(r.name)+'</div><span class="chip brass">'+r.cost+' pts</span><button class="btn sm primary" data-act="claim" data-id="'+r.id+'"'+(balance()<r.cost?' disabled':'')+'>Claim</button><button class="btn sm ghost danger" data-act="delreward" data-id="'+r.id+'">✕</button></div>'}).join(''))+'</div>'
+  +'<div class="row" style="margin-top:10px"><input type="text" id="rname" class="grow" placeholder="New reward"><input type="number" id="rcost" min="1" value="50" style="width:80px"><button class="btn" data-act="addreward">Add</button></div>'
+  +(D.rewards.claims.length?'<div class="label" style="margin-top:14px">Claimed</div><div class="hint">'+D.rewards.claims.slice(-5).reverse().map(function(c){return esc(c.name)+' ('+fmtDate(c.ts.slice(0,10))+')'}).join(' · ')+'</div>':'')+'</div>'
+  +'<div class="panel"><div class="label">Recent XP</div><div class="list">'+(D.rewards.log.slice(-10).reverse().map(function(e){return '<div><span class="chip teal">+'+e.xp+'</span><div class="grow">'+esc(e.why)+'</div><span class="muted">'+fmtDate(e.day)+'</span></div>'}).join('')||'<div class="muted">Complete something to earn XP.</div>')+'</div></div></div>'
+  +'<div class="panel"><div class="label">Badges</div><div class="badges">'+BADGES.map(function(b){var ok=b[2](st);return '<div class="badge '+(ok?'':'lock')+'"><b>'+(ok?'🏅 ':'🔒 ')+b[0]+'</b><span class="muted">'+b[1]+'</span></div>'}).join('')+'</div></div>';
+};
+
+VIEWS.help=function(){
+  function step(n,t,b,v){return '<div class="panel"><div class="row"><span class="chip teal">'+n+'</span><b>'+t+'</b>'+(v?'<button class="btn sm" style="margin-left:auto" data-view="'+v+'">Open →</button>':'')+'</div><div class="hint" style="font-size:13.5px;margin-top:6px">'+b+'</div></div>'}
+  return '<h2>How to use Steady Hand</h2><p class="sub">Make starting easy, keep going in short bursts, then reward yourself.</p>'
+  +'<div class="panel" style="border-left:4px solid var(--brass)"><div class="row"><div class="grow"><b>Watch the 1-minute video</b><div class="hint">A quick tour of the app. Opens on YouTube in a new tab.</div></div><a class="btn primary" href="'+VIDEO_URL+'" target="_blank" rel="noopener noreferrer" data-act="watchvid">▶ Watch video</a></div></div>'
+  +step(1,'Empty your head','Write everything on your mind in the Brain dump, one thought per line. Sort it later.','dump')
+  +step(2,'Make tasks tiny','Add tasks in plain words, e.g. “Call the bank tomorrow 4pm 20 min”. Open a task and press ✨ Break it down; press ✂ smaller on any step that still feels big.','tasks')
+  +step(3,'Start with “Just 5 minutes”','Stuck? Use the “Stuck? Start here” card on Today. You only commit to 5 minutes and can stop after that. Most of the effort is in starting.','today')
+  +step(4,'Work in short bursts','Link the timer to a task and use 25/5 or 15/3.','focus')
+  +step(5,'Reward finishing','Ticking steps and tasks earns XP. Spend points on rewards you choose.','rewards')
+  +step(6,'Build a daily rhythm','Add one or two tiny habits and give your top task a start time so it shows on the Timeline.','habits')
+  +'<div class="panel"><div class="label">Good to know</div><div class="hint" style="font-size:13.5px">Everything is saved in this browser only. Use Export on the Backup page now and then, and Import to restore. A banner reminds you after several unsaved changes.</div></div>';
+};
+VIEWS.backup=function(){
+  var ab=lsGet(KEYS.ab)||'off';
+  return '<h2>Backup &amp; data</h2><p class="sub">Everything lives in this browser (localStorage). No server, no login. Keep copies safe.</p>'
+  +'<div class="panel"><div class="label">Manual backup</div><div class="row"><button class="btn primary" data-act="export">⬇ Export JSON</button><button class="btn" data-act="exportcsv">⬇ Export CSV (tasks)</button><button class="btn" data-act="import">⬆ Import JSON</button></div>'
+  +'<div class="hint" style="margin-top:8px">Last export: <b>'+fmtStamp(lsGet(KEYS.exp)||'')+'</b> · '+changes()+' change(s) since then. Import replaces all current data (you will be asked to confirm).</div></div>'
+  +'<div class="panel"><div class="label">Auto-backup</div><div class="row"><select id="abSel">'+opts([['off','Off'],['6','Every 6 hours'],['24','Daily'],['168','Weekly']],ab)+'</select></div>'
+  +'<div class="hint" style="margin-top:8px">Last auto-backup: <b>'+fmtStamp(lsGet(KEYS.lastab)||'')+'</b>.'+(DL?' <b>Note:</b> in this hosted page every save asks for your confirmation, so silent auto-backup is paused here — it works in the downloaded <code>steadyhand.html</code> file.':'')+' While this page is open, a backup file is downloaded quietly when due (only if something changed). Your browser may ask permission for repeated downloads.</div></div>'
+  +'<div class="panel"><div class="label">Reminder banner</div><div class="row"><label>Show a banner after <input type="number" id="stale" min="1" value="'+D.prefs.staleAfter+'" style="width:80px"> changes without an export</label></div></div>'
+  +'<div class="panel"><div class="label">Overdue nudges</div><div class="row"><label><input type="checkbox" id="nudgeOn"'+(D.prefs.nudge?' checked':'')+'> Remind me about overdue tasks</label><label>every <select id="nudgeEvery">'+opts([['30','30 min'],['60','1 hour'],['120','2 hours'],['240','4 hours']],D.prefs.nudgeEvery)+'</select></label><button class="btn sm" data-act="notifyperm">🔔 Allow desktop alerts</button></div><div class="hint" style="margin-top:8px">A banner shows on every page while tasks are overdue, the tab title shows the count, and while this page is open you get a gentle toast (and a desktop alert if allowed) at your chosen interval. No XP is ever lost for overdue tasks.</div></div>'
+  +'<div class="panel"><div class="label">Danger zone</div><button class="btn danger" data-act="reset">New (reset) — clear all data</button></div>';
+};
+
+/* ---------- backup logic ---------- */
+function stamp(){var d=new Date();return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+pad(d.getHours())+pad(d.getMinutes())}
+function buildBackup(){var o={app:'steadyhand',version:1,exportedAt:new Date().toISOString(),data:{}};DATA_KEYS.forEach(function(k){o.data[k]=D[k]});return o}
+function download(name,text,mime){var b=new Blob([text],{type:mime}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
+function markExport(auto){var now=new Date().toISOString();lsSet(KEYS.exp,now);lsSet(KEYS.changes,'0');if(auto)lsSet(KEYS.lastab,now);refreshStatus();if(U.view==='backup')render()}
+async function doExport(){
+  var json=JSON.stringify(buildBackup(),null,2),name='steadyhand-backup-'+stamp()+'.json';
+  if(DL){if(await saveFile(name,json,'application/json')){markExport();toast('Backup saved')}return}
+  if(window.showSaveFilePicker){
+    try{var h=await window.showSaveFilePicker({suggestedName:name,types:[{description:'JSON backup',accept:{'application/json':['.json']}}]});var w=await h.createWritable();await w.write(json);await w.close();markExport();toast('Backup saved');return}
+    catch(e){if(e&&e.name==='AbortError')return}
+  }
+  download(name,json,'application/json');markExport();toast('Backup downloaded');
+}
+var DL=null;
+function initDL(tries){try{if(window.claude&&typeof window.claude.use==='function'){window.claude.use('downloads').then(function(d){DL=d||null;if(U.view==='backup')render()}).catch(function(){})}else if(tries<5)setTimeout(function(){initDL(tries+1)},500)}catch(e){}}
+async function saveFile(name,text,mime){
+  if(DL){try{await DL.save({filename:name,data:text});return true}catch(e){if(!e||e.code!=='declined')toast('Could not save the file: '+((e&&e.message)||'unknown error'));return false}}
+  download(name,text,mime);return true;
+}
+function csvCell(v){v=String(v==null?'':v);return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
+async function doCSV(){
+  var head=['Title','Project','Due','Time','Priority','Estimate (min)','Repeat','Done','Done at','Steps total','Steps done','Focus minutes','Notes','Created'];
+  var rows=D.tasks.map(function(t){return [t.title,t.project,fmtDate(t.due),t.time,PRI[t.pri],t.est||'',t.repeat,t.done?'Yes':'No',t.doneAt?fmtStamp(t.doneAt):'',t.steps.length,t.steps.filter(function(s){return s.done}).length,t.spent||0,t.notes,fmtStamp(t.created)]});
+  var csv='\ufeff'+[head].concat(rows).map(function(r){return r.map(csvCell).join(',')}).join('\r\n');
+  if(await saveFile('steadyhand-tasks-'+stamp()+'.csv',csv,'text/csv;charset=utf-8'))toast('CSV saved');
+}
+function validBackup(o){
+  if(!o||typeof o!=='object'||(o.app!=='steadyhand'&&o.app!=='mellowflow')||!o.data)return false;var d=o.data;
+  return ['tasks','habits','sessions','moods','inbox'].every(function(k){return Array.isArray(d[k])})&&d.rewards&&Array.isArray(d.rewards.log)&&d.prefs&&Array.isArray(d.prefs.projects);
+}
+function doImportFile(file){
+  var r=new FileReader();
+  r.onload=function(){
+    var o;try{o=JSON.parse(r.result)}catch(e){toast('That file is not valid JSON');return}
+    if(!validBackup(o)){toast('This does not look like a Steady Hand backup');return}
+    confirmBox('Replace all data?','Importing will replace everything currently in the app ('+D.tasks.length+' tasks, '+D.habits.length+' habits) with the backup from '+fmtStamp(o.exportedAt)+'. This cannot be undone.','Replace data',true).then(function(ok){
+      if(!ok)return;DATA_KEYS.forEach(function(k){D[k]=o.data[k];lsSet(KEYS[k],JSON.stringify(D[k]))});
+      var d=defaults();D.prefs=Object.assign(d.prefs,D.prefs);D.rewards=Object.assign(d.rewards,D.rewards);
+      lsSet(KEYS.changes,'0');lsSet(KEYS.saved,new Date().toISOString());render();toast('Backup imported');
+    });
+  };r.readAsText(file);
+}
+function doReset(){
+  confirmBox('Reset everything?','This deletes ALL tasks, habits, sessions, moods, inbox items, XP and settings from this browser. Export a backup first if you might want them back.','Delete everything',true).then(function(ok){
+    if(!ok)return;Object.keys(KEYS).forEach(function(k){lsDel(KEYS[k])});loadAll();
+    T={mode:'focus',status:'idle',total:25*60000,remain:25*60000,endAt:0,taskId:'',just5:false};
+    D.prefs=defaults().prefs;DATA_KEYS.forEach(function(k){lsSet(KEYS[k],JSON.stringify(D[k]))});lsSet(KEYS.changes,'0');lsSet(KEYS.saved,new Date().toISOString());
+    U.view='today';U.expanded=null;render();toast('All data cleared');
+  });
+}
+function autoBackupCheck(){
+  if(DL)return; /* hosted viewer needs a confirmation click, so silent auto-backup is skipped there */
+  var iv=parseInt(lsGet(KEYS.ab),10);if(!iv)return;
+  var last=lsGet(KEYS.lastab),due=!last||(Date.now()-new Date(last).getTime())>=iv*3600000;
+  if(due&&changes()>0){
+    try{var json=JSON.stringify(buildBackup(),null,2);download('steadyhand-autobackup-'+stamp()+'.json',json,'application/json');markExport(true)}catch(e){}
+  }
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click',function(e){
+  var v=e.target.closest('[data-view]');if(v){U.view=v.getAttribute('data-view');render();return}
+  var th_=e.target.closest('[data-sort]');if(th_){var k=th_.getAttribute('data-sort');if(U.sort.k===k)U.sort.d*=-1;else{U.sort.k=k;U.sort.d=1}$('#tt').innerHTML=taskTable();return}
+  var a=e.target.closest('[data-act]');if(!a)return;if(a.getAttribute('data-act')!=='watchvid')e.preventDefault();
+  var act=a.getAttribute('data-act'),id=a.getAttribute('data-id');
+  switch(act){
+    case 'watchvid':if(!D.prefs.introSeen){D.prefs.introSeen=true;persist('prefs');setTimeout(function(){if(U.view==='today')render()},600)}break;
+    case 'dismissvid':D.prefs.introSeen=true;persist('prefs');render();break;
+    case 'snooze':lsSet(SNZ,String(Date.now()+3600000));renderNudge();toast('Snoozed for 1 hour');break;
+    case 'viewoverdue':U.view='tasks';U.filter={q:'',status:'overdue',project:'',pri:''};U.sort={k:'due',d:1};render();break;
+    case 'export':doExport();break;
+    case 'exportcsv':doCSV();break;
+    case 'import':$('#importFile').click();break;
+    case 'reset':doReset();break;
+    case 'quickadd':quickAdd();break;
+    case 'todayadd':todayAdd();break;
+    case 'toggle':toggleTask(id);render();break;
+    case 'expand':U.expanded=U.expanded===id?null:id;if(U.view!=='tasks')U.view='tasks';render();break;
+    case 'expand-go':var tg=getTask(id);U.expanded=id;U.view='tasks';U.filter.q='';U.filter.project='';U.filter.pri='';if(tg&&tg.done&&U.filter.status==='open')U.filter.status='all';render();break;
+    case 'deltask':confirmBox('Delete task?','This removes the task and its steps.','Delete',true).then(function(ok){if(!ok)return;D.tasks=D.tasks.filter(function(t){return t.id!==id});revoke('task:'+id);persist('tasks');U.expanded=null;render()});break;
+    case 'step':var t=getTask(id),i=+a.getAttribute('data-i');t.steps[i].done=!t.steps[i].done;persist('tasks');
+      if(t.steps[i].done){award('step:'+id+':'+i+':'+t.steps[i].t.length,2,'Step done');if(t.steps.every(function(s){return s.done})&&!t.done)toast('All steps done — tick the task! ✅')}else revoke('step:'+id+':'+i+':'+t.steps[i].t.length);
+      render();break;
+    case 'delstep':var t2=getTask(id);t2.steps.splice(+a.getAttribute('data-i'),1);persist('tasks');render();break;
+    case 'split':var t3=getTask(id),ix=+a.getAttribute('data-i');var ns=splitStep(t3.steps[ix].t.replace(/^(Get ready for|Do just the first 2 minutes of|Finish): /,''));Array.prototype.splice.apply(t3.steps,[ix,1].concat(ns));persist('tasks');render();break;
+    case 'magic':var t4=getTask(id);if(t4.steps.length){confirmBox('Replace steps?','This replaces the '+t4.steps.length+' existing step(s) with a fresh breakdown.','Replace').then(function(ok){if(!ok)return;t4.steps=breakdown(t4.title);persist('tasks');render()})}else{t4.steps=breakdown(t4.title);persist('tasks');render();toast('Broken into '+t4.steps.length+' tiny steps')}break;
+    case 'focustask':T.taskId=id;if(T.status==='idle'||T.mode!=='focus'){tSet('focus',5,true);}T.taskId=id;saveT();tStart();U.view='focus';render();break;
+    case 'habit':toggleHabit(id,a.getAttribute('data-d'));render();break;
+    case 'hday':var i2=+a.getAttribute('data-i'),p=hdaysSel.indexOf(i2);if(p>-1)hdaysSel.splice(p,1);else hdaysSel.push(i2);a.classList.toggle('sel',hdaysSel.indexOf(i2)>-1);break;
+    case 'addhabit':var hn=$('#hname').value.trim();if(!hn){toast('Give the habit a name');break}D.habits.push({id:uid(),name:hn,days:hdaysSel.length&&hdaysSel.length<7?hdaysSel.slice().sort():[],dates:[],created:today()});persist('habits');render();break;
+    case 'delhabit':confirmBox('Delete habit?','Its history will be removed.','Delete',true).then(function(ok){if(!ok)return;D.habits=D.habits.filter(function(h){return h.id!==id});D.rewards.log=D.rewards.log.filter(function(e){return e.ref.indexOf('habit:'+id)!==0});persist('habits');persist('rewards');render()});break;
+    case 'tlprev':U.tlDate=addDays(U.tlDate,-1);render();break;
+    case 'tlnext':U.tlDate=addDays(U.tlDate,1);render();break;
+    case 'tltoday':U.tlDate=today();render();break;
+    case 'dumpadd':var lines=$('#dumpTxt').value.split(/\n+/).map(function(x){return x.trim()}).filter(Boolean);lines.forEach(function(x){D.inbox.push({id:uid(),text:x,ts:new Date().toISOString()})});if(lines.length){persist('inbox');toast('Captured '+lines.length+' thought'+(lines.length>1?'s':''))}render();break;
+    case 'dumptask':var it=D.inbox.filter(function(x){return x.id===id})[0];if(it){newTask(parseQuick(it.text));D.inbox=D.inbox.filter(function(x){return x.id!==id});persist('inbox');toast('Moved to Tasks')}render();break;
+    case 'dumpdel':D.inbox=D.inbox.filter(function(x){return x.id!==id});persist('inbox');render();break;
+    case 'dumpall':D.inbox.forEach(function(it){newTask(parseQuick(it.text))});D.inbox=[];persist('inbox');toast('All moved to Tasks');render();break;
+    case 'mood':moodSel.mood=+a.getAttribute('data-v');render();break;
+    case 'energy':moodSel.energy=+a.getAttribute('data-v');render();break;
+    case 'logmood':var m={id:uid(),ts:new Date().toISOString(),day:today(),mood:moodSel.mood,energy:moodSel.energy,note:$('#mnote').value.trim()};D.moods.push(m);persist('moods');award('mood:'+m.id,2,'Mood check-in');render();break;
+    case 'delmood':D.moods=D.moods.filter(function(x){return x.id!==id});persist('moods');revoke('mood:'+id);render();break;
+    case 'claim':var r=D.rewards.menu.filter(function(x){return x.id===id})[0];if(r&&balance()>=r.cost){D.rewards.claims.push({id:uid(),name:r.name,cost:r.cost,ts:new Date().toISOString()});persist('rewards');toast('Enjoy: '+r.name+' 🎉')}render();break;
+    case 'addreward':var rn=$('#rname').value.trim(),rc=parseInt($('#rcost').value,10);if(rn&&rc>0){D.rewards.menu.push({id:uid(),name:rn,cost:rc});persist('rewards');render()}break;
+    case 'delreward':D.rewards.menu=D.rewards.menu.filter(function(x){return x.id!==id});persist('rewards');render();break;
+    case 'tstart':tStart();render();break;
+    case 'tpause':tPause();render();break;
+    case 'treset':tReset();render();break;
+    case 'tskip':if(T.mode==='focus')tSet('break',D.prefs.breakMin);else tSet('focus',D.prefs.focusMin);render();break;
+    case 'preset':D.prefs.focusMin=+a.getAttribute('data-m');D.prefs.breakMin=+a.getAttribute('data-b');persist('prefs');tSet('focus',D.prefs.focusMin);render();break;
+    case 'just5':tSet('focus',5,true);render();break;
+    case 'just5go':T.taskId='';tSet('focus',5,true);tStart();U.view='focus';render();break;
+    case 'custom':var f=parseInt($('#cf').value,10),b=parseInt($('#cb').value,10);if(f>0&&b>0){D.prefs.focusMin=f;D.prefs.breakMin=b;persist('prefs');tSet('focus',f);render()}break;
+    case 'notifyperm':if(window.Notification){Notification.requestPermission().then(function(p){toast(p==='granted'?'Desktop alerts enabled':'Alerts not enabled — in-page alerts and sound still work')})}else toast('Notifications are not supported here');break;
+  }
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'){
+    if(e.target.id==='quick'){e.preventDefault();quickAdd()}
+    else if(e.target.id==='tquick'){e.preventDefault();todayAdd()}
+    else if(e.target.id==='newStep'){var tid=e.target.closest('[data-tid]').getAttribute('data-tid'),v=e.target.value.trim();if(v){getTask(tid).steps.push({t:v,done:false});persist('tasks');render();var ns=$('#newStep');if(ns)ns.focus()}}
+    else if(e.target.id==='hname'){var b=document.querySelector('[data-act=addhabit]');if(b)b.click()}
+  }
+});
+document.addEventListener('input',function(e){
+  var t=e.target;
+  if(t.id==='quick'){U.quick=t.value;updateQuickPrev()}
+  else if(t.id==='tquick'){var pv=$('#tprev');if(!t.value.trim())pv.innerHTML='<span class="hint">Dates, times, durations and projects are picked up automatically.</span>';else{var r=parseQuick(t.value);pv.innerHTML='<span class="muted">→ <b>'+esc(r.title)+'</b></span> '+describeParsed(r)}}
+  else if(t.id==='fq'){U.filter.q=t.value;$('#tt').innerHTML=taskTable()}
+});
+document.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.hasAttribute('data-fl')){U.filter[t.getAttribute('data-fl')]=t.value;$('#tt').innerHTML=taskTable();return}
+  if(t.hasAttribute('data-hheat')){U.heat=t.value;render();return}
+  if(t.id==='ftask'){T.taskId=t.value;saveT();return}
+  if(t.id==='abSel'){lsSet(KEYS.ab,t.value);if(t.value!=='off')lsSet(KEYS.lastab,new Date().toISOString());bump();render();toast('Auto-backup: '+t.options[t.selectedIndex].text);return}
+  if(t.id==='nudgeOn'){D.prefs.nudge=t.checked;persist('prefs');renderNudge();return}
+  if(t.id==='nudgeEvery'){D.prefs.nudgeEvery=parseInt(t.value,10)||60;persist('prefs');return}
+  if(t.id==='stale'){var n=parseInt(t.value,10);if(n>0){D.prefs.staleAfter=n;persist('prefs');refreshStatus()}return}
+  if(t.id==='importFile'){if(t.files[0])doImportFile(t.files[0]);t.value='';return}
+  if(t.hasAttribute('data-tl')){var tk=getTask(t.getAttribute('data-tl'));if(tk&&t.value){tk.time=t.value;if(!tk.est)tk.est=30;persist('tasks');render()}return}
+  if(t.hasAttribute('data-tf')){
+    var box=t.closest('[data-tid]'),task=getTask(box.getAttribute('data-tid')),f=t.getAttribute('data-tf'),v=t.value;
+    if(f==='est')task.est=Math.max(0,parseInt(v,10)||0);else if(f==='pri')task.pri=+v;else if(f==='title'){if(!v.trim())return;task.title=v.trim()}else task[f]=v;
+    if(f==='project'){projectsEnsure(v.trim());task.project=v.trim()}
+    if(f==='repeat'&&v&&!task.due)task.due=today();
+    persist('tasks');var keep=U.view==='tasks';if(keep)$('#tt').innerHTML=taskTable();
+  }
+});
+
+/* ---------- boot ---------- */
+window.__mf={parseQuick:parseQuick,breakdown:breakdown,D:D,U:U,render:render,nextDue:nextDue,validBackup:validBackup,buildBackup:buildBackup,habitStreak:habitStreak,toggleHabit:toggleHabit,toggleTask:toggleTask,newTask:newTask,totalXP:totalXP};
+if(T.status==='run'&&T.endAt<=Date.now())tDone();
+if(!lsGet(KEYS.saved)){lsSet(KEYS.saved,new Date().toISOString())}
+initDL(0);
+render();
+setInterval(tick,500);
+setInterval(autoBackupCheck,60000);
+setInterval(nudgeTick,60000);
+setTimeout(autoBackupCheck,3000);
+document.addEventListener('visibilitychange',function(){if(!document.hidden)tick()});
+})();
+</script>
+</body>
+</html>
