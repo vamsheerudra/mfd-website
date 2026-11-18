@@ -217,9 +217,9 @@ body{padding:0 0 40px !important}
 var NS='ledger_steadyhand_';
 /* one-time migration from the earlier 'mellowflow' key names */
 try{var OLD='ledger_mellowflow_';if(!localStorage.getItem(NS+'saved_probe')){Object.keys(localStorage).forEach(function(k){if(k.indexOf(OLD)===0){var nk=NS+k.slice(OLD.length);if(localStorage.getItem(nk)===null)localStorage.setItem(nk,localStorage.getItem(k))}});localStorage.setItem(NS+'saved_probe','1')}}catch(e){}
-var KEYS={tasks:NS+'tasks_v1',habits:NS+'habits_v1',sessions:NS+'sessions_v1',moods:NS+'moods_v1',inbox:NS+'inbox_v1',rewards:NS+'rewards_v1',prefs:NS+'prefs_v1',
+var KEYS={tasks:NS+'tasks_v1',habits:NS+'habits_v1',sessions:NS+'sessions_v1',moods:NS+'moods_v1',inbox:NS+'inbox_v1',events:NS+'events_v1',rewards:NS+'rewards_v1',prefs:NS+'prefs_v1',
   timer:NS+'timer_v1',changes:NS+'changes_since_export_v1',saved:NS+'last_saved_v1',exp:NS+'last_export_v1',ab:NS+'autobackup_interval_v1',lastab:NS+'last_autobackup_v1'};
-var DATA_KEYS=['tasks','habits','sessions','moods','inbox','rewards','prefs'];
+var DATA_KEYS=['tasks','habits','sessions','moods','inbox','rewards','prefs','events'];
 var mem={};
 function lsGet(k){try{var v=localStorage.getItem(k);return v}catch(e){return mem[k]===undefined?null:mem[k]}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=String(v)}}
@@ -227,7 +227,7 @@ function lsDel(k){try{localStorage.removeItem(k)}catch(e){delete mem[k]}}
 function jget(k,def){try{var v=lsGet(k);return v?JSON.parse(v):def}catch(e){return def}}
 function clone(o){return JSON.parse(JSON.stringify(o))}
 function defaults(){return {
-  tasks:[],habits:[],sessions:[],moods:[],inbox:[],
+  tasks:[],habits:[],sessions:[],moods:[],inbox:[],events:[],
   rewards:{log:[],claims:[],menu:[{id:'r1',name:'Favourite snack',cost:30},{id:'r2',name:'30 min guilt-free scrolling',cost:50},{id:'r3',name:'One episode of a show',cost:80},{id:'r4',name:'A proper treat',cost:200}]},
   prefs:{projects:['Personal','Work','Home','Study'],focusMin:25,breakMin:5,staleAfter:25,nudge:true,nudgeEvery:60,introSeen:false}
 }}
@@ -448,12 +448,43 @@ function updateTimerDom(r){
   var s2=Math.ceil(r/1000);document.title=(T.status==='run'?pad(Math.floor(s2/60))+':'+pad(s2%60)+' · ':'')+'Steady Hand';
 }
 
+/* ---------- events (birthdays, anniversaries, ...) ---------- */
+var EVTYPES={birthday:['🎂','Birthday'],anniversary:['💍','Anniversary'],other:['📅','Other']};
+function isLeap(y){return (y%4===0&&y%100!==0)||y%400===0}
+function evNext(e,from){
+  var t=from||today();if(!e.yearly)return e.date;
+  var p=e.date.split('-'),m=+p[1],d=+p[2];
+  function occ(Y){var dd=d;if(m===2&&d===29&&!isLeap(Y))dd=28;return Y+'-'+pad(m)+'-'+pad(dd)}
+  var cy=pISO(t).getFullYear(),c=occ(cy);if(c<t)c=occ(cy+1);return c;
+}
+function ordinal(n){var s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0])}
+function evYearsText(e,next){
+  if(!e.showYears||!e.yearly)return '';
+  var n=+next.slice(0,4)-(+e.date.slice(0,4));if(n<=0)return '';
+  if(e.type==='birthday')return 'turning '+n;
+  if(e.type==='anniversary')return ordinal(n)+' anniversary';
+  return n+' years';
+}
+function evWhen(days){return days===0?'Today 🎉':days===1?'Tomorrow':'in '+days+' days'}
+function eventsList(){var t0=today();return D.events.map(function(e){var n=evNext(e);return {e:e,next:n,days:dayDiff(t0,n)}})}
+function eventsDue(){return eventsList().filter(function(x){return x.days>=0&&x.days<=(x.e.lead||0)}).sort(function(a,b){return a.days-b.days})}
+function evLabel(x){var t=EVTYPES[x.e.type]||EVTYPES.other,yt=evYearsText(x.e,x.next);return t[0]+' '+esc(x.e.title)+(yt?' <span class="muted">('+yt+')</span>':'')}
+var EVN=NS+'event_notified_v1';
+function eventsTick(){
+  var due=eventsDue();if(!due.length)return;
+  var seen=jget(EVN,{}),t0=today(),fresh=due.filter(function(x){return seen[x.e.id]!==t0});
+  if(!fresh.length)return;
+  fresh.forEach(function(x){seen[x.e.id]=t0});lsSet(EVN,JSON.stringify(seen));
+  var msg=fresh.slice(0,3).map(function(x){var t=EVTYPES[x.e.type]||EVTYPES.other;var yt=evYearsText(x.e,x.next);return t[0]+' '+x.e.title+(yt?' ('+yt+')':'')+' — '+(x.days===0?'today':x.days===1?'tomorrow':'in '+x.days+' days')}).join(' · ');
+  toast(msg);notify(msg);renderNav();
+}
+
 /* ---------- UI state ---------- */
 var U={view:'today',sort:{k:'due',d:1},filter:{q:'',status:'open',project:'',pri:''},expanded:null,tlDate:today(),heat:'all',quick:''};
-var NAV=[['today','🏠','Today'],['tasks','✅','Tasks'],['focus','⏱','Focus'],['habits','🔥','Habits'],['timeline','🗓','Timeline'],['dump','🧠','Brain dump'],['mood','🙂','Mood'],['rewards','🏆','Rewards'],['backup','💾','Backup'],['help','❓','How to use']];
+var NAV=[['today','🏠','Today'],['tasks','✅','Tasks'],['focus','⏱','Focus'],['habits','🔥','Habits'],['timeline','🗓','Timeline'],['events','🎉','Events'],['dump','🧠','Brain dump'],['mood','🙂','Mood'],['rewards','🏆','Rewards'],['backup','💾','Backup'],['help','❓','How to use']];
 function renderNav(){
-  var od=D.tasks.filter(isOverdue).length;
-  $('#nav').innerHTML=NAV.map(function(n){return '<button class="'+(U.view===n[0]?'on':'')+'" data-view="'+n[0]+'"><span class="ic">'+n[1]+'</span>'+n[2]+(n[0]==='tasks'&&od?'<span class="count">'+od+'</span>':'')+(n[0]==='focus'&&T.status==='run'?'<span class="count" style="background:var(--amber)">●</span>':'')+'</button>'}).join('');
+  var od=D.tasks.filter(isOverdue).length,evn=eventsDue().length;
+  $('#nav').innerHTML=NAV.map(function(n){return '<button class="'+(U.view===n[0]?'on':'')+'" data-view="'+n[0]+'"><span class="ic">'+n[1]+'</span>'+n[2]+(n[0]==='tasks'&&od?'<span class="count">'+od+'</span>':'')+(n[0]==='events'&&evn?'<span class="count" style="background:var(--amber)">'+evn+'</span>':'')+(n[0]==='focus'&&T.status==='run'?'<span class="count" style="background:var(--amber)">●</span>':'')+'</button>'}).join('');
 }
 var VIDEO_URL='https://youtube.com/shorts/QvJwVRSsoH8';
 var SNZ=NS+'nudge_snooze';
@@ -502,6 +533,7 @@ VIEWS.today=function(){
   var lastMood=D.moods.length?D.moods[D.moods.length-1]:null;
   return '<h2>'+hello()+' 👋</h2><p class="sub">'+DOW[dow(t0)]+', '+fmtDate(t0)+' · <b id="nowClock">'+clockNow()+'</b> — one small step at a time.</p>'
   +(D.prefs.introSeen?'':'<div class="panel" style="border-left:4px solid var(--brass)"><div class="row"><div class="grow"><div class="label">New here?</div><b>Watch the 1-minute intro video</b><div class="hint">A quick tour of how Steady Hand helps you stop putting things off. Opens on YouTube in a new tab.</div></div><a class="btn primary" href="'+VIDEO_URL+'" target="_blank" rel="noopener noreferrer" data-act="watchvid">▶ Watch video</a><button class="btn sm ghost" data-act="dismissvid" title="Hide this">✕</button></div></div>')
+  +(function(){var ds=eventsDue().slice(0,5);if(!ds.length)return '';return '<div class="panel" style="border-left:4px solid var(--amber)"><div class="row"><div class="label" style="margin:0">Coming up</div><button class="btn sm ghost" style="margin-left:auto" data-view="events">All events →</button></div><div class="list">'+ds.map(function(x){return '<div><div class="grow">'+evLabel(x)+'</div><span class="chip '+(x.days===0?'rust':'amber')+'">'+evWhen(x.days)+'</span></div>'}).join('')+'</div></div>'})()
   +'<div class="grid g4" style="margin-bottom:16px">'
    +'<div class="tile t"><div class="n">'+due.length+'</div><div class="l">due today</div></div>'
    +'<div class="tile r"><div class="n '+(over.length?'rust':'')+'">'+over.length+'</div><div class="l">overdue</div></div>'
@@ -694,6 +726,28 @@ VIEWS.rewards=function(){
   +'<div class="panel"><div class="label">Badges</div><div class="badges">'+BADGES.map(function(b){var ok=b[2](st);return '<div class="badge '+(ok?'':'lock')+'"><b>'+(ok?'🏅 ':'🔒 ')+b[0]+'</b><span class="muted">'+b[1]+'</span></div>'}).join('')+'</div></div>';
 };
 
+var evForm={type:'birthday'};
+VIEWS.events=function(){
+  var t0=today(),all=eventsList(),edit=U.evEdit&&D.events.filter(function(e){return e.id===U.evEdit})[0];
+  var v=edit||{type:'birthday',title:'',date:'',yearly:true,showYears:true,lead:7,notes:''};
+  var up=all.filter(function(x){return x.days>=0}).sort(function(a,b){return a.days-b.days}),past=all.filter(function(x){return x.days<0}).sort(function(a,b){return b.days-a.days});
+  function row(x){var e=x.e,tp=EVTYPES[e.type]||EVTYPES.other;
+    return '<div><div class="grow"><b>'+evLabel(x)+'</b><div class="hint">'+fmtDate(x.next)+' · '+DOW[dow(x.next)]+(e.yearly?' · repeats every year':'')+(e.lead?' · remind '+(e.lead===1?'1 day':e.lead+' days')+' before':' · remind on the day')+(e.notes?' · '+esc(e.notes):'')+'</div></div>'
+    +(x.days>=0?'<span class="chip '+(x.days===0?'rust':x.days<=(e.lead||0)?'amber':'')+'">'+evWhen(x.days)+'</span>':'<span class="chip">'+Math.abs(x.days)+' days ago</span>')
+    +'<button class="btn sm" data-act="editevent" data-id="'+e.id+'">Edit</button><button class="btn sm danger" data-act="delevent" data-id="'+e.id+'">✕</button></div>'}
+  return '<h2>Events</h2><p class="sub">Birthdays, anniversaries and other special days — so you never forget the people who matter.</p>'
+  +'<div class="panel"><div class="label">'+(edit?'Edit event':'Add an event')+'</div><div class="row">'
+  +'<select id="evType">'+opts([['birthday','🎂 Birthday'],['anniversary','💍 Anniversary'],['other','📅 Other']],v.type)+'</select>'
+  +'<input type="text" id="evTitle" class="grow" placeholder="Name or title, e.g. Priya, Mom &amp; Dad, Insurance renewal" value="'+esc(v.title)+'" autocomplete="off">'
+  +'<input type="date" id="evDate" value="'+esc(v.date)+'" title="Date (use the original year for birthdays and anniversaries)"></div>'
+  +'<div class="row" style="margin-top:10px"><label><input type="checkbox" id="evYearly"'+(v.yearly?' checked':'')+'> Repeats every year</label>'
+  +'<label><input type="checkbox" id="evYears"'+(v.showYears?' checked':'')+'> Show age / years count</label>'
+  +'<label>Remind me <select id="evLead">'+opts([['0','on the day'],['1','1 day before'],['3','3 days before'],['7','1 week before'],['14','2 weeks before'],['30','1 month before']],String(v.lead))+'</select></label></div>'
+  +'<div class="row" style="margin-top:10px"><input type="text" id="evNotes" class="grow" placeholder="Note (optional), e.g. buy a gift, call in the morning" value="'+esc(v.notes)+'"><button class="btn primary" data-act="saveevent">'+(edit?'Save changes':'Add event')+'</button>'+(edit?'<button class="btn" data-act="cancelevent">Cancel</button>':'')+'</div>'
+  +'<div class="hint" style="margin-top:6px">For birthdays and anniversaries pick the original date, including the year, to show the age or the number of years. You will see reminders on the Today page and, while the app is open, as a pop-up message.</div></div>'
+  +'<div class="panel"><div class="label">Coming up</div><div class="list">'+(up.map(row).join('')||'<div class="muted">No events yet. Add the first birthday above.</div>')+'</div></div>'
+  +(past.length?'<div class="panel"><div class="label">Past one-time events</div><div class="list">'+past.map(row).join('')+'</div></div>':'');
+};
 VIEWS.help=function(){
   function step(n,t,b,v){return '<div class="panel"><div class="row"><span class="chip teal">'+n+'</span><b>'+t+'</b>'+(v?'<button class="btn sm" style="margin-left:auto" data-view="'+v+'">Open →</button>':'')+'</div><div class="hint" style="font-size:13.5px;margin-top:6px">'+b+'</div></div>'}
   return '<h2>How to use Steady Hand</h2><p class="sub">Make starting easy, keep going in short bursts, then reward yourself.</p>'
@@ -704,6 +758,7 @@ VIEWS.help=function(){
   +step(4,'Work in short bursts','Link the timer to a task and use 25/5 or 15/3.','focus')
   +step(5,'Reward finishing','Ticking steps and tasks earns XP. Spend points on rewards you choose.','rewards')
   +step(6,'Build a daily rhythm','Add one or two tiny habits and give your top task a start time so it shows on the Timeline.','habits')
+  +step(7,'Remember special days','Add birthdays, anniversaries and other dates on the Events page. You get a reminder on the Today page before the day.','events')
   +'<div class="panel"><div class="label">Good to know</div><div class="hint" style="font-size:13.5px">Everything is saved in this browser only. Use Export on the Backup page now and then, and Import to restore. A banner reminds you after several unsaved changes.</div></div>';
 };
 VIEWS.backup=function(){
@@ -755,7 +810,7 @@ function doImportFile(file){
     var o;try{o=JSON.parse(r.result)}catch(e){toast('That file is not valid JSON');return}
     if(!validBackup(o)){toast('This does not look like a Steady Hand backup');return}
     confirmBox('Replace all data?','Importing will replace everything currently in the app ('+D.tasks.length+' tasks, '+D.habits.length+' habits) with the backup from '+fmtStamp(o.exportedAt)+'. This cannot be undone.','Replace data',true).then(function(ok){
-      if(!ok)return;DATA_KEYS.forEach(function(k){D[k]=o.data[k];lsSet(KEYS[k],JSON.stringify(D[k]))});
+      if(!ok)return;DATA_KEYS.forEach(function(k){D[k]=o.data[k]!==undefined?o.data[k]:defaults()[k];lsSet(KEYS[k],JSON.stringify(D[k]))});
       var d=defaults();D.prefs=Object.assign(d.prefs,D.prefs);D.rewards=Object.assign(d.rewards,D.rewards);
       lsSet(KEYS.changes,'0');lsSet(KEYS.saved,new Date().toISOString());render();toast('Backup imported');
     });
@@ -787,6 +842,13 @@ document.addEventListener('click',function(e){
   switch(act){
     case 'watchvid':if(!D.prefs.introSeen){D.prefs.introSeen=true;persist('prefs');setTimeout(function(){if(U.view==='today')render()},600)}break;
     case 'dismissvid':D.prefs.introSeen=true;persist('prefs');render();break;
+    case 'saveevent':var evT=$('#evTitle').value.trim(),evD=$('#evDate').value;if(!evT||!evD){toast('Please enter a name and a date');break}
+      var evO={title:evT,type:$('#evType').value,date:evD,yearly:$('#evYearly').checked,showYears:$('#evYears').checked,lead:parseInt($('#evLead').value,10)||0,notes:$('#evNotes').value.trim()};
+      if(U.evEdit){var ex=D.events.filter(function(e){return e.id===U.evEdit})[0];if(ex)Object.assign(ex,evO)}else D.events.push(Object.assign({id:uid()},evO));
+      persist('events');U.evEdit=null;toast('Event saved');render();break;
+    case 'editevent':U.evEdit=id;render();window.scrollTo&&window.scrollTo(0,0);break;
+    case 'cancelevent':U.evEdit=null;render();break;
+    case 'delevent':confirmBox('Delete event?','This removes the event and its reminders.','Delete',true).then(function(ok){if(!ok)return;D.events=D.events.filter(function(e){return e.id!==id});persist('events');U.evEdit=null;render()});break;
     case 'snooze':lsSet(SNZ,String(Date.now()+3600000));renderNudge();toast('Snoozed for 1 hour');break;
     case 'viewoverdue':U.view='tasks';U.filter={q:'',status:'overdue',project:'',pri:''};U.sort={k:'due',d:1};render();break;
     case 'export':doExport();break;
@@ -851,6 +913,7 @@ document.addEventListener('input',function(e){
 });
 document.addEventListener('change',function(e){
   var t=e.target;
+  if(t.id==='evType'&&!U.evEdit){var yr=$('#evYearly'),sy=$('#evYears');if(yr)yr.checked=t.value!=='other';if(sy)sy.checked=t.value!=='other';return}
   if(t.hasAttribute('data-fl')){U.filter[t.getAttribute('data-fl')]=t.value;$('#tt').innerHTML=taskTable();return}
   if(t.hasAttribute('data-hheat')){U.heat=t.value;render();return}
   if(t.id==='ftask'){T.taskId=t.value;saveT();return}
@@ -874,6 +937,7 @@ window.__mf={parseQuick:parseQuick,breakdown:breakdown,D:D,U:U,render:render,nex
 if(T.status==='run'&&T.endAt<=Date.now())tDone();
 if(!lsGet(KEYS.saved)){lsSet(KEYS.saved,new Date().toISOString())}
 initDL(0);
+setTimeout(eventsTick,1500);setInterval(eventsTick,1800000);
 render();
 setInterval(tick,500);
 setInterval(autoBackupCheck,60000);
