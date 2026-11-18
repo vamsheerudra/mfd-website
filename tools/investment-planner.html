@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<meta name="description" content="One-page investment planner: compare six SIP and lumpsum strategies built on the same numbers. From Nityasarathi Financial Services.">
+<title>Investment Planner | SIP, Lumpsum and Step-up SIP</title>
+<style>
+:root{
+  --paper:#f1f5fa; --paper2:#e6edf6; --line:#d9e2ee;
+  --ink:#15233b; --ink-soft:#5a6a83;
+  --brass:#0e7c7b; --brass-tint:#dcefee;
+  --teal:#0e7c7b; --teal-tint:#cfe9e7;
+  --rust:#b0503a; --rust-tint:#f4dcd4;
+  --amber:#e87722; --amber-tint:#fdebdc;
+  --slate:#51606b; --slate-tint:#e0e6ea;
+  --navy:#1B3A6B; --gold:#c98a10;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);min-height:100vh;padding:0;display:flex;flex-direction:column;background:#f1f5fa;position:relative}
+.card{position:relative;flex:1 0 auto;display:flex;flex-direction:column;width:100%;margin:0;background:var(--paper);overflow:hidden}
+.card::before{content:none}
+.top{background:#fff!important;padding-left:clamp(14px,1.8vw,32px)!important;padding-right:clamp(14px,1.8vw,32px)!important;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--paper)}
+.top .brand{display:flex;align-items:center;gap:12px;margin-right:auto;flex-wrap:wrap}
+.top .brand h1{font-size:21px;margin:0;font-family:Georgia,'Times New Roman',serif;color:var(--navy);display:flex;align-items:center;gap:9px}
+.top .brand h1::before{content:'';width:10px;height:22px;border-radius:3px;background:linear-gradient(180deg,#0e7c7b,#E87722)}
+.top .acts{display:flex;gap:8px;flex-wrap:wrap}
+.top .btn{padding:9px 14px}
+.top .brand small{color:var(--ink-soft);font-size:13px;font-weight:500;line-height:1.2;padding-left:12px;border-left:1px solid var(--line)}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:7px 12px;border-radius:9px;font-size:13px;font-weight:600;transition:.15s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn:hover{border-color:var(--brass);background:var(--brass-tint)}
+.btn.sm{padding:4px 9px;font-size:12px;border-radius:7px}
+.btn.ghost{background:transparent}
+.btn.navy{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.navy:hover{background:#142c52}
+.btn.goldb{background:#E87722;border-color:#E87722;color:#fff}
+.btn.goldb:hover{background:#cf6a1c;border-color:#cf6a1c}
+.planner{flex:1;display:grid;grid-template-columns:clamp(290px,21vw,400px) minmax(0,1fr) clamp(300px,23vw,430px);gap:0;padding:0;align-items:stretch}
+.main{display:flex;flex-direction:column;gap:14px;min-width:0;padding:18px clamp(14px,1.8vw,32px) 22px}
+.main>.chartpanel{flex:1;display:flex;flex-direction:column}
+#hero{flex:none}
+#view{flex:1;position:relative;min-height:340px}
+.panel{flex:1;display:flex;flex-direction:column}
+.cmp{background:#fff;border-left:1px solid var(--line);padding:22px clamp(14px,1.4vw,24px);display:flex;flex-direction:column;min-width:0}
+.cmp .ptitle{font-size:12px;text-transform:uppercase;letter-spacing:1.6px;color:var(--navy);margin-bottom:14px}
+.cmp .ptitle small{text-transform:none;letter-spacing:0;font-weight:500;color:var(--ink-soft);font-size:12px;margin-left:6px}
+.cmp .hint{margin-top:12px!important;padding-top:0!important}
+.strategies{flex:1;display:flex;flex-direction:column;gap:10px}
+.strategies .plan{flex:1;justify-content:center}
+.plan{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:12px 14px 12px 16px;border-radius:14px;background:#fff;border:1px solid var(--line);border-left:6px solid var(--c);position:relative;transition:.15s}
+.plan:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(21,35,59,.1)}
+.plan:focus-visible{outline:2px solid var(--teal)}
+.plan .t2{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink-soft)}
+.plan .bdg{width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex:none}
+.plan .vv{font-size:21px;font-weight:800;color:var(--ink);font-family:Georgia,'Times New Roman',serif;white-space:nowrap}
+.plan .sub{font-size:12px;color:var(--ink-soft)}
+.plan .top1{position:absolute;right:10px;top:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#0b6b52;background:#d8f3e8;border-radius:99px;padding:2px 8px}
+.plan.on{box-shadow:0 0 0 2px var(--c),0 8px 20px rgba(21,35,59,.12)}
+.plan.on .t2{color:var(--ink)}
+.side .hint{margin-top:auto}
+#hero{flex:none}
+#view{flex:1;position:relative;min-height:340px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.side{background:linear-gradient(180deg,#16335f 0%,#0f2547 100%);color:#e8eefa;padding:22px clamp(16px,1.6vw,26px);display:flex;flex-direction:column}
+.side .ptitle{color:#fff;font-size:12px;text-transform:uppercase;letter-spacing:1.6px;font-weight:700;margin-bottom:14px;opacity:.85}
+.side .slbox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1)}
+.side .ticks,.side .f small,.side .hint{color:#9db2d6}
+.side .f>label,.side .f .lab,.side .slrow{color:#f2f6fd}
+.side input[type=range]{accent-color:#E87722}
+.side .pill input{background:#fff}
+.side .money{background:#fff;border-color:transparent}
+.side .money span{color:#5a6a83}
+.side .seg{border-color:rgba(255,255,255,.25)}
+.side .seg button{background:transparent;color:#cfdcf2}
+.side .seg button.on{background:#E87722;color:#fff}
+.side details.more{border-top-color:rgba(255,255,255,.18)}
+.side details.more summary{color:#7fe3d8}
+.side .hint{margin-top:auto;padding-top:14px}
+.ptitle{font-weight:700;font-size:15px;margin-bottom:12px}
+.slbox{background:#eef3fa;border-radius:12px;padding:12px 12px 8px;margin-bottom:12px}
+.slrow{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:600;font-size:14px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-weight:700}
+.pill input{width:64px;text-align:center;font:inherit;font-weight:700;font-size:15px;padding:6px 4px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+input[type=range]{width:100%;margin:10px 0 2px;accent-color:var(--navy)}
+.ticks{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-soft)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.f{margin-bottom:12px;min-width:0}
+.f>label,.f .lab{display:flex;align-items:center;justify-content:space-between;gap:6px;font-weight:600;font-size:13.5px;margin-bottom:5px;flex-wrap:wrap}
+.f small{font-weight:400;color:var(--ink-soft);font-size:11.5px}
+.money{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:0 10px}
+.money:focus-within{outline:2px solid var(--teal-tint);border-color:var(--teal)}
+.money span{color:var(--ink-soft);font-weight:700}
+.money input{border:0;outline:0;background:transparent;font:inherit;font-weight:700;font-size:16px;padding:10px 0;width:100%;min-width:0;color:var(--ink)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:#fff;padding:2px 12px;font-weight:700;font-size:13px;color:var(--ink-soft)}
+.seg button.on{background:var(--teal);color:#fff}
+details.more{border-top:1px solid var(--line);margin-top:6px;padding-top:10px}
+details.more summary{cursor:pointer;font-weight:600;font-size:13px;color:var(--teal)}
+details.more .f{margin-top:10px}
+details.more select,details.more input[type=text]{width:100%;font:inherit;font-size:13.5px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
+.hero2{--c:#1B3A6B;background:#fff;border:1px solid var(--line);border-left:6px solid var(--c);border-radius:14px;padding:16px 20px;color:var(--ink);display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.hero2 .lh{flex:1;min-width:230px}
+.hero2 .lbl{font-size:13px;color:var(--ink-soft);font-weight:600}
+.hero2 .big{font-size:38px;font-weight:800;line-height:1.1;margin:4px 0 2px;white-space:nowrap;color:var(--navy);font-family:Georgia,'Times New Roman',serif;letter-spacing:-.5px}
+.hero2 .words{color:#E87722;font-weight:700;font-size:15px}
+.hero2 .desc{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
+.hero2 .hs{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:10px;flex:2;min-width:260px}
+.hero2 .ht{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--teal);border-radius:10px;padding:9px 12px;min-width:0}
+.hero2 .ht:nth-child(2){border-top-color:#E87722}.hero2 .ht:nth-child(3){border-top-color:#4f7cff}.hero2 .ht:nth-child(4){border-top-color:#9b6bff}
+.hero2 .ht span{font-size:11.5px;color:var(--ink-soft);display:block}
+.hero2 .ht b{font-size:17px;display:block;margin-top:2px;overflow-wrap:anywhere;color:var(--ink)}
+.ctop{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.tabs{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.tabs button{border:0;background:#fff;padding:7px 14px;font-weight:600;font-size:13px;color:var(--ink-soft)}
+.tabs button.on{background:var(--teal);color:#fff}
+.legend{margin-left:auto;font-size:12.5px;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:5px}
+.chartbox{position:absolute;inset:0}
+.chartbox svg{width:100%;height:100%;display:block}
+.tip{position:absolute;display:none;pointer-events:none;background:var(--ink);color:#fff;padding:8px 10px;border-radius:10px;font-size:12.5px;white-space:nowrap;transform:translate(-50%,-105%);z-index:3;box-shadow:0 8px 20px rgba(0,0,0,.3);line-height:1.5}
+.tablewrap{position:absolute;inset:0;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:right;font-size:11.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--teal);padding:8px;border-bottom:2px solid var(--line);white-space:nowrap;position:sticky;top:0;background:#fff}
+th:first-child,td:first-child{text-align:left}
+td{padding:8px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+.bbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.hint{font-size:12px;color:var(--ink-soft);line-height:1.45}
+.disc{border-top:3px solid var(--teal);background:#fff;padding:12px clamp(14px,1.8vw,32px);font-size:12px;color:var(--ink-soft);line-height:1.55}
+.disc b{color:var(--ink)}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:50;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+#toast div{background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-size:13.5px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+@media(max-width:1180px){
+  .planner{grid-template-columns:clamp(280px,30vw,340px) minmax(0,1fr)}
+  .cmp{grid-column:1/-1;border-left:0;border-top:1px solid var(--line)}
+  .strategies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:780px){
+  .planner{grid-template-columns:1fr}
+  .strategies{grid-template-columns:1fr}
+  .hero2 .big{font-size:30px}
+  #view{min-height:300px}
+}
+
+/* ---- Nityasarathi site additions ---- */
+.site-head{background:#fff;border-bottom:1px solid #EEF2F8;position:relative;z-index:2}
+.site-head-in{width:100%;margin:0;padding:0 clamp(14px,1.8vw,32px);height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.site-head .brand{display:flex;align-items:center;gap:10px;margin:0;text-decoration:none;color:#1B3A6B;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:19px;line-height:1.1}
+.site-head .brand img{width:42px;height:42px;border-radius:10px;display:block}
+.site-head .brand small{display:block;font-family:Arial,sans-serif;font-weight:500;font-size:11px;color:#4A5F85;letter-spacing:.04em;text-transform:uppercase;margin-top:3px}
+.site-head .cta{background:#E87722;color:#fff;text-decoration:none;font-family:Arial,sans-serif;font-weight:600;font-size:14px;padding:9px 18px;border-radius:999px;white-space:nowrap}
+.site-head .cta:hover{background:#cf6a1c}
+@media(max-width:480px){.site-head .brand small{display:none}.site-head .cta{font-size:13px;padding:9px 14px}}
+.back-bar{background:#EEF2F8;padding:10px 16px;font-size:15px;position:relative;z-index:2}
+.back-bar a{color:#0E7C7B;text-decoration:none;font-weight:600}
+.back-bar a:hover{text-decoration:underline}
+.tool-foot{width:100%;margin:0;padding:16px clamp(14px,1.8vw,32px);background:#fff;border-top:1px solid #e3eaf3;border-radius:0;color:#6b665c;font-size:13px;position:relative;z-index:2}
+.tool-foot p{margin:0 0 8px}
+.tool-foot p:last-child{margin-bottom:0}
+.tool-foot strong{color:#2b2a27}
+.tool-foot a{color:#0e7c7b}
+
+/* ---- printable report ---- */
+#report{display:none}
+.rp{font-family:"Segoe UI",system-ui,Arial,sans-serif;color:#222;font-size:12px}
+.rp-head{display:flex;gap:12px;align-items:center;border-bottom:3px solid #1B3A6B;padding-bottom:10px;margin-bottom:12px}
+.rp-head img{width:48px;height:48px;border-radius:10px}
+.rp-co{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:700;color:#1B3A6B}
+.rp-sub{font-size:11px;color:#555}
+.rp h1{font-size:18px;margin:6px 0 2px}
+.rp h3{font-size:12.5px;margin:14px 0 6px;color:#1B3A6B;text-transform:uppercase;letter-spacing:.06em}
+.rp table{width:100%;border-collapse:collapse;font-size:11.5px}
+.rp th,.rp td{padding:4px 6px;border-bottom:1px solid #ddd;text-align:right;position:static}
+.rp th:first-child,.rp td:first-child{text-align:left}
+.rp th{color:#1B3A6B;border-bottom:2px solid #1B3A6B;font-size:10.5px}
+.rp .kv td:first-child{color:#555;width:45%}
+.rp .kv td:last-child{text-align:left}
+.rp-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.rp-tile{border:1px solid #ccc;border-radius:8px;padding:8px}
+.rp-tile span{font-size:10.5px;color:#555}
+.rp-tile b{display:block;font-size:14px;margin-top:2px}
+.rp-disc{font-size:10.5px;color:#555;border-top:1px solid #ccc;margin-top:14px;padding-top:8px;line-height:1.5}
+.rp tr{page-break-inside:avoid}
+.rp svg{width:100%;height:auto}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff!important;padding:0!important;min-height:0}
+  body::before{display:none}
+  .site-head,.back-bar,.card,.tool-foot,#toast{display:none!important}
+  #report{display:block!important}
+  @page{size:A4;margin:14mm}
+}
+</style>
+</head>
+<body>
+<header class="site-head"><div class="site-head-in">
+  <a class="brand" href="../index.html" aria-label="Nityasarathi Financial Services home"><img src="data:image/png;base64,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" width="42" height="42" alt="Nityasarathi compass logo"><span>Nityasarathi<small>Financial Services</small></span></a>
+  <a class="cta" href="https://wa.me/918886912221?text=Hello%2C%20I%20would%20like%20to%20book%20a%20conversation." target="_blank" rel="noopener">Book a Conversation</a>
+</div></header>
+<div class="back-bar"><a href="../tools.html">&larr; Back to Tools</a></div>
+<div class="card">
+  <header class="top">
+    <div class="brand"><h1>Investment Planner</h1><small>SIP, Lumpsum and Step-up SIP, compared side by side</small></div>
+    <div class="acts"><button class="btn" data-act="reset" title="Set every input to 0">↺ Clear all</button><button class="btn navy" data-act="pdf">⬇ Save as PDF</button><button class="btn goldb" data-act="xlsx">⬇ Export to Excel</button></div>
+  </header>
+  <div class="planner">
+    <aside class="side col-in" aria-label="Inputs">
+      <div class="ptitle">Set your numbers</div>
+      <div class="slbox">
+        <div class="slrow"><label for="i_T">Time horizon</label><span class="pill"><input id="i_T" data-k="T" inputmode="numeric" autocomplete="off"><span>years</span></span></div>
+        <input type="range" data-r="T" min="0" max="50" step="1" aria-label="Time horizon slider">
+        <div class="ticks"><span>0</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span></div>
+      </div>
+      <div class="slbox">
+        <div class="slrow"><label for="i_r">Expected return</label><span class="pill"><input id="i_r" data-k="r" inputmode="decimal" autocomplete="off"><span>% p.a.</span></span></div>
+        <input type="range" data-r="r" min="1" max="30" step="0.5" aria-label="Expected return slider">
+        <div class="ticks"><span>1%</span><span>8%</span><span>15%</span><span>22%</span><span>30%</span></div>
+      </div>
+      <div class="two">
+        <div class="f"><label for="i_sip">Monthly SIP</label><div class="money"><span>₹</span><input id="i_sip" data-k="sip" inputmode="numeric" autocomplete="off"></div></div>
+        <div class="f"><label for="i_lump">Lumpsum <small>at start</small></label><div class="money"><span>₹</span><input id="i_lump" data-k="lump" inputmode="numeric" autocomplete="off"></div></div>
+      </div>
+      <div class="f"><div class="lab"><label for="i_sipTop" style="margin:0">Step-up SIP <small id="stl"></small></label><span class="seg"><button type="button" data-seg="amt">₹</button><button type="button" data-seg="pct">%</button></span></div><div class="money"><span id="stpre">₹</span><input id="i_sipTop" data-k="sipTop" inputmode="decimal" autocomplete="off"><span id="stsuf"></span></div></div>
+      <div class="f"><label for="i_lumpTop">Yearly Lumpsum top-up <small>from year 2</small></label><div class="money"><span>₹</span><input id="i_lumpTop" data-k="lumpTop" inputmode="numeric" autocomplete="off"></div></div>
+      <details class="more"><summary>Advanced settings</summary>
+        <div class="f"><label for="i_infl">Inflation assumption (p.a.) <small>for today's-rupee value</small></label><div class="money"><input id="i_infl" data-k="infl" inputmode="decimal" autocomplete="off"><span>%</span></div></div>
+        <div class="f"><label for="s_comp">Return calculation</label><select id="s_comp"><option value="eff">Yearly: 12% means 12% over a full year</option><option value="nom">Monthly: yearly rate ÷ 12, as many websites do</option></select></div>
+        <div class="f"><label for="i_client">Prepared for <small>shown on the PDF and Excel</small></label><input type="text" id="i_client" maxlength="80" placeholder="Optional" autocomplete="off"></div>
+      </details>
+      <div class="hint">SIP goes in at the start of every month; the yearly Lumpsum top-up at the start of each year, from year 2.</div>
+    </aside>
+
+    <main class="main" aria-label="Results">
+      <div id="hero"></div>
+      <div class="panel chartpanel">
+        <div class="ctop">
+          <div class="tabs" role="tablist"><button data-tab="chart" role="tab">Chart</button><button data-tab="table" role="tab">Yearly breakdown</button></div>
+          <div class="legend" id="legend"></div>
+        </div>
+        <div id="view"></div>
+      </div>
+    </main>
+
+    <aside class="cmp" aria-label="Comparison">
+      <div class="ptitle">Comparison <small>same inputs, six ways</small></div>
+      <div class="strategies" id="plans"></div>
+      <div class="hint">Click a strategy to see its chart and yearly breakdown.</div>
+    </aside>
+  </div>
+  <div class="disc"><b>Disclaimer:</b> This is an illustrative planning tool. Projections use the growth rate you choose, which real mutual fund returns will not follow, and are not guaranteed. Mutual fund investments are subject to market risks. Read all scheme related documents carefully. Past performance is not indicative of future returns. Taxes, exit load and expense ratio are not considered. <i id="assume"></i></div>
+</div>
+<div class="tool-foot">
+  <p>Calculations run in your browser. Your inputs stay in your own browser and nothing is sent to Nityasarathi or anyone else.</p>
+  <p>Vamshi Krishna Rudra | AMFI Registered Mutual Fund Distributor (ARN-370426) | Nityasarathi Financial Services, Hyderabad</p>
+  <p><a href="../index.html">Home</a> &nbsp;|&nbsp; <a href="../tools.html">All tools</a> &nbsp;|&nbsp; <a href="https://wa.me/918886912221?text=Hello%2C%20I%20would%20like%20to%20talk." target="_blank" rel="noopener">Talk to me on WhatsApp</a></p>
+</div>
+<div id="report"></div>
+<div id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+var KEY='ledger_planner_state_v1',mem={};
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return mem[k]===undefined?null:mem[k]}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=String(v)}}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function pad(n){return n<10?'0'+n:''+n}
+function toast(m){var t=$('#toast'),d=document.createElement('div');d.textContent=m;t.appendChild(d);setTimeout(function(){d.remove()},3600)}
+function fmtDate(d){return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear()}
+function stamp(){var d=new Date();return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+pad(d.getHours())+pad(d.getMinutes())}
+
+/* ---------- formatting (Indian system) ---------- */
+function group(n){n=Math.round(n);var neg=n<0,s=String(Math.abs(n));if(s.length>3){var l=s.slice(-3),r=s.slice(0,-3);s=r.replace(/\B(?=(\d{2})+(?!\d))/g,',')+','+l}return (neg?'-':'')+s}
+function inr(n){return isFinite(n)?'₹'+group(n):'—'}
+function trimN(x){return String(parseFloat(x.toFixed(2)))}
+function compact(n){var a=Math.abs(n);if(a>=1e7)return trimN(n/1e7)+' Cr';if(a>=1e5)return trimN(n/1e5)+' L';if(a>=1e3)return trimN(n/1e3)+'K';return String(Math.round(n))}
+function lab(n){var a=Math.abs(n);if(a>=1e7)return trimN(Math.round(n/1e6)/10)+' Cr';if(a>=1e5)return trimN(Math.round(n/1e4)/10)+' L';if(a>=1e3)return trimN(Math.round(n/100)/10)+'K';return String(Math.round(n))}
+function lakh(v){if(v>=1e7)return '₹'+(v/1e7).toFixed(2)+' Crore';if(v>=1e5)return '₹'+(v/1e5).toFixed(2)+' Lakh';return inr(v)}
+function lk(v){if(v>=1e7)return '₹'+(v/1e7).toFixed(2)+' Cr';if(v>=1e5)return '₹'+(v/1e5).toFixed(2)+' L';return inr(v)}
+function plain(v){return String(Math.round(v*1000)/1000)}
+function pct(v){return String(parseFloat(v.toFixed(2)))+'%'}
+
+/* ---------- state ---------- */
+var B={T:[0,50],r:[0,30],sip:[0,5e6],lump:[0,1e10],sipTopAmt:[0,5e5],sipTopPct:[0,50],lumpTop:[0,1e9],infl:[0,20]};
+function def(){return {T:10,r:12,sip:10000,lump:100000,sipTopT:'amt',sipTopAmt:1000,sipTopPct:10,lumpTop:25000,infl:6,comp:'eff',sel:6,tab:'chart',client:''}}
+function jget(){try{var v=lsGet(KEY);return v?JSON.parse(v):{}}catch(e){return {}}}
+var S=Object.assign(def(),jget());
+function sanitize(){var d=def();
+  Object.keys(B).forEach(function(k){var v=+S[k];S[k]=isFinite(v)?clamp(k==='T'?Math.round(v):v,B[k][0],B[k][1]):d[k]});
+  if(S.sipTopT!=='pct')S.sipTopT='amt';if(S.comp!=='nom')S.comp='eff';
+  S.sel=clamp(Math.round(+S.sel)||6,1,6);S.tab=S.tab==='table'?'table':'chart';S.client=String(S.client||'').slice(0,80);
+}
+sanitize();
+function sk(k){return k==='sipTop'?(S.sipTopT==='pct'?'sipTopPct':'sipTopAmt'):k}
+function isMoney(k){return k==='sip'||k==='lump'||k==='lumpTop'||(k==='sipTop'&&S.sipTopT==='amt')}
+var saveT=null;
+function save(){clearTimeout(saveT);saveT=setTimeout(function(){lsSet(KEY,JSON.stringify(S))},250)}
+
+/* ---------- engine: six plans, month by month ---------- */
+var NAMES=['SIP only','SIP + Lumpsum','Lumpsum only','Step-up SIP','Lumpsum + yearly top-up','Lumpsum + Step-up SIP + top-up'];
+var LET='ABCDEF';
+var DESCS=['A fixed SIP every month','A Lumpsum on day one plus a fixed monthly SIP','A Lumpsum on day one, left to grow','A monthly SIP that steps up every year','A Lumpsum plus a yearly Lumpsum top-up from year 2','A Lumpsum, a yearly Lumpsum top-up and a Step-up SIP, all together'];
+var COLORS=['#4f7cff','#12a594','#9b6bff','#ff8a3d','#e5467a','#1B3A6B'];
+function engine(st){
+  var T=st.T,i=st.comp==='nom'?st.r/1200:Math.pow(1+st.r/100,1/12)-1,inf=st.infl/100;
+  function flat(){return st.sip}
+  function stepped(y){return st.sipTopT==='pct'?st.sip*Math.pow(1+st.sipTopPct/100,y-1):st.sip+st.sipTopAmt*(y-1)}
+  function run(sipFn,lump,top){
+    var bal=lump,inv=lump,I=[inv],V=[bal];
+    for(var y=1;y<=T;y++){
+      for(var k=0;k<12;k++){
+        if(k===0&&y>1&&top){bal+=top;inv+=top}
+        if(sipFn){var a=sipFn(y);bal+=a;inv+=a}
+        bal*=1+i;
+      }
+      I.push(inv);V.push(bal);
+    }
+    return {inv:I,val:V};
+  }
+  var p1=run(flat,0,0),p3=run(null,st.lump,0),p5=run(null,st.lump,st.lumpTop),p4=run(stepped,0,0),p6=run(stepped,st.lump,st.lumpTop);
+  var p2={inv:p1.inv.map(function(v,y){return v+p3.inv[y]}),val:p1.val.map(function(v,y){return v+p3.val[y]})};
+  return [p1,p2,p3,p4,p5,p6].map(function(p,n){
+    p.name=NAMES[n];p.desc=DESCS[n];p.color=COLORS[n];p.n=n+1;
+    p.real=p.val.map(function(v,y){return v/Math.pow(1+inf,y)});
+    p.gain=p.val.map(function(v,y){return v-p.inv[y]});
+    p.end={inv:p.inv[T],val:p.val[T],gain:p.gain[T],real:p.real[T],mult:p.inv[T]>0?p.val[T]/p.inv[T]:0};
+    return p;
+  });
+}
+
+/* ---------- stacked bar chart (plain SVG) ---------- */
+function niceStep(raw){var e=Math.pow(10,Math.floor(Math.log10(raw))),f=raw/e,n=f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10;return n*e}
+var C_INV='#1B3A6B',C_GAIN='#14b8a6';
+var CH=null;
+function barsSVG(p,isStatic){
+  if(S.T<1)return '<div class="hint" style="padding:40px 10px;text-align:center">Enter a tenure of at least 1 year to see the chart.</div>';
+  var vb=!isStatic&&$('#view'),T=S.T,W=vb&&vb.clientWidth>200?vb.clientWidth:760,H=vb&&vb.clientHeight>200?vb.clientHeight:400,pl=58,pr=16,pt=26,pb=30,iw=W-pl-pr,ih=H-pt-pb,bw=iw/T,bar=Math.min(54,bw*0.66),mx=0,y;
+  for(y=1;y<=T;y++)if(p.val[y]>mx)mx=p.val[y];
+  if(mx<=0)mx=1;
+  var step=niceStep(mx/4),nt=Math.ceil(mx/step-1e-9),ymax=nt*step;
+  function Y(v){return pt+ih-ih*(v/ymax)}
+  var g='',k,fs=bw>=44?10.5:9.5,labelAll=bw>=34,every=labelAll?1:Math.ceil((lab(mx).length*6.2+8)/bw),xEvery=Math.max(1,Math.ceil(26/bw));
+  for(k=0;k<=nt;k++){var yy=Y(k*step);g+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+yy+'" y2="'+yy+'" stroke="#dfe6ef"/><text x="'+(pl-8)+'" y="'+(yy+4)+'" text-anchor="end" font-size="11" fill="#6b665c">'+compact(k*step)+'</text>'}
+  var L='';
+  for(y=1;y<=T;y++){
+    var cx=pl+bw*(y-0.5),inv=p.inv[y],gain=Math.max(0,p.gain[y]),hi=ih*inv/ymax,hg=ih*gain/ymax,y0=pt+ih,top=y0-hi-hg;
+    if(hi>0)g+='<rect x="'+(cx-bar/2).toFixed(1)+'" y="'+(y0-hi).toFixed(1)+'" width="'+bar.toFixed(1)+'" height="'+hi.toFixed(1)+'" fill="'+C_INV+'"/>';
+    if(hg>0)g+='<rect x="'+(cx-bar/2).toFixed(1)+'" y="'+(y0-hi-hg).toFixed(1)+'" width="'+bar.toFixed(1)+'" height="'+hg.toFixed(1)+'" fill="'+C_GAIN+'"/>';
+    var showTop=(y-1)%every===0||y===T&&every===1;
+    if(labelAll&&hi>=17)L+='<text x="'+cx.toFixed(1)+'" y="'+(y0-hi/2+4).toFixed(1)+'" text-anchor="middle" font-size="'+fs+'" font-weight="600" fill="#fff">'+lab(inv)+'</text>';
+    if(labelAll&&hg>=17)L+='<text x="'+cx.toFixed(1)+'" y="'+(y0-hi-hg/2+4).toFixed(1)+'" text-anchor="middle" font-size="'+fs+'" font-weight="700" fill="#fff">'+lab(gain)+'</text>';
+    if(showTop){
+      var thin=labelAll&&hg<17&&gain>0;
+      if(thin)L+='<text x="'+cx.toFixed(1)+'" y="'+(top-4).toFixed(1)+'" text-anchor="middle" font-size="'+(fs-1)+'" font-weight="700" fill="#0b7f74">+'+lab(gain)+'</text>';
+      var edge=!labelAll&&cx+lab(p.val[y]).length*3.4>W-4;L+='<text x="'+(edge?(W-4):cx).toFixed(1)+'" y="'+(top-(thin?15:5)).toFixed(1)+'" text-anchor="'+(edge?'end':'middle')+'" font-size="'+fs+'" font-weight="700" fill="#2b2a27">'+lab(p.val[y])+'</text>';
+    }
+    if((y-1)%xEvery===0)L+='<text x="'+cx.toFixed(1)+'" y="'+(H-12)+'" text-anchor="middle" font-size="11" fill="#6b665c">Y'+y+'</text>';
+    if(!isStatic)g+='<rect data-y="'+y+'" x="'+(cx-bw/2).toFixed(1)+'" y="'+pt+'" width="'+bw.toFixed(1)+'" height="'+ih+'" fill="transparent"/>';
+  }
+  g+=L;
+  if(!isStatic)CH={W:W,H:H,pl:pl,bw:bw,Y:Y,p:p};
+  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Yearly growth of '+esc(p.name)+'" xmlns="http://www.w3.org/2000/svg">'+g+'</svg>';
+}
+function attachChart(){
+  var box=$('#chartbox');if(!box||!CH)return;
+  var svg=box.querySelector('svg'),tip=$('#tip'),c=CH;
+  function show(y){
+    var p=c.p,cx=c.pl+c.bw*(y-0.5);
+    tip.innerHTML='<b>Year '+y+'</b><div>Put in: '+inr(p.inv[y])+'</div><div>Growth earned: '+inr(p.gain[y])+'</div><div>Value: <b>'+inr(p.val[y])+'</b></div><div>Today\'s rupees: '+inr(p.real[y])+'</div>';
+    tip.style.display='block';tip.style.left=clamp(cx/c.W*100,16,84)+'%';tip.style.top=(c.Y(p.val[y])/c.H*100)+'%';
+  }
+  svg.addEventListener('pointermove',function(e){var t=e.target.getAttribute&&e.target.getAttribute('data-y');if(t)show(+t);else tip.style.display='none'});
+  svg.addEventListener('pointerdown',function(e){var t=e.target.getAttribute&&e.target.getAttribute('data-y');if(t)show(+t)});
+  svg.addEventListener('pointerleave',function(){tip.style.display='none'});
+}
+function tableHTML(p,wrap){
+  var h='<div class="'+(wrap?'tablewrap':'')+'"><table><thead><tr><th>Year</th><th>Put in this year</th><th>Total put in</th><th>Growth earned</th><th>Portfolio value</th><th>Today\'s rupees</th></tr></thead><tbody>';
+  for(var y=1;y<=S.T;y++)h+='<tr><td>'+y+'</td><td>'+inr(p.inv[y]-p.inv[y-1])+'</td><td>'+inr(p.inv[y])+'</td><td>'+inr(p.gain[y])+'</td><td><b>'+inr(p.val[y])+'</b></td><td>'+inr(p.real[y])+'</td></tr>';
+  return h+'</tbody></table></div>';
+}
+
+/* ---------- rendering ---------- */
+var E=null;
+function renderHero(p){
+  var e=p.end,L=inr(e.val).length;
+  $('#hero').innerHTML='<div class="hero2" style="--c:'+p.color+'"><div class="lh"><div class="lbl">'+LET[p.n-1]+' · '+esc(p.name)+' · '+S.T+' year'+(S.T===1?'':'s')+' at '+pct(S.r)+' a year</div><div class="big" style="font-size:'+(L>17?'22':L>14?'26':L>12?'32':'38')+'px">'+inr(e.val)+'</div><div class="words">about '+lakh(e.val)+'</div><div class="desc">'+esc(p.desc)+'</div></div>'
+   +'<div class="hs"><div class="ht"><span>You put in</span><b>'+inr(e.inv)+'</b></div><div class="ht"><span>Growth earned</span><b>'+inr(e.gain)+'</b></div><div class="ht"><span>Grows to</span><b>'+(e.inv>0?e.mult.toFixed(2)+'x':'—')+'</b></div><div class="ht"><span>In today\'s rupees ('+pct(S.infl)+' inflation)</span><b>'+inr(e.real)+'</b></div></div></div>';
+}
+function renderPlans(){
+  var best=0;E.forEach(function(p){if(p.end.val>best)best=p.end.val});
+  $('#plans').innerHTML=E.map(function(p){
+    return '<button class="plan'+(p.n===S.sel?' on':'')+'" style="--c:'+p.color+'" data-plan="'+p.n+'" aria-pressed="'+(p.n===S.sel)+'">'+(best>0&&p.end.val===best?'<span class="top1">Highest</span>':'')+'<div class="t2"><span class="bdg">'+LET[p.n-1]+'</span><span class="nm">'+esc(p.name)+'</span></div><div class="vv">'+lk(p.end.val)+'</div><div class="sub">'+(p.end.inv>0?inr(p.end.inv)+' in · '+p.end.mult.toFixed(2)+'x':'Nothing invested')+'</div></button>';
+  }).join('');
+}
+function renderView(p){
+  $$('[data-tab]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-tab')===S.tab)});
+  CH=null;
+  if(S.tab==='chart'){
+    $('#legend').innerHTML='<span><i style="background:'+C_INV+'"></i>Your investment</span><span><i style="background:'+C_GAIN+'"></i>Your gains</span><span>Number on top: total value that year</span>';
+    $('#view').innerHTML='<div class="chartbox" id="chartbox">'+barsSVG(p)+'<div class="tip" id="tip"></div></div>';
+    attachChart();
+  }else{
+    $('#legend').innerHTML='<span>'+esc(p.name)+'</span>';
+    $('#view').innerHTML=tableHTML(p,true);
+  }
+}
+function update(){
+  E=engine(S);var p=E[S.sel-1];
+  renderHero(p);renderPlans();renderView(p);
+  $('#assume').textContent=(S.comp==='nom'?'Growth is compounded monthly at the yearly rate ÷ 12.':'The yearly growth rate is applied as an effective yearly rate, so the same rate is used for SIPs and lumpsums.')+' SIP is invested at the start of each month; top-ups apply from year 2.';
+  save();
+}
+function syncInputs(){
+  $$('[data-k]').forEach(function(el){if(el===document.activeElement)return;var k=el.getAttribute('data-k'),v=S[sk(k)];el.value=isMoney(k)?group(v):plain(v)});
+  $$('[data-r]').forEach(function(el){el.value=S[el.getAttribute('data-r')]});
+  $$('[data-seg]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-seg')===S.sipTopT)});
+  $('#stpre').textContent=S.sipTopT==='amt'?'₹':'';$('#stsuf').textContent=S.sipTopT==='pct'?'%':'';
+  $('#stl').textContent=S.sipTopT==='amt'?'(₹ added every year)':'(% increase every year)';
+  $('#s_comp').value=S.comp;
+  if(document.activeElement!==$('#i_client'))$('#i_client').value=S.client;
+}
+
+/* ---------- input handling ---------- */
+function fmtMoneyField(el,n){
+  var pos=el.selectionStart==null?el.value.length:el.selectionStart,before=el.value.slice(0,pos).replace(/\D/g,'').length;
+  el.value=n===null?'':group(n);
+  var cnt=0,np=0;while(np<el.value.length&&cnt<before){if(/\d/.test(el.value.charAt(np)))cnt++;np++}
+  try{el.setSelectionRange(np,np)}catch(e){}
+}
+document.addEventListener('input',function(e){
+  var t=e.target,k=t.getAttribute&&t.getAttribute('data-k'),r=t.getAttribute&&t.getAttribute('data-r');
+  if(k){
+    var key=sk(k),b=B[key],v;
+    if(isMoney(k)){
+      var digits=t.value.replace(/\D/g,'');v=digits?Math.min(+digits,b[1]):0;fmtMoneyField(t,digits?v:null);
+    }else{
+      var raw=t.value.replace(',','.').trim();
+      if(raw===''||raw==='.'){v=b[0]}
+      else{var f=parseFloat(raw);if(!isFinite(f))return;v=clamp(k==='T'?Math.round(f):f,b[0],b[1]);if(v!==f||(k==='T'&&String(v)!==raw))t.value=plain(v)}
+    }
+    S[key]=v;
+    $$('[data-r="'+k+'"]').forEach(function(s){s.value=v});
+    update();
+  }else if(r){
+    S[r]=+t.value;var inp=$('[data-k="'+r+'"]');if(inp)inp.value=plain(S[r]);update();
+  }else if(t.id==='i_client'){S.client=t.value;save()}
+});
+document.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.getAttribute&&t.getAttribute('data-k')){var k=t.getAttribute('data-k');t.value=isMoney(k)?group(S[sk(k)]):plain(S[sk(k)])}
+  else if(t.id==='s_comp'){S.comp=t.value==='nom'?'nom':'eff';update()}
+});
+document.addEventListener('click',function(e){
+  var s=e.target.closest('[data-seg]');
+  if(s){S.sipTopT=s.getAttribute('data-seg');syncInputs();update();return}
+  var tb=e.target.closest('[data-tab]');
+  if(tb){S.tab=tb.getAttribute('data-tab');update();return}
+  var pl=e.target.closest('[data-plan]');
+  if(pl){S.sel=+pl.getAttribute('data-plan');update();return}
+  var a=e.target.closest('[data-act]');if(!a)return;
+  var act=a.getAttribute('data-act');
+  if(act==='reset'){Object.keys(B).forEach(function(k){S[k]=0});S.sipTopT='amt';S.comp='eff';S.sel=6;S.client='';syncInputs();update();toast('Everything cleared to 0')}
+  else if(act==='pdf')printReport();
+  else if(act==='xlsx')downloadXlsx();
+});
+
+/* ---------- PDF (print) ---------- */
+function reportHTML(){
+  var p=E[S.sel-1],e=p.end,logo=($('.site-head img')||{}).src||'';
+  var h='<div class="rp"><div class="rp-head"><img src="'+logo+'" alt=""><div><div class="rp-co">Nityasarathi Financial Services</div><div class="rp-sub">Vamshi Krishna Rudra · AMFI Registered Mutual Fund Distributor (ARN-370426) · Hyderabad</div></div></div>';
+  h+='<h1>Investment projection: '+esc(p.name)+'</h1><div class="rp-sub">'+(S.client?'Prepared for <b>'+esc(S.client)+'</b> · ':'')+'Date: '+fmtDate(new Date())+'</div>';
+  var kv=[['Time horizon',S.T+' year'+(S.T>1?'s':'')],['Expected return (p.a.)',pct(S.r)],['Monthly SIP',inr(S.sip)],['Lumpsum at start',inr(S.lump)],
+    ['Step-up SIP',S.sipTopT==='pct'?pct(S.sipTopPct)+' increase each year':inr(S.sipTopAmt)+' added each year'],['Yearly Lumpsum top-up (from year 2)',inr(S.lumpTop)],['Inflation assumed',pct(S.infl)]];
+  h+='<h3>The numbers used</h3><table class="kv"><tbody>'+kv.map(function(r){return '<tr><td>'+r[0]+'</td><td><b>'+r[1]+'</b></td></tr>'}).join('')+'</tbody></table>';
+  h+='<h3>Six strategies compared</h3><table><thead><tr><th>Strategy</th><th>Total put in</th><th>Growth earned</th><th>Final value</th><th>Grows to</th></tr></thead><tbody>'
+    +E.map(function(q){return '<tr><td>'+(q.n===S.sel?'<b>':'')+LET[q.n-1]+'. '+esc(q.name)+(q.n===S.sel?'</b>':'')+'</td><td>'+inr(q.end.inv)+'</td><td>'+inr(q.end.gain)+'</td><td><b>'+inr(q.end.val)+'</b></td><td>'+(q.end.inv>0?q.end.mult.toFixed(2)+'x':'—')+'</td></tr>'}).join('')+'</tbody></table>';
+  h+='<h3>Strategy shown: '+esc(p.name)+'</h3><div class="rp-tiles"><div class="rp-tile"><span>Total put in</span><b>'+inr(e.inv)+'</b></div><div class="rp-tile"><span>Growth earned</span><b>'+inr(e.gain)+'</b></div><div class="rp-tile"><span>Final value</span><b>'+inr(e.val)+'</b></div><div class="rp-tile"><span>In today\'s rupees</span><b>'+inr(e.real)+'</b></div></div>';
+  h+='<h3>Year-by-year growth</h3><div><span style="font-size:11px"><b style="color:'+C_INV+'">■</b> Your investment &nbsp; <b style="color:'+C_GAIN+'">■</b> Your gains</span></div>'+barsSVG(p,true);
+  h+='<h3>Yearly breakdown</h3>'+tableHTML(p,false);
+  h+='<div class="rp-disc"><b>Important:</b> This is an illustration based on an assumed constant growth rate and is not a promise or guarantee of returns. Actual mutual fund returns vary and can be negative. Mutual fund investments are subject to market risks. Read all scheme related documents carefully. Past performance is not indicative of future returns. Taxes, exit load and expense ratio are not considered. '+esc($('#assume').textContent)+'</div></div>';
+  return h;
+}
+var DL=null;
+function initDL(){try{if(window.claude&&typeof window.claude.use==='function')window.claude.use('downloads').then(function(d){DL=d||null}).catch(function(){})}catch(e){}}
+function saveVia(name,data){
+  return DL.save({filename:name,data:data}).then(function(){return true}).catch(function(e){if(!e||e.code!=='declined')toast('Could not save the file'+(e&&e.message?': '+e.message:''));return false});
+}
+function printReport(){
+  var body=reportHTML();
+  if(DL){
+    var css=($('style')||{}).textContent||'';
+    var doc='<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Investment projection</title><style>'+css+'body{background:#fff!important;padding:14px!important}body::before{display:none}</style></head><body><div id="report" style="display:block">'+body+'</div><script>window.onload=function(){setTimeout(function(){window.print()},500)}<\/script></body></html>';
+    saveVia('investment-plan-report-'+stamp()+'.html',doc).then(function(ok){if(ok)toast('Open the saved file: it opens the print window, choose “Save as PDF”')});
+    return;
+  }
+  $('#report').innerHTML=body;toast('In the print window, choose “Save as PDF”');setTimeout(function(){window.print()},300);
+}
+
+/* ---------- Excel (.xlsx) writer, no libraries ---------- */
+function crc32(u8){var t=crc32.t;if(!t){t=crc32.t=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}}var c2=0xFFFFFFFF;for(var i=0;i<u8.length;i++)c2=t[(c2^u8[i])&255]^(c2>>>8);return (c2^0xFFFFFFFF)>>>0}
+function zipBlob(files){
+  var enc=new TextEncoder(),parts=[],cen=[],off=0;
+  files.forEach(function(f){
+    var nm=enc.encode(f.name),data=enc.encode(f.text),crc=crc32(data),sz=data.length;
+    var lh=new Uint8Array(30+nm.length),dv=new DataView(lh.buffer);
+    dv.setUint32(0,0x04034b50,true);dv.setUint16(4,20,true);dv.setUint16(6,0x0800,true);dv.setUint16(8,0,true);dv.setUint16(10,0,true);dv.setUint16(12,0x21,true);
+    dv.setUint32(14,crc,true);dv.setUint32(18,sz,true);dv.setUint32(22,sz,true);dv.setUint16(26,nm.length,true);dv.setUint16(28,0,true);lh.set(nm,30);
+    parts.push(lh,data);
+    var ch=new Uint8Array(46+nm.length),cv=new DataView(ch.buffer);
+    cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint16(8,0x0800,true);cv.setUint16(10,0,true);cv.setUint16(12,0,true);cv.setUint16(14,0x21,true);
+    cv.setUint32(16,crc,true);cv.setUint32(20,sz,true);cv.setUint32(24,sz,true);cv.setUint16(28,nm.length,true);cv.setUint32(42,off,true);ch.set(nm,46);cen.push(ch);
+    off+=lh.length+sz;
+  });
+  var cd=cen.reduce(function(a,c){return a+c.length},0),end=new Uint8Array(22),ev=new DataView(end.buffer);
+  ev.setUint32(0,0x06054b50,true);ev.setUint16(8,files.length,true);ev.setUint16(10,files.length,true);ev.setUint32(12,cd,true);ev.setUint32(16,off,true);
+  return new Blob(parts.concat(cen,[end]),{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+}
+function xe(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function colL(n){var s='';n++;while(n>0){var m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26)}return s}
+/* styles: 0 normal, 1 bold header (gold fill), 2 Indian-grouped number, 3 two decimals, 4 bold + grouped, 5 bold title */
+function sheetXML(rows,widths){
+  var x='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><cols>'+widths.map(function(w,i){return '<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+w+'" customWidth="1"/>'}).join('')+'</cols><sheetData>';
+  rows.forEach(function(r,ri){
+    x+='<row r="'+(ri+1)+'">';
+    r.forEach(function(c,ci){
+      if(c===null||c===undefined||c==='')return;
+      var ref=colL(ci)+(ri+1),v=c,s=0;
+      if(typeof c==='object'){v=c.v;s=c.s||0}
+      if(typeof v==='number')x+='<c r="'+ref+'" s="'+s+'"><v>'+(isFinite(v)?v:0)+'</v></c>';
+      else x+='<c r="'+ref+'" s="'+s+'" t="inlineStr"><is><t xml:space="preserve">'+xe(v)+'</t></is></c>';
+    });
+    x+='</row>';
+  });
+  return x+'</sheetData></worksheet>';
+}
+function buildXlsx(){
+  var p=E[S.sel-1],T=S.T,n0=function(v){return {v:Math.round(v),s:2}},H=function(t){return {v:t,s:1}};
+  var s1=[[{v:'Investment projection',s:5}],[S.client?'Prepared for':'',S.client],['Date',fmtDate(new Date())],[],
+    [{v:'The numbers used',s:5}],['Time horizon (years)',T],['Expected return (% a year)',S.r],['Monthly SIP (₹)',n0(S.sip)],['Lumpsum at start (₹)',n0(S.lump)],
+    [S.sipTopT==='pct'?'Step-up SIP (% increase)':'Step-up SIP (₹ added)',S.sipTopT==='pct'?S.sipTopPct:n0(S.sipTopAmt)],['Yearly Lumpsum top-up, from year 2 (₹)',n0(S.lumpTop)],['Inflation assumed (%)',S.infl],
+    ['Growth compounding',S.comp==='nom'?'Monthly (rate ÷ 12)':'Effective yearly'],[],
+    [{v:'Six strategies compared',s:5}],[H('Strategy'),H('Total put in (₹)'),H('Growth earned (₹)'),H('Final value (₹)'),H('Grows to (x)'),H('In today\'s rupees (₹)')]];
+  E.forEach(function(q){s1.push([(q.n===S.sel?'► ':'')+LET[q.n-1]+'. '+q.name,n0(q.end.inv),n0(q.end.gain),{v:Math.round(q.end.val),s:4},{v:Math.round(q.end.mult*100)/100,s:3},n0(q.end.real)])});
+  s1.push([],['Illustration only. Projections use an assumed constant growth rate and are not guaranteed. Mutual fund investments are subject to market risks. Read all scheme related documents carefully.']);
+  var s2=[[{v:p.name+': yearly breakdown',s:5}],[H('Year'),H('Put in this year (₹)'),H('Total put in (₹)'),H('Growth earned (₹)'),H('Value (₹)'),H('In today\'s rupees (₹)')]];
+  for(var y=1;y<=T;y++)s2.push([y,n0(p.inv[y]-p.inv[y-1]),n0(p.inv[y]),n0(p.gain[y]),{v:Math.round(p.val[y]),s:4},n0(p.real[y])]);
+  var s3=[[{v:'Value of every strategy at the end of each year (₹)',s:5}],[H('Year')].concat(E.map(function(q){return H(LET[q.n-1]+'. '+q.name)}))];
+  for(var y2=1;y2<=T;y2++)s3.push([y2].concat(E.map(function(q){return n0(q.val[y2])})));
+  var NS='xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"';
+  var files=[
+   {name:'[Content_Types].xml',text:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet3.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>'},
+   {name:'_rels/.rels',text:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'},
+   {name:'xl/workbook.xml',text:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook '+NS+' xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Summary" sheetId="1" r:id="rId1"/><sheet name="Selected plan by year" sheetId="2" r:id="rId2"/><sheet name="All plans by year" sheetId="3" r:id="rId3"/></sheets></workbook>'},
+   {name:'xl/_rels/workbook.xml.rels',text:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet3.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>'},
+   {name:'xl/styles.xml',text:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet '+NS+'><numFmts count="1"><numFmt numFmtId="164" formatCode="[&gt;=10000000]##\\,##\\,##\\,##0;[&gt;=100000]##\\,##\\,##0;##,##0"/></numFmts><fonts count="3"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="14"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFF1E6C9"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="6"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="2" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="164" fontId="1" fillId="0" borderId="0" xfId="0" applyNumberFormat="1" applyFont="1"/><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>'},
+   {name:'xl/worksheets/sheet1.xml',text:sheetXML(s1,[40,20,20,20,20,22])},
+   {name:'xl/worksheets/sheet2.xml',text:sheetXML(s2,[10,22,22,22,22,22])},
+   {name:'xl/worksheets/sheet3.xml',text:sheetXML(s3,[10,20,20,20,22,22,22])}];
+  return zipBlob(files);
+}
+function download(name,blob){var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},800)}
+function downloadXlsx(){
+  var blob,name='investment-plan-'+stamp()+'.xlsx';
+  try{blob=buildXlsx()}catch(e){toast('Could not build the Excel file');return}
+  if(DL){saveVia(name,blob).then(function(ok){if(ok)toast('Excel file saved')});return}
+  try{download(name,blob);toast('Excel file downloaded')}catch(e){toast('Could not download the file')}
+}
+
+/* ---------- boot ---------- */
+window.__pl={engine:engine,S:function(){return S},update:update,buildXlsx:buildXlsx,group:group,lakh:lakh};
+var rzT;window.addEventListener('resize',function(){clearTimeout(rzT);rzT=setTimeout(function(){if(E&&E.length)renderView(E[S.sel-1])},120)});
+initDL();
+syncInputs();update();
+})();
+</script>
+</body>
+</html>
