@@ -22,13 +22,17 @@ html,body{margin:0}
 body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);min-height:100vh;padding:0;display:flex;flex-direction:column;background:#f1f5fa;position:relative}
 .card{position:relative;flex:1 0 auto;display:flex;flex-direction:column;width:100%;margin:0;background:var(--paper);overflow:hidden}
 .card::before{content:none}
-.top{background:#fff!important;padding-left:clamp(14px,1.8vw,32px)!important;padding-right:clamp(14px,1.8vw,32px)!important;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--paper)}
+.top{background:#10284c!important;border-bottom:1px solid rgba(255,255,255,.12)!important;padding-left:clamp(14px,1.8vw,32px)!important;padding-right:clamp(14px,1.8vw,32px)!important;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--paper)}
 .top .brand{display:flex;align-items:center;gap:12px;margin-right:auto;flex-wrap:wrap}
-.top .brand h1{font-size:21px;margin:0;font-family:Georgia,'Times New Roman',serif;color:var(--navy);display:flex;align-items:center;gap:9px}
+.top .brand h1{font-size:21px;margin:0;font-family:Georgia,'Times New Roman',serif;color:#fff;display:flex;align-items:center;gap:9px}
 .top .brand h1::before{content:'';width:10px;height:22px;border-radius:3px;background:linear-gradient(180deg,#0e7c7b,#E87722)}
 .top .acts{display:flex;gap:8px;flex-wrap:wrap}
 .top .btn{padding:9px 14px}
-.top .brand small{color:var(--ink-soft);font-size:13px;font-weight:500;line-height:1.2;padding-left:12px;border-left:1px solid var(--line)}
+.top .brand small{color:#b9c8e4;font-size:13px;font-weight:500;line-height:1.2;padding-left:12px;border-left:1px solid rgba(255,255,255,.25)}
+.top .btn:not(.navy):not(.goldb){background:transparent;border-color:rgba(255,255,255,.4);color:#fff}
+.top .btn:not(.navy):not(.goldb):hover{background:rgba(255,255,255,.12);border-color:#fff}
+.top .btn.navy{background:#fff;border-color:#fff;color:#10284c}
+.top .btn.navy:hover{background:#e8eefa}
 button{font:inherit;cursor:pointer}
 .btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:7px 12px;border-radius:9px;font-size:13px;font-weight:600;transition:.15s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .btn:hover{border-color:var(--brass);background:var(--brass-tint)}
