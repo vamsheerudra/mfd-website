@@ -55,7 +55,7 @@ button{font:inherit;cursor:pointer}
 .plan:focus-visible{outline:2px solid var(--teal)}
 .plan .t2{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink-soft)}
 .plan .bdg{width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex:none}
-.plan .vv{font-size:21px;font-weight:800;color:var(--ink);font-family:Georgia,'Times New Roman',serif;white-space:nowrap}
+.plan .vv{font-size:21px;font-weight:800;color:var(--ink);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
 .plan .sub{font-size:12px;color:var(--ink-soft)}
 .plan .top1{position:absolute;right:10px;top:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#0b6b52;background:#d8f3e8;border-radius:99px;padding:2px 8px}
 .plan.on{box-shadow:0 0 0 2px var(--c),0 8px 20px rgba(21,35,59,.12)}
@@ -104,7 +104,7 @@ details.more select,details.more input[type=text]{width:100%;font:inherit;font-s
 .hero2{--c:#1B3A6B;background:#fff;border:1px solid var(--line);border-left:6px solid var(--c);border-radius:14px;padding:16px 20px;color:var(--ink);display:flex;gap:18px;align-items:center;flex-wrap:wrap}
 .hero2 .lh{flex:1;min-width:230px}
 .hero2 .lbl{font-size:13px;color:var(--ink-soft);font-weight:600}
-.hero2 .big{font-size:38px;font-weight:800;line-height:1.1;margin:4px 0 2px;white-space:nowrap;color:var(--navy);font-family:Georgia,'Times New Roman',serif;letter-spacing:-.5px}
+.hero2 .big{font-size:38px;font-weight:800;line-height:1.1;margin:4px 0 2px;white-space:nowrap;color:var(--navy);font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.3px}
 .hero2 .words{color:#E87722;font-weight:700;font-size:15px}
 .hero2 .desc{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
 .hero2 .hs{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:10px;flex:2;min-width:260px}
@@ -302,7 +302,7 @@ var saveT=null;
 function save(){clearTimeout(saveT);saveT=setTimeout(function(){lsSet(KEY,JSON.stringify(S))},250)}
 
 /* ---------- engine: six plans, month by month ---------- */
-var NAMES=['SIP only','SIP + Lumpsum','Lumpsum only','Step-up SIP','Lumpsum + yearly top-up','Lumpsum + Step-up SIP + top-up'];
+var NAMES=['SIP only','SIP + Lumpsum','Lumpsum only','SIP + Step-up SIP','Lumpsum + yearly top-up','Lumpsum + Step-up SIP + top-up'];
 var LET='ABCDEF';
 var DESCS=['A fixed SIP every month','A Lumpsum on day one plus a fixed monthly SIP','A Lumpsum on day one, left to grow','A monthly SIP that steps up every year','A Lumpsum plus a yearly Lumpsum top-up from year 2','A Lumpsum, a yearly Lumpsum top-up and a Step-up SIP, all together'];
 var COLORS=['#4f7cff','#12a594','#9b6bff','#ff8a3d','#e5467a','#1B3A6B'];
@@ -339,7 +339,7 @@ var C_INV='#1B3A6B',C_GAIN='#14b8a6';
 var CH=null;
 function barsSVG(p,isStatic){
   if(S.T<1)return '<div class="hint" style="padding:40px 10px;text-align:center">Enter a tenure of at least 1 year to see the chart.</div>';
-  var vb=!isStatic&&$('#view'),T=S.T,W=vb&&vb.clientWidth>200?vb.clientWidth:760,H=vb&&vb.clientHeight>200?vb.clientHeight:400,pl=58,pr=16,pt=26,pb=30,iw=W-pl-pr,ih=H-pt-pb,bw=iw/T,bar=Math.min(54,bw*0.66),mx=0,y;
+  var vb=!isStatic&&$('#view'),T=S.T,W=vb&&vb.clientWidth>200?vb.clientWidth:760,H=vb&&vb.clientHeight>200?vb.clientHeight:400,pl=58,pr=16,pt=(function(){var m=0;for(var q=1;q<p.val.length;q++)m=Math.max(m,lab(p.val[q]).length);return Math.round(m*6.2+16)})(),pb=30,iw=W-pl-pr,ih=H-pt-pb,bw=iw/T,bar=Math.min(54,bw*0.66),mx=0,y;
   for(y=1;y<=T;y++)if(p.val[y]>mx)mx=p.val[y];
   if(mx<=0)mx=1;
   var step=niceStep(mx/4),nt=Math.ceil(mx/step-1e-9),ymax=nt*step;
@@ -351,14 +351,10 @@ function barsSVG(p,isStatic){
     var cx=pl+bw*(y-0.5),inv=p.inv[y],gain=Math.max(0,p.gain[y]),hi=ih*inv/ymax,hg=ih*gain/ymax,y0=pt+ih,top=y0-hi-hg;
     if(hi>0)g+='<rect x="'+(cx-bar/2).toFixed(1)+'" y="'+(y0-hi).toFixed(1)+'" width="'+bar.toFixed(1)+'" height="'+hi.toFixed(1)+'" fill="'+C_INV+'"/>';
     if(hg>0)g+='<rect x="'+(cx-bar/2).toFixed(1)+'" y="'+(y0-hi-hg).toFixed(1)+'" width="'+bar.toFixed(1)+'" height="'+hg.toFixed(1)+'" fill="'+C_GAIN+'"/>';
-    var showTop=(y-1)%every===0||y===T&&every===1;
-    if(labelAll&&hi>=17)L+='<text x="'+cx.toFixed(1)+'" y="'+(y0-hi/2+4).toFixed(1)+'" text-anchor="middle" font-size="'+fs+'" font-weight="600" fill="#fff">'+lab(inv)+'</text>';
-    if(labelAll&&hg>=17)L+='<text x="'+cx.toFixed(1)+'" y="'+(y0-hi-hg/2+4).toFixed(1)+'" text-anchor="middle" font-size="'+fs+'" font-weight="700" fill="#fff">'+lab(gain)+'</text>';
-    if(showTop){
-      var thin=labelAll&&hg<17&&gain>0;
-      if(thin)L+='<text x="'+cx.toFixed(1)+'" y="'+(top-4).toFixed(1)+'" text-anchor="middle" font-size="'+(fs-1)+'" font-weight="700" fill="#0b7f74">+'+lab(gain)+'</text>';
-      var edge=!labelAll&&cx+lab(p.val[y]).length*3.4>W-4;L+='<text x="'+(edge?(W-4):cx).toFixed(1)+'" y="'+(top-(thin?15:5)).toFixed(1)+'" text-anchor="'+(edge?'end':'middle')+'" font-size="'+fs+'" font-weight="700" fill="#2b2a27">'+lab(p.val[y])+'</text>';
-    }
+    var li=lab(inv),lg=lab(gain),cw=fs*0.62,okw=bar>=fs+3;
+    if(okw&&hi>=li.length*cw+10)L+='<text transform="translate('+(cx+fs*0.35).toFixed(1)+' '+(y0-hi/2).toFixed(1)+') rotate(-90)" text-anchor="middle" font-size="'+fs+'" font-weight="600" fill="#fff">'+li+'</text>';
+    if(okw&&hg>=lg.length*cw+10)L+='<text transform="translate('+(cx+fs*0.35).toFixed(1)+' '+(y0-hi-hg/2).toFixed(1)+') rotate(-90)" text-anchor="middle" font-size="'+fs+'" font-weight="700" fill="#fff">'+lg+'</text>';
+    if(p.val[y]>0)L+='<text transform="translate('+(cx+fs*0.35).toFixed(1)+' '+(top-6).toFixed(1)+') rotate(-90)" text-anchor="start" font-size="'+fs+'" font-weight="700" fill="#15233b">'+lab(p.val[y])+'</text>';
     if((y-1)%xEvery===0)L+='<text x="'+cx.toFixed(1)+'" y="'+(H-12)+'" text-anchor="middle" font-size="11" fill="#6b665c">Y'+y+'</text>';
     if(!isStatic)g+='<rect data-y="'+y+'" x="'+(cx-bw/2).toFixed(1)+'" y="'+pt+'" width="'+bw.toFixed(1)+'" height="'+ih+'" fill="transparent"/>';
   }
