@@ -25,7 +25,7 @@ body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-
  
 .card{position:relative;flex:1 0 auto;display:flex;flex-direction:column;width:100%;margin:0;background:var(--paper);overflow:hidden}
 .card::before{content:none}
-.top{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:14px clamp(14px,1.8vw,32px);border-bottom:1px solid var(--line);background:#fff}
+.top{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:14px clamp(14px,1.8vw,32px);border-bottom:1px solid rgba(255,255,255,.12);background:#132c52}
 .brand{display:flex;align-items:center;gap:8px 12px;margin-right:auto;flex-wrap:wrap}
 .brand h1{white-space:nowrap;font-size:21px;margin:0;font-family:Georgia,'Times New Roman',serif;color:var(--navy);display:flex;align-items:center;gap:9px}
 .brand h1::before{content:'';width:10px;height:22px;border-radius:3px;background:linear-gradient(180deg,#0e7c7b,#E87722)}
@@ -148,6 +148,18 @@ tr.detail td{background:var(--paper2);padding:14px}
   .ring{width:210px;height:210px}.ring>div{width:174px;height:174px}.ring .time{font-size:38px}
 }
 
+
+.top .brand h1{color:#fff}
+.top .brand small{color:#9db2d6;border-left-color:rgba(255,255,255,.25)}
+.top .status{color:#9db2d6}.top .status b{color:#fff}
+.top .btn.navy{background:#E87722;border-color:#E87722;color:#fff}
+.top .btn.navy:hover{background:#cf6a1c;border-color:#cf6a1c}
+.top .btn.goldb{background:#fff;border-color:#fff;color:#132c52}
+.top .btn.goldb:hover{background:#dcefee;border-color:#dcefee}
+.top .btn:not(.navy):not(.goldb):not(.danger){background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35);color:#fff}
+.top .btn:not(.navy):not(.goldb):not(.danger):hover{background:rgba(255,255,255,.18)}
+.top .btn.danger{background:transparent;border-color:#e8a898;color:#ffb9a8}
+.top .btn.danger:hover{background:var(--rust);border-color:var(--rust);color:#fff}
 /* ---- Nityasarathi site additions ---- */
 .site-head{background:#fff;border-bottom:1px solid #EEF2F8;position:relative;z-index:2}
 .site-head-in{width:100%;margin:0;padding:0 clamp(14px,1.8vw,32px);height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
