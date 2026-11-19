@@ -8,60 +8,55 @@
 <title>Steady Hand | Focus, Tasks and Habits</title>
 <style>
 :root{
-  --bg:#12303a; --bg2:#23272b;
-  --paper:#fbf7ee; --paper2:#f3ecdc; --line:#e2d8c0;
-  --ink:#2b2a27; --ink-soft:#6b665c;
-  --brass:#a47c2f; --brass-tint:#f1e6c9;
-  --teal:#1f6f6b; --teal-tint:#d9ece9;
+  --bg:#f1f5fa; --bg2:#e6edf6;
+  --paper:#f1f5fa; --paper2:#e6edf6; --line:#d9e2ee;
+  --ink:#15233b; --ink-soft:#5a6a83;
+  --brass:#0e7c7b; --brass-tint:#dcefee;
+  --teal:#0e7c7b; --teal-tint:#cfe9e7;
   --rust:#b0503a; --rust-tint:#f4dcd4;
-  --amber:#d6931f; --amber-tint:#f8e7c2;
+  --amber:#e87722; --amber-tint:#fdebdc;
   --slate:#51606b; --slate-tint:#e0e6ea;
   --olive:#6b7a3a; --olive-tint:#e4e9d0;
+  --navy:#1B3A6B;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{
-  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
-  color:var(--ink);min-height:100vh;padding:24px 14px 40px;
-  background:linear-gradient(135deg,#0e2c33 0%,#1b3b40 45%,#25282b 100%) fixed;
-  position:relative;
-}
-body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-.card{
-  position:relative;max-width:1180px;margin:0 auto;background:var(--paper);border-radius:20px;
-  box-shadow:0 24px 70px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.25);overflow:hidden;
-}
-.card::before{content:"";display:block;height:5px;background:linear-gradient(90deg,var(--brass),var(--amber),var(--teal),var(--rust))}
-.top{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--paper)}
-.brand{display:flex;align-items:baseline;gap:8px;margin-right:auto}
-.brand h1{font-size:20px;margin:0;letter-spacing:.2px}
-.brand small{color:var(--brass);text-transform:uppercase;letter-spacing:1.4px;font-size:10.5px;font-weight:700}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);min-height:100vh;padding:0;display:flex;flex-direction:column;background:#f1f5fa;position:relative}
+ 
+.card{position:relative;flex:1 0 auto;display:flex;flex-direction:column;width:100%;margin:0;background:var(--paper);overflow:hidden}
+.card::before{content:none}
+.top{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:14px clamp(14px,1.8vw,32px);border-bottom:1px solid var(--line);background:#fff}
+.brand{display:flex;align-items:center;gap:8px 12px;margin-right:auto;flex-wrap:wrap}
+.brand h1{white-space:nowrap;font-size:21px;margin:0;font-family:Georgia,'Times New Roman',serif;color:var(--navy);display:flex;align-items:center;gap:9px}
+.brand h1::before{content:'';width:10px;height:22px;border-radius:3px;background:linear-gradient(180deg,#0e7c7b,#E87722)}
+.brand small{color:var(--ink-soft);font-size:13px;font-weight:500;padding-left:12px;border-left:1px solid var(--line);text-transform:none;letter-spacing:0}
 .status{font-size:12px;color:var(--ink-soft);line-height:1.3}
 .status b{color:var(--ink)}
 .btns{display:flex;flex-wrap:wrap;gap:6px}
 button,.btn{font:inherit;cursor:pointer}
 .btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:7px 12px;border-radius:9px;font-size:13px;font-weight:600;transition:.15s;display:inline-flex;align-items:center;gap:6px}
 .btn:hover{border-color:var(--brass);background:var(--brass-tint)}
-.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
-.btn.primary:hover{background:#185b58}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.primary:hover{background:#142c52;border-color:#142c52}
+.btn.goldb{background:#E87722;border-color:#E87722;color:#fff}
+.btn.goldb:hover{background:#cf6a1c;border-color:#cf6a1c}
 .btn.danger{color:var(--rust);border-color:#e3b9ad}
 .btn.danger:hover{background:var(--rust);color:#fff;border-color:var(--rust)}
+.btn.navy{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.navy:hover{background:#142c52;border-color:#142c52}
 .btn.sm{padding:4px 9px;font-size:12px;border-radius:7px}
 .btn.ghost{background:transparent}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
 .banner{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--amber-tint);border-bottom:1px solid #e5c37a;padding:10px 20px;font-size:13.5px}
 .banner span{margin-right:auto}
-.app{display:grid;grid-template-columns:200px 1fr;min-height:600px}
-.side{border-right:1px solid var(--line);padding:14px 10px;background:var(--paper2);display:flex;flex-direction:column;gap:3px}
-.side button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;font-size:14px;color:var(--ink-soft);font-weight:600;white-space:nowrap}
-.side button:hover{background:#fff;color:var(--ink)}
-.side button.on{background:var(--teal);color:#fff}
+.app{flex:1;display:grid;grid-template-columns:clamp(190px,14vw,260px) minmax(0,1fr);align-items:stretch}
+.side{padding:18px 12px;background:linear-gradient(180deg,#16335f 0%,#0f2547 100%);display:flex;flex-direction:column;gap:3px}
+.side button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;font-size:14px;color:#cfdcf2;font-weight:600;white-space:nowrap}
+.side button:hover{background:rgba(255,255,255,.1);color:#fff}
+.side button.on{background:#E87722;color:#fff}
 .side .ic{width:20px;text-align:center}
 .side .count{margin-left:auto;font-size:11px;background:var(--rust);color:#fff;border-radius:10px;padding:1px 7px}
-main{padding:22px 24px 30px;min-width:0}
+main{padding:22px clamp(14px,1.8vw,32px) 30px;min-width:0}
 h2{margin:0 0 4px;font-size:22px}
 .sub{color:var(--ink-soft);font-size:13.5px;margin:0 0 16px}
 .label{color:var(--brass);text-transform:uppercase;letter-spacing:1.3px;font-size:11px;font-weight:700;margin:0 0 8px}
@@ -148,31 +143,28 @@ tr.detail td{background:var(--paper2);padding:14px}
 @media(max-width:780px){
   body{padding:10px 6px 30px}
   .app{grid-template-columns:1fr}
-  .side{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:8px}
+  .side{flex-direction:row;overflow-x:auto;padding:8px}
   main{padding:16px 14px 24px}
   .ring{width:210px;height:210px}.ring>div{width:174px;height:174px}.ring .time{font-size:38px}
 }
 
 /* ---- Nityasarathi site additions ---- */
-body{padding:0 0 40px !important}
-.card{margin:22px auto 0;width:calc(100% - 28px)}
-@media(max-width:780px){.card{margin-top:12px;width:calc(100% - 12px)}}
 .site-head{background:#fff;border-bottom:1px solid #EEF2F8;position:relative;z-index:2}
-.site-head-in{max-width:1080px;margin:0 auto;padding:0 22px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.site-head-in{width:100%;margin:0;padding:0 clamp(14px,1.8vw,32px);height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .site-head .brand{display:flex;align-items:center;gap:10px;margin:0;text-decoration:none;color:#1B3A6B;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:19px;line-height:1.1}
 .site-head .brand img{width:42px;height:42px;border-radius:10px;display:block}
 .site-head .brand small{display:block;font-family:Arial,sans-serif;font-weight:500;font-size:11px;color:#4A5F85;letter-spacing:.04em;text-transform:uppercase;margin-top:3px}
 .site-head .cta{background:#E87722;color:#fff;text-decoration:none;font-family:Arial,sans-serif;font-weight:600;font-size:14px;padding:9px 18px;border-radius:999px;white-space:nowrap}
 .site-head .cta:hover{background:#cf6a1c}
 @media(max-width:480px){.site-head .brand small{display:none}.site-head .cta{font-size:13px;padding:9px 14px}}
-.back-bar{background:#EEF2F8;padding:10px 16px;font-size:15px;position:relative;z-index:2}
+.back-bar{background:#EEF2F8;padding:10px clamp(14px,1.8vw,32px);font-size:15px;position:relative;z-index:2}
 .back-bar a{color:#0E7C7B;text-decoration:none;font-weight:600}
 .back-bar a:hover{text-decoration:underline}
-.tool-foot{max-width:1180px;width:calc(100% - 28px);margin:18px auto 0;padding:16px 20px;background:#fbf7ee;border-radius:14px;color:#6b665c;font-size:13px;position:relative;z-index:2}
+.tool-foot{width:100%;margin:0;padding:16px clamp(14px,1.8vw,32px);background:#fff;border-top:1px solid #e3eaf3;color:#5a6a83;font-size:13px;position:relative;z-index:2}
 .tool-foot p{margin:0 0 8px}
 .tool-foot p:last-child{margin-bottom:0}
-.tool-foot strong{color:#2b2a27}
-.tool-foot a{color:#1f6f6b}
+.tool-foot strong{color:#15233b}
+.tool-foot a{color:#0e7c7b}
 @media print{.site-head,.back-bar,.tool-foot{display:none !important}}
 </style>
 </head>
@@ -184,11 +176,11 @@ body{padding:0 0 40px !important}
 <div class="back-bar"><a href="../tools.html">&larr; Back to Tools</a></div>
 <div class="card">
   <header class="top">
-    <div class="brand"><h1>🌿 Steady Hand</h1><small>personal focus space</small></div>
+    <div class="brand"><h1>Steady Hand</h1><small>Tasks, habits and focus, one small step at a time</small></div>
     <div class="status" id="status"></div>
     <div class="btns">
-      <button class="btn" data-act="export">⬇ Export</button>
-      <button class="btn" data-act="exportcsv">⬇ Export CSV</button>
+      <button class="btn navy" data-act="export">⬇ Export</button>
+      <button class="btn goldb" data-act="exportcsv">⬇ Export CSV</button>
       <button class="btn" data-act="import">⬆ Import</button>
       <button class="btn danger" data-act="reset">New (reset)</button>
     </div>
@@ -764,7 +756,7 @@ VIEWS.help=function(){
 VIEWS.backup=function(){
   var ab=lsGet(KEYS.ab)||'off';
   return '<h2>Backup &amp; data</h2><p class="sub">Everything lives in this browser (localStorage). No server, no login. Keep copies safe.</p>'
-  +'<div class="panel"><div class="label">Manual backup</div><div class="row"><button class="btn primary" data-act="export">⬇ Export JSON</button><button class="btn" data-act="exportcsv">⬇ Export CSV (tasks)</button><button class="btn" data-act="import">⬆ Import JSON</button></div>'
+  +'<div class="panel"><div class="label">Manual backup</div><div class="row"><button class="btn primary" data-act="export">⬇ Export JSON</button><button class="btn goldb" data-act="exportcsv">⬇ Export CSV (tasks)</button><button class="btn" data-act="import">⬆ Import JSON</button></div>'
   +'<div class="hint" style="margin-top:8px">Last export: <b>'+fmtStamp(lsGet(KEYS.exp)||'')+'</b> · '+changes()+' change(s) since then. Import replaces all current data (you will be asked to confirm).</div></div>'
   +'<div class="panel"><div class="label">Auto-backup</div><div class="row"><select id="abSel">'+opts([['off','Off'],['6','Every 6 hours'],['24','Daily'],['168','Weekly']],ab)+'</select></div>'
   +'<div class="hint" style="margin-top:8px">Last auto-backup: <b>'+fmtStamp(lsGet(KEYS.lastab)||'')+'</b>.'+(DL?' <b>Note:</b> in this hosted page every save asks for your confirmation, so silent auto-backup is paused here — it works in the downloaded <code>steadyhand.html</code> file.':'')+' While this page is open, a backup file is downloaded quietly when due (only if something changed). Your browser may ask permission for repeated downloads.</div></div>'
