@@ -44,7 +44,8 @@ h1{margin:0;text-wrap:balance}
 /* ---- app: edge to edge, fills the screen ---- */
 .app{position:relative;flex:1 0 auto;display:flex;flex-direction:column;width:100%;margin:0;background:var(--paper)}
 .top{background:#132c52;border-bottom:1px solid rgba(255,255,255,.12);padding:14px clamp(14px,1.8vw,32px);display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
-.top .brand{display:flex;align-items:center;gap:12px;margin-right:auto;flex-wrap:wrap}
+.top .brand{display:flex;align-items:center;gap:12px;margin-right:auto;flex-wrap:wrap;flex:1 1 0;min-width:0}
+@media(min-width:901px){.top .brand{flex-wrap:nowrap}.top .brand small{flex:1;min-width:0}}
 .top .brand h1{white-space:nowrap;font-size:21px;margin:0;font-family:Georgia,'Times New Roman',serif;color:#fff;display:flex;align-items:center;gap:9px}
 .top .brand h1::before{content:'';width:10px;height:22px;border-radius:3px;background:linear-gradient(180deg,#0e7c7b,#E87722);flex:none}
 .top .brand small{color:#9db2d6;font-size:13px;font-weight:500;line-height:1.2;padding-left:12px;border-left:1px solid rgba(255,255,255,.25)}
@@ -187,7 +188,7 @@ tr:last-child td{border-bottom:none}
 <div class="back-bar noprint"><a href="../tools.html">&larr; Back to Tools</a></div>
 <div class="app">
   <header class="top noprint">
-    <div class="brand"><h1>Home loan: prepay it or invest it?</h1><small>Compare closing your home loan early with investing in mutual funds</small></div>
+    <div class="brand"><h1>Home loan: prepay it or invest it?</h1><small>Enter your loan and the extra money you can put in: a lump sum, an extra payment every month, an extra EMI every year, or a yearly step-up in your EMI. See whether it does more good in the loan or in mutual funds, with the reasons.</small></div>
     <div class="acts">
       <button class="act danger" id="btnNew" type="button">Clear all</button>
       <button class="act alt" id="btnPrint" type="button">Print summary</button>
